@@ -2,9 +2,9 @@
 import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 
-import VueUtility from '@thzero/library_client_vue3_vuetify3/utility/index';
+import LibraryClientVuetifyUtility from '@/library_vue_vuetify/utility/index';
 
-import { useBaseEditComponent } from '@thzero/library_client_vue3/components/baseEdit';
+import { useBaseEditComponent } from '@/library_vue/components/baseEdit';
 
 export function useDisplayComponent(props, context, options) {
 	const {
@@ -13,7 +13,7 @@ export function useDisplayComponent(props, context, options) {
 	const useDisplayI = useDisplay();
 
 	const isFullscreen = computed(() => {
-		return VueUtility.fullscreenDisplay(useDisplayI);
+		return LibraryClientVuetifyUtility.fullscreen(useDisplayI);
 	});
 
 	return {
