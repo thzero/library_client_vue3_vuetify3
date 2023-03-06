@@ -1,5 +1,5 @@
 <script>
-import { useBaseOpenSourceComponent } from '@/library_vue/components/baseOpenSource';
+import { useBaseOpenSourceComponent } from '@thzero/library_client_vue3/components/baseOpenSource';
 
 export function useFrameworkOpenSourceComponent(props, context, options) {
 	const {

@@ -4,7 +4,7 @@ import { useDisplay } from 'vuetify';
 
 import LibraryClientVuetifyUtility from '@thzero/library_client_vue3_vuetify3/utility/index';
 
-import { useBaseEditComponent } from '@/library_vue/components/baseEdit';
+import { useBaseEditComponent } from '@thzero/library_client_vue3/components/baseEdit';
 
 export function useDisplayComponent(props, context, options) {
 	const {

@@ -33,8 +33,8 @@ import { ref } from 'vue';
 
 import LIbraryCommonUtility from '@thzero/library_common/utility';
 
-import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
-import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
+import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
 export default {
 	name: 'VtAutoCompleteWithValidation',
@@ -77,7 +77,7 @@ export default {
 			initValue
 		} = useBaseControlEditComponent(props, context);
 
-		
+
 		const innerItems = ref([]);
 		const loading = ref(false);
 		const search = ref(null);

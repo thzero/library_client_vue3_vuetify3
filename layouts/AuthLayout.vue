@@ -34,8 +34,8 @@
 </template>
 
 <script>
-// import baseLayout from '@/library_vue/layouts/baseLayout';
-import { useBaseLayout } from '@/library_vue/layouts/baseLayout';
+// import baseLayout from '@thzero/library_client_vue3/layouts/baseLayout';
+import { useBaseLayout } from '@thzero/library_client_vue3/layouts/baseLayout';
 
 import VLayoutFooter from '@/library_vue_vuetify/components/VLayoutFooter';
 

@@ -42,8 +42,8 @@ import { useDisplay } from 'vuetify';
 
 import LibraryClientVuetifyUtility from '@thzero/library_client_vue3_vuetify3/utility/index';
 
-import { useDisplayDialogBaseComponent } from '@/library_vue/components/baseDisplayDialog';
-import { baseDisplayDialogBaseProps } from '@/library_vue/components/baseDisplayDialogProps';
+import { useDisplayDialogBaseComponent } from '@thzero/library_client_vue3/components/baseDisplayDialog';
+import { baseDisplayDialogBaseProps } from '@thzero/library_client_vue3/components/baseDisplayDialogProps';
 
 export default {
 	name: 'VtDisplayDialog',

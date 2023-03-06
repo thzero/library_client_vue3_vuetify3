@@ -27,7 +27,7 @@ import { getCurrentInstance, onMounted, watch } from 'vue';
 
 import LIbraryCommonUtility from '@thzero/library_common/utility';
 
-import baseControlEdit from '@/library_vue/components/baseControlEdit';
+import baseControlEdit from '@thzero/library_client_vue3/components/baseControlEdit';
 
 export default {
 	name: 'VtCollapseButton',

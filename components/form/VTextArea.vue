@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
-import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
+import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
 export default {
 	name: 'VtTextArea',
@@ -49,7 +49,7 @@ export default {
 			innerValueUpdate,
 			initValue
 		} = useBaseControlEditComponent(props, context);
-		
+
 		return {
 			correlationId,
 			error,

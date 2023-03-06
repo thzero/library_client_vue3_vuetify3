@@ -1,5 +1,5 @@
 <template>
-    <Datepicker 
+    <Datepicker
 		v-model="innerValue"
 		:enable-time-picker="false"
 		:dark="dark"
@@ -9,17 +9,17 @@
 <script>
 import { computed} from 'vue';
 import { useTheme } from 'vuetify';
-		
+
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
-import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
-import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
+import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
 export default {
 	name: 'VtDatetimePicker',
-    components: { 
-		Datepicker 
+    components: {
+		Datepicker
 	},
 	props: {
 		...useBaseControlEditProps
@@ -45,7 +45,7 @@ export default {
 			innerValue,
 			innerValueUpdate,
 			initValue
-		} = useBaseControlEditComponent(props, context, { 
+		} = useBaseControlEditComponent(props, context, {
 			convertValueI: (value) => {
 				return value ? value : Date();
 			}}

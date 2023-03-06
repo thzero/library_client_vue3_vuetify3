@@ -47,8 +47,8 @@ import { computed } from 'vue';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 
-import { useBaseConfirmationDialogComponent } from '@/library_vue/components/baseConfirmationDialogComponent';
-import { baseConfirmationDialogProps } from '@/library_vue/components/baseConfirmationDialogProps';
+import { useBaseConfirmationDialogComponent } from '@thzero/library_client_vue3/components/baseConfirmationDialogComponent';
+import { baseConfirmationDialogProps } from '@thzero/library_client_vue3/components/baseConfirmationDialogProps';
 
 export default {
 	name: 'VtConfirmationDialog',

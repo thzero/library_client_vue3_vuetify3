@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { useBaseAuthComponent } from '@/library_vue/components/baseAuth';
+import { useBaseAuthComponent } from '@thzero/library_client_vue3/components/baseAuth';
 
 export default {
 	name: 'VtAuth',

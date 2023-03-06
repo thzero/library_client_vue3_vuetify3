@@ -141,8 +141,8 @@
 
 <script>
 import VConfirmationDialog from '@/library_vue_vuetify/components/VConfirmationDialog';
-import { useBaseFormControlComponent } from '@/library_vue/components/form/baseFormControl';
-import { baseFormControlProps } from '@/library_vue/components/form/baseFormControlProps';
+import { useBaseFormControlComponent } from '@thzero/library_client_vue3/components/form/baseFormControl';
+import { baseFormControlProps } from '@thzero/library_client_vue3/components/form/baseFormControlProps';
 
 export default {
 	name: 'VtFormControl',
@@ -186,7 +186,7 @@ export default {
 			setNotify,
 			submit
 		} = useBaseFormControlComponent(props, context);
-		
+
 		return {
 			correlationId,
 			error,

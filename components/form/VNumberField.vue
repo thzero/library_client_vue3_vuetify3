@@ -16,8 +16,8 @@
 <script>
 import { computed } from 'vue';
 
-import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
-import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
+import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
 export default {
 	name: 'VtNumberField',
@@ -58,7 +58,7 @@ export default {
 		const displayClass = computed(() => {
 			return props.negativeColor ? (innerValue.value < 0 ? 'text-negative' : null) : null;
 		});
-		
+
 		return {
 			correlationId,
 			error,
