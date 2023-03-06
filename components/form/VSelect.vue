@@ -5,6 +5,7 @@
 		:item-text="text"
 		item-value="id"
 		:hide-details="hideDetails"
+		:readonly="readonly"
 		:label="$attrs.label"
 		:flat="flat"
 		:solo-inverted="soloInverted"
@@ -13,8 +14,8 @@
 </template>
 
 <script>
-import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
-import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
+import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
 
 export default {
 	name: 'VtSelect',
@@ -60,19 +61,19 @@ export default {
 		
 		const text = (item) => { 
 			return item.displayName ? item.displayName : item.name;
-		}
-		
-		onMounted(async () => {
-			if (props.items)
-				innerItems.value = props.items;
-			initValue(props.modelValue);
-		});
+		};
 
 		watch(() => props.items,
 			(value) => {
 				innerItems.value = value;
 			}
 		);
+		
+		onMounted(async () => {
+			if (props.items)
+				innerItems.value = props.items;
+			initValue(props.modelValue);
+		});
 
 		return {
 			correlationId,

@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import LibraryUtility from '@thzero/library_common/utility';
+import LIbraryCommonUtility from '@thzero/library_common/utility';
 
-import baseControlEdit from '@thzero/library_client_vue3/components/baseControlEdit';
+import baseControlEdit from '@/library_vue/components/baseControlEdit';
 
 export default {
 	name: 'VtFavoriteButton',
@@ -57,7 +57,7 @@ export default {
 		click(value) {
 			this.update(this, value);
 		},
-		update: LibraryUtility.debounce(async function(self, value) {
+		update: LIbraryCommonUtility.debounce(async function(self, value) {
 			self.innerValue = value;
 		}, 500)
 	}

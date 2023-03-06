@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import base from '@thzero/library_client_vue3/components/base';
+import base from '@/library_vue/components/base';
 
 export default {
 	name: 'VtTags',

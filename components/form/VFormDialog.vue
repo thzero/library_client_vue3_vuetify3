@@ -85,12 +85,12 @@
 </template>
 
 <script>
-import VueUtility from '@thzero/library_client_vue/utility/index';
+import LibraryClientVueUtility from '@thzero/library_client_vue/utility/index';
 
-import baseEdit from '@thzero/library_client_vue3/components/baseEdit';
+import baseEdit from '@/library_vue/components/baseEdit';
 import VConfirmationDialog from '../VConfirmationDialog';
 
-import DialogSupport from '@thzero/library_client_vue3/components/support/dialog';
+import DialogSupport from '@/library_vue/components/support/dialog';
 
 export default {
 	name: 'VtFormDialog',
@@ -169,7 +169,7 @@ export default {
 	}),
 	computed: {
 		fullscreenInternal() {
-			return VueUtility.fullscreen(this.$vuetify);
+			return LibraryClientVueUtility.fullscreen(this.$vuetify);
 		},
 		loading() {
 			return this.executing || this.dialogDeleteConfirmSignal.signal;
@@ -241,7 +241,7 @@ export default {
 				const response = await this.preCompleteDelete(correlationId);
 				this.logger.debug('FormDialog', 'handleDeleteConfirmOk', 'response', response, correlationId);
 				if (this.hasFailed(response)) {
-					VueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
+					LibraryClientVueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
 					return;
 				}
 			}
@@ -289,7 +289,7 @@ export default {
 					const response = await this.preCompleteOk(correlationId);
 					this.logger.debug('FormDialog', 'submit', 'response', response, correlationId);
 					if (this.hasFailed(response)) {
-						VueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
+						LibraryClientVueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
 						return;
 					}
 				}

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { useBaseComponent } from '@thzero/library_client_vue3/components/base';
+import { useBaseComponent } from '@/library_vue/components/base';
 
 export default {
 	name: 'VtCookieComply',

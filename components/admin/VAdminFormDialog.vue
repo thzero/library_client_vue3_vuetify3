@@ -1,8 +1,8 @@
 <script>
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
-import LibraryUtility from '@thzero/library_common/utility';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LIbraryCommonUtility from '@thzero/library_common/utility';
 
 import NotImplementedError from '@thzero/library_common/errors/notImplemented';
 
@@ -39,7 +39,7 @@ export default {
 		}
 	},
 	created() {
-		this.serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		this.serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 		this.initializeServices();
 	},
 	methods: {
@@ -97,11 +97,11 @@ export default {
 		},
 		async resetDialog(correlationId, value) {
 			// forces random key gen so that the editor gets reset for each new item
-			this.randomKey = LibraryUtility.randomKeyGen();
+			this.randomKey = LIbraryCommonUtility.randomKeyGen();
 			if (value) {
 				const temp = this.clone(value);
-				temp.timestamp = temp.timestamp ? LibraryUtility.convertTimestampToLocal(temp.timestamp).valueOf() : LibraryUtility.getTimestampLocal().valueOf();
-				temp.updatedTimestamp = temp.updatedTimestamp ? temp.updatedTimestamp : LibraryUtility.getTimestamp();
+				temp.timestamp = temp.timestamp ? LIbraryCommonUtility.convertTimestampToLocal(temp.timestamp).valueOf() : LIbraryCommonUtility.getTimestampLocal().valueOf();
+				temp.updatedTimestamp = temp.updatedTimestamp ? temp.updatedTimestamp : LIbraryCommonUtility.getTimestamp();
 				this.gameSystemId = temp.gameSystemId;
 				await this.resetDialogI(correlationId, temp);
 				this.innerValue = temp;

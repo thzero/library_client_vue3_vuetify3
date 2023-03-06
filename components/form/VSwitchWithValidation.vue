@@ -16,16 +16,16 @@
 				:key="error.$uid"
 			>
 				<strong>{{ error.$message }}</strong>
-				<small> on </small>
-				<strong>{{ error.$property }}</strong>
+				<!--<small> on </small>
+				<strong>{{ error.$property }}</strong>-->
 			</div>
 		</template>
 	</v-switch>
 </template>
 
 <script>
-import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
-import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
+import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
 
 export default {
 	name: 'VtSwitchWithValidation',

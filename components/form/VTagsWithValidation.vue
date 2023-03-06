@@ -17,10 +17,10 @@
 <script>
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
-import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
+import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
 
 export default {
 	name: 'VtTagsWithValidation',
@@ -59,7 +59,7 @@ export default {
 		const search = ref('');
 		
 		const hint = computed((item) => { 
-			return GlobalUtility.$trans.t('errors.tagLine.max', { max: props.max });
+			return LibraryClientUtility.$trans.t('errors.tagLine.max', { max: props.max });
 		});
 
 		const paste = () => {
@@ -78,12 +78,6 @@ export default {
 				context.emit('input', select.value);
 			});
 		};
-		
-		onMounted(async () => {
-			if (props.items)
-				innerItems.value = props.items;
-			initValue(props.modelValue);
-		});
 
 		watch(() => select,
 			(value) => {
@@ -93,6 +87,12 @@ export default {
 				nextTick(() => select.value.pop());
 			}
 		);
+		
+		onMounted(async () => {
+			if (props.items)
+				innerItems.value = props.items;
+			initValue(props.modelValue);
+		});
 
 		return {
 			

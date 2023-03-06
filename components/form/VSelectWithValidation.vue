@@ -6,8 +6,9 @@
 		:item-value="itemValue"
 		:items="innerItems"
 		:hide-details="hideDetails"
-		:label="$attrs.label"
 		:multiple="multiple"
+		:readonly="readonly"
+		:label="$attrs.label"
       	density="compact"
 		@update:modelValue="innerValueUpdate"
 	>
@@ -17,8 +18,8 @@
 				:key="error.$uid"
 			>
 				<strong>{{ error.$message }}</strong>
-				<small> on </small>
-				<strong>{{ error.$property }}</strong>
+				<!--<small> on </small>
+				<strong>{{ error.$property }}</strong>-->
 			</div>
 		</template>
 	</v-select>
@@ -27,8 +28,8 @@
 <script>
 import { onMounted, ref, watch } from 'vue';
 
-import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
-import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
+import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
 
 export default {
 	name: 'VtSelectWithValidation',
@@ -49,6 +50,10 @@ export default {
 		multiple: {
 			type: Boolean,
 			default: false
+		},
+		vidOverride: {
+			type: String,
+			default: null
 		}
 	},
 	setup (props, context) {
@@ -72,7 +77,9 @@ export default {
 			innerValue,
 			initValue,
 			innerValueUpdate
-		} = useBaseControlEditComponent(props, context);
+		} = useBaseControlEditComponent(props, context, {
+			vidOverride: props.vidOverride
+		});
 		
 		const innerItems = ref([]);
 		

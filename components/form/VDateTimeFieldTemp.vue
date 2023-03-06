@@ -13,8 +13,8 @@ import { useTheme } from 'vuetify';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
-import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
-import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
+import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
 
 export default {
 	name: 'VtDatetimePicker',

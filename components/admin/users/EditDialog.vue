@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import VUsersAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/users/VUsersAdminFormDialog';
+import VUsersAdminFormDialog from '@/library_vue_vuetify/components/admin/users/VUsersAdminFormDialog';
 
 export default {
 	name: 'AdminUsersEditDialog',

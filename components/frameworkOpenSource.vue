@@ -1,5 +1,5 @@
 <script>
-import { useBaseOpenSourceComponent } from '@thzero/library_client_vue3/components/baseOpenSource';
+import { useBaseOpenSourceComponent } from '@/library_vue/components/baseOpenSource';
 
 export function useFrameworkOpenSourceComponent(props, context, options) {
 	const {
@@ -16,11 +16,10 @@ export function useFrameworkOpenSourceComponent(props, context, options) {
 		data,
 		dependenciesClient,
 		dependenciesServer,
-		// initializeDependenciesClientBase,
 		key,
 		serviceStore
-	} = useBaseOpenSourceComponent(props, context, Object.assign(options, {
-			initializeDependenciesClient: () => {
+	} = useBaseOpenSourceComponent(props, context, Object.assign({
+			initializeDependenciesClientFramework: () => {
 				return [
 					{
 						category: 'client',
@@ -38,8 +37,7 @@ export function useFrameworkOpenSourceComponent(props, context, options) {
 					}
 				];
 			}
-		})
-	);
+		}, {}));
 
 	return {
 		correlationId,
@@ -55,7 +53,6 @@ export function useFrameworkOpenSourceComponent(props, context, options) {
 		data,
 		dependenciesClient,
 		dependenciesServer,
-		// initializeDependenciesClientBase,
 		key,
 		serviceStore
 	};

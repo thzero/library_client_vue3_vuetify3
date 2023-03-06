@@ -21,6 +21,7 @@
 						:disabled="disabled"
 						show-swatches
 						swatches-max-height="20vh"
+						@update:modelValue="innerValueUpdate"
 					/>
 					<div
 						class="text-right mt-2"
@@ -41,13 +42,17 @@
 <script>
 import { computed, ref } from 'vue';
 
-import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
-import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
+import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
 
 export default {
 	name: 'VtColorWithValidation',
 	props: {
 		...useBaseControlEditProps,
+		label: {
+			type: String,
+			default: null
+		},
 		maxWidth: {
 			type: String,
 			default: '300px'

@@ -44,11 +44,11 @@
 <script>
 import { computed } from 'vue';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
-import VueUtility from '@thzero/library_client_vue3/utility/index';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 
-import { useBaseConfirmationDialogComponent } from '@thzero/library_client_vue3/components/baseConfirmationDialogComponent';
-import { baseConfirmationDialogProps } from '@thzero/library_client_vue3/components/baseConfirmationDialogProps';
+import { useBaseConfirmationDialogComponent } from '@/library_vue/components/baseConfirmationDialogComponent';
+import { baseConfirmationDialogProps } from '@/library_vue/components/baseConfirmationDialogProps';
 
 export default {
 	name: 'VtConfirmationDialog',
@@ -76,17 +76,17 @@ export default {
 			context,
 			{
 				handleErrorI: (response, correlationId) => {
-					VueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
+					LibraryClientVueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
 				}
 			}
 		);
 
 		// const handleError = (response, correlationId) => {
-		// 	VueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
+		// 	LibraryClientVueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
 		// }
 
 		const internalMessage = computed(() => {
-			return props.message ? props.message : props.nonRecoverable ? GlobalUtility.$trans.t('questions.areYouSureNonRecoverable') : GlobalUtility.$trans.t('questions.areYouSure')
+			return props.message ? props.message : props.nonRecoverable ? LibraryClientUtility.$trans.t('questions.areYouSureNonRecoverable') : LibraryClientUtility.$trans.t('questions.areYouSure')
 		});
 
 		return {

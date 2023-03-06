@@ -7,7 +7,7 @@
 <script>
 import { computed } from 'vue';
 
-import { useBaseVersionComponent } from '@thzero/library_client_vue3/components/baseVersion';
+import { useBaseVersionComponent } from '@/library_vue/components/baseVersion';
 
 export default {
 	name: 'VtVersion',

@@ -21,8 +21,8 @@
 				:key="error.$uid"
 			>
 				<strong>{{ error.$message }}</strong>
-				<small> on </small>
-				<strong>{{ error.$property }}</strong>
+				<!--<small> on </small>
+				<strong>{{ error.$property }}</strong>-->
 			</div>
 		</template>
 	</v-autocomplete>
@@ -31,10 +31,10 @@
 <script>
 import { ref } from 'vue';
 
-import LibraryUtility from '@thzero/library_common/utility';
+import LIbraryCommonUtility from '@thzero/library_common/utility';
 
-import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
-import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
+import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
 
 export default {
 	name: 'VtAutoCompleteWithValidation',
@@ -91,7 +91,7 @@ export default {
 			// this.loading = false
 			update(this, newVal);
 		},
-		const update = LibraryUtility.debounce(async function(self, newVal) {
+		const update = LIbraryCommonUtility.debounce(async function(self, newVal) {
 			loading.value = true;
 			if (querySelection.value)
 				innerItems.value = await props.querySelection(newVal);
@@ -161,7 +161,7 @@ export default {
 	// 	validation() {
 	// 		return this.$refs.prv;
 	// 	},
-	// 	update: LibraryUtility.debounce(async function(self, newVal) {
+	// 	update: LIbraryCommonUtility.debounce(async function(self, newVal) {
 	// 		self.loading = true;
 	// 		if (self.querySelection)
 	// 			self.innerItems = await this.querySelection(newVal);

@@ -1,14 +1,14 @@
 <script>
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import VAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/VAdminFormDialog';
-import VCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VCheckboxWithValidation';
-import VDateTimeFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VDateTimeFieldWithValidation';
-import VMarkdownEditor from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdownEditor';
-import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
-import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
+import VAdminFormDialog from '@/library_vue_vuetify/components/admin/VAdminFormDialog';
+import VCheckboxWithValidation from '@/library_vue_vuetify/components/form/VCheckboxWithValidation';
+import VDateTimeFieldWithValidation from '@/library_vue_vuetify/components/form/VDateTimeFieldWithValidation';
+import VMarkdownEditor from '@/library_vue_vuetify/components/markup/VMarkdownEditor';
+import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelectWithValidation';
+import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTextFieldWithValidation';
 
 export default {
 	name: 'VNewsAdminFormDialog',
@@ -22,7 +22,7 @@ export default {
 	},
 	extends: VAdminFormDialog,
 	created() {
-		this.serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		this.serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 	},
 	methods: {
 		async preComplete(correlationId) {

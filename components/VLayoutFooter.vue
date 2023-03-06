@@ -19,12 +19,12 @@
 import { computed, onMounted, ref } from 'vue';
 import { useDisplay } from 'vuetify';
 
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
-import LibraryUtility from '@thzero/library_common/utility';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
+import LIbraryCommonUtility from '@thzero/library_common/utility';
 
-import { useBaseComponent } from '@thzero/library_client_vue3/components/base';
+import { useBaseComponent } from '@/library_vue/components/base';
 
 import VCopyright from './VCopyright';
 import VVersion from './VVersion';
@@ -50,15 +50,15 @@ export default {
 
 		const useDisplayI = useDisplay();
 
-		const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		const serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 
 		const version = ref({});
 
 		const breakpointName = computed(() => {
-			return LibraryUtility.isDev ? useDisplayI.name : '';
+			return LIbraryCommonUtility.isDev ? useDisplayI.name : '';
 		});
 		const isDev = computed(() => {
-			return LibraryUtility.isDev;
+			return LIbraryCommonUtility.isDev;
 		});
 
 		onMounted(async () => {

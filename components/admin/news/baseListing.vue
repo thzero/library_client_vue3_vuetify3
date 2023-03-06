@@ -1,8 +1,8 @@
 <script>
-import baseListing from '@thzero/library_client_vue3/components/admin/news/baseListing';
+import baseListing from '@/library_vue/components/admin/news/baseListing';
 
-import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
-import VMarkdown from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdown';
+import VConfirmationDialog from '@/library_vue_vuetify/components/VConfirmationDialog';
+import VMarkdown from '@/library_vue_vuetify/components/markup/VMarkdown';
 
 export default {
 	name: 'VueBaseAdminNewsListing',

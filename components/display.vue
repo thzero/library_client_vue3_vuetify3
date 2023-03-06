@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 
-import LibraryClientVuetifyUtility from '@/library_vue_vuetify/utility/index';
+import LibraryClientVuetifyUtility from '@thzero/library_client_vue3_vuetify3/utility/index';
 
 import { useBaseEditComponent } from '@/library_vue/components/baseEdit';
 

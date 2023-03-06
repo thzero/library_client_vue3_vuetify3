@@ -30,7 +30,7 @@
 <script>
 import { computed } from 'vue';
 
-import VueUtility from '@thzero/library_client_vue3/utility/index';
+import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 
 export default {
 	name: 'VtLoadingOverlay',
@@ -42,10 +42,10 @@ export default {
 	},
 	setup(props) {
 		const imageWidth = computed(() => {
-			return VueUtility.overlayImageWidth();
+			return LibraryClientVueUtility.overlayImageWidth();
 		});
 		const progressSize = computed(() => {
-			return VueUtility.overlayProgressSize();
+			return LibraryClientVueUtility.overlayProgressSize();
 		});
 
 		return {
@@ -55,10 +55,10 @@ export default {
 	},
 	// computed: {
 	// 	imageWidth() {
-	// 		return VueUtility.overlayImageWidth();
+	// 		return LibraryClientVueUtility.overlayImageWidth();
 	// 	},
 	// 	progressSize() {
-	// 		return VueUtility.overlayProgressSize();
+	// 		return LibraryClientVueUtility.overlayProgressSize();
 	// 	}
 	// }
 };

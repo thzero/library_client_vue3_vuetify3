@@ -34,10 +34,10 @@
 </template>
 
 <script>
-// import baseLayout from '@thzero/library_client_vue3/layouts/baseLayout';
-import { useBaseLayout } from '@thzero/library_client_vue3/layouts/baseLayout';
+// import baseLayout from '@/library_vue/layouts/baseLayout';
+import { useBaseLayout } from '@/library_vue/layouts/baseLayout';
 
-import VLayoutFooter from '@thzero/library_client_vue3_vuetify3/components/VLayoutFooter';
+import VLayoutFooter from '@/library_vue_vuetify/components/VLayoutFooter';
 
 export default {
 	name: 'AuthLayout',

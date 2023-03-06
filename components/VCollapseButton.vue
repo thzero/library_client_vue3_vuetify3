@@ -25,9 +25,9 @@
 <script>
 import { getCurrentInstance, onMounted, watch } from 'vue';
 
-import LibraryUtility from '@thzero/library_common/utility';
+import LIbraryCommonUtility from '@thzero/library_common/utility';
 
-import baseControlEdit from '@thzero/library_client_vue3/components/baseControlEdit';
+import baseControlEdit from '@/library_vue/components/baseControlEdit';
 
 export default {
 	name: 'VtCollapseButton',
@@ -51,7 +51,7 @@ export default {
 			this.update(this, value);
 			this.$emit('click');
 		};
-		const update = () => LibraryUtility.debounce(async function(self, value) {
+		const update = () => LIbraryCommonUtility.debounce(async function(self, value) {
 			self.innerValue = value;
 		}, 500);
 
@@ -86,7 +86,7 @@ export default {
 	// 		this.update(this, value);
 	// 		this.$emit('click');
 	// 	},
-	// 	update: LibraryUtility.debounce(async function(self, value) {
+	// 	update: LIbraryCommonUtility.debounce(async function(self, value) {
 	// 		self.innerValue = value;
 	// 	}, 500)
 	// }
