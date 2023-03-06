@@ -162,7 +162,7 @@ input:checked + .cookie-comply-required.cookie-comply-slider {
   .cookie-comply__modal-middle {
     padding: var(--spacing-md);
   }
-  . cookie-comply__modal-inner {
+  .cookie-comply__modal-inner {
     width: auto;
   }
 }
