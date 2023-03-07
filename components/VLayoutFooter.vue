@@ -1,18 +1,13 @@
 <template>
-	<v-footer
-		app
-		absolute
+	<VVersion v-model="version" />
+	<v-spacer />
+	<VCopyright v-model="version" />
+	<span
+		v-if="isDev"
+		style="padding-left: 4px;"
 	>
-		<VVersion v-model="version" />
-		<v-spacer />
-		<VCopyright v-model="version" />
-		<span
-			v-if="isDev"
-			style="padding-left: 4px;"
-		>
-			{{ breakpointName }}
-		</span>
-	</v-footer>
+		{{ breakpointName }}
+	</span>
 </template>
 
 <script>
