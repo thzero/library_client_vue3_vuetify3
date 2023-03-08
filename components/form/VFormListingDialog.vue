@@ -58,7 +58,7 @@ import { computed, ref } from 'vue';
 
 import { useBaseFormDialogControlComponent } from '@thzero/library_client_vue3/components/form/baseFormDialogControl';
 import { baseFormDialogControlProps } from '@thzero/library_client_vue3/components/form/baseFormDialogControlProps';
-import { useDisplayComponent } from '@/library_vue_vuetify/components/display';
+import { useDisplayComponent } from '@thzero/library_client_vue3_vuetify3/components/display';
 
 export default {
 	name: 'VtFormListingDialog',

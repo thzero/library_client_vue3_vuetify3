@@ -140,7 +140,7 @@
 </template>
 
 <script>
-import VConfirmationDialog from '@/library_vue_vuetify/components/VConfirmationDialog';
+import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
 import { useBaseFormControlComponent } from '@thzero/library_client_vue3/components/form/baseFormControl';
 import { baseFormControlProps } from '@thzero/library_client_vue3/components/form/baseFormControlProps';
 

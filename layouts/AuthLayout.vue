@@ -37,7 +37,7 @@
 // import baseLayout from '@thzero/library_client_vue3/layouts/baseLayout';
 import { useBaseLayout } from '@thzero/library_client_vue3/layouts/baseLayout';
 
-import VLayoutFooter from '@/library_vue_vuetify/components/VLayoutFooter';
+import VLayoutFooter from '@thzero/library_client_vue3_vuetify3/components/VLayoutFooter';
 
 export default {
 	name: 'AuthLayout',

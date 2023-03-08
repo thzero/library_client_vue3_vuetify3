@@ -3,12 +3,12 @@ import LibraryClientConstants from '@thzero/library_client/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import VAdminFormDialog from '@/library_vue_vuetify/components/admin/VAdminFormDialog';
-import VCheckboxWithValidation from '@/library_vue_vuetify/components/form/VCheckboxWithValidation';
-import VDateTimeFieldWithValidation from '@/library_vue_vuetify/components/form/VDateTimeFieldWithValidation';
-import VMarkdownEditor from '@/library_vue_vuetify/components/markup/VMarkdownEditor';
-import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelectWithValidation';
-import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTextFieldWithValidation';
+import VAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/VAdminFormDialog';
+import VCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VCheckboxWithValidation';
+import VDateTimeFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VDateTimeFieldWithValidation';
+import VMarkdownEditor from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdownEditor';
+import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
+import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
 
 export default {
 	name: 'VNewsAdminFormDialog',

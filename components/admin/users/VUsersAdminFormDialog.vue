@@ -1,9 +1,9 @@
 <script>
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import VAdminFormDialog from '@/library_vue_vuetify/components/admin/VAdminFormDialog';
-import VSelectWithValidation from '@/library_vue_vuetify/components/form/VSelectWithValidation';
-import VTextFieldWithValidation from '@/library_vue_vuetify/components/form/VTextFieldWithValidation';
+import VAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/VAdminFormDialog';
+import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
+import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
 
 export default {
 	name: 'VUsersAdminFormDialog',

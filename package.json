@@ -1,9 +1,9 @@
 {
   "name": "@thzero/library_client_vue3_vuetify3",
-  "version": "0.17.4-alpha",
+  "version": "0.17.5-alpha",
   "version_major": 0,
   "version_minor": 17,
-  "version_patch": 4,
+  "version_patch": 5,
   "version_date": "03/07/2023",
   "description": "An opinionated library of common functionality to bootstrap a VueJs 3.0 based SPA application and Vuetify 3.0.",
   "author": "thZero",
