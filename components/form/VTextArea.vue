@@ -49,7 +49,7 @@ export default {
 			innerValueUpdate,
 			initValue
 		} = useBaseControlEditComponent(props, context);
-		
+
 		return {
 			correlationId,
 			error,

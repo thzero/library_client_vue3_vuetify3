@@ -19,7 +19,7 @@
 				<div
 					class="markdown-body"
 					style="vertical-align: top;"
-					v-html="description"
+					v-html="markup"
 				/>
 				<!--eslint-enable-->
 			</v-card-text>
@@ -38,10 +38,70 @@
 </template>
 
 <script>
-import baseDisplayDialog from '@thzero/library_client_vue3/components/baseDisplayDialog';
+import { useDisplay } from 'vuetify';
+
+import LibraryClientVuetifyUtility from '@thzero/library_client_vue3_vuetify3/utility/index';
+
+import { useDisplayDialogBaseComponent } from '@thzero/library_client_vue3/components/baseDisplayDialog';
+import { baseDisplayDialogBaseProps } from '@thzero/library_client_vue3/components/baseDisplayDialogProps';
 
 export default {
 	name: 'VtDisplayDialog',
-	extends: baseDisplayDialog
+	props: {
+		...baseDisplayDialogBaseProps
+	},
+	setup(props, context) {
+		const useDisplayI = useDisplay();
+
+		const {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			isSaving,
+			serverErrors,
+			setErrors,
+			dialogCancel,
+			dialogOk,
+			dialogSignal,
+			fullscreenInternal,
+			markup,
+			internalItem,
+			serviceMarkup,
+			scrollableI,
+			scrollableHeightI
+		} = useDisplayDialogBaseComponent(props, context, {
+			fullscreenInternal: LibraryClientVuetifyUtility.fullscreen(useDisplayI)
+		});
+
+		return {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			isSaving,
+			serverErrors,
+			setErrors,
+			dialogCancel,
+			dialogOk,
+			dialogSignal,
+			fullscreenInternal,
+			markup,
+			internalItem,
+			serviceMarkup,
+			scrollableI,
+			scrollableHeightI
+		};
+	}
 };
 </script>

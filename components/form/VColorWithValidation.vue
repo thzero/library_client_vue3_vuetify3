@@ -21,6 +21,7 @@
 						:disabled="disabled"
 						show-swatches
 						swatches-max-height="20vh"
+						@update:modelValue="innerValueUpdate"
 					/>
 					<div
 						class="text-right mt-2"
@@ -48,6 +49,10 @@ export default {
 	name: 'VtColorWithValidation',
 	props: {
 		...useBaseControlEditProps,
+		label: {
+			type: String,
+			default: null
+		},
 		maxWidth: {
 			type: String,
 			default: '300px'
@@ -75,7 +80,7 @@ export default {
 			innerValueUpdate,
 			initValue
 		} = useBaseControlEditComponent(props, context);
-		
+
 		const dialogSignal = ref(false);
 
 		const buttonColor = computed(() => {

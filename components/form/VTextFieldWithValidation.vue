@@ -23,8 +23,8 @@
 				:key="error.$uid"
 			>
 				<strong>{{ error.$message }}</strong>
-				<small> on </small>
-				<strong>{{ error.$property }}</strong>
+				<!--<small> on </small>
+				<strong>{{ error.$property }}</strong>-->
 			</div>
 			</div>
 		</template>
@@ -76,14 +76,14 @@ export default {
 			innerValueUpdate,
 			initValue
 		} = useBaseControlEditComponent(props, context);
-		
+
 		const count = computed(() => {
 			return props.maxcount ? '(' + (innerValue .value? innerValue.value.length : 0) + ')' : '';
 		});
 		const countClass = computed(() => {
 			return (props.maxcount && !String.isNullOrEmpty(innerValu.value) ? innerValue.value.length > props.maxcount ? 'negative ' : '' : '') + 'title-body2';
 		});
-		
+
 		return {
 			correlationId,
 			error,

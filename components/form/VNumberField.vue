@@ -58,7 +58,7 @@ export default {
 		const displayClass = computed(() => {
 			return props.negativeColor ? (innerValue.value < 0 ? 'text-negative' : null) : null;
 		});
-		
+
 		return {
 			correlationId,
 			error,

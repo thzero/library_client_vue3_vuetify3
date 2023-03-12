@@ -1,6 +1,13 @@
 <template>
 	<!-- eslint-disable vue/no-v-html -->
 	<div
+		v-if="tag==='div'"
+		:class="markdownClass"
+		style="background-color: transparent"
+		v-html="display"
+	/>
+	<span
+		v-if="tag==='span'"
 		:class="markdownClass"
 		style="background-color: transparent"
 		v-html="display"
@@ -59,5 +66,22 @@ export default {
 	.markdown ol, ul, li {
 		margin: revert;
 		padding: revert; /* Padding is what gives the indentation */
+	}
+	.markdown h1 {
+		text-align: left;
+		margin-bottom: 24px;
+		text-align: center;
+	}
+	.markdown h2 {
+		text-align: left;
+		margin-bottom: 24px;
+	}
+	.markdown h3 {
+		text-align: left;
+		margin-bottom: 24px;
+	}
+	.markdown p {
+		text-align: left;
+		margin-bottom: 24px;
 	}
 </style>

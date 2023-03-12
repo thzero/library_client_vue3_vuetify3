@@ -1,9 +1,10 @@
 <template>
 	<v-checkbox
 		v-model="innerValue"
-		:hide-details="hideDetails"
-		:success="valid"
+		:hide-details="hideDetailsOverride"
 		v-bind="$attrs"
+		density="compact"
+		:readonly="readonly"
 		@update:modelValue="innerValueUpdate"
 	>
 		<template v-slot:details>
@@ -12,14 +13,16 @@
 				:key="error.$uid"
 			>
 				<strong>{{ error.$message }}</strong>
-				<small> on </small>
-				<strong>{{ error.$property }}</strong>
+				<!--<small> on </small>
+				<strong>{{ error.$property }}</strong>-->
 			</div>
 		</template>
 	</v-checkbox>
 </template>
 
 <script>
+import { computed } from 'vue';
+
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
@@ -51,6 +54,10 @@ export default {
 			initValue
 		} = useBaseControlEditComponent(props, context);
 
+		const hideDetailsOverride = computed(() => {
+			return !hideDetails.value ? hideDetails.value : true
+		});
+
 		return {
 			correlationId,
 			error,
@@ -68,6 +75,7 @@ export default {
 			errorI,
 			errorsI,
 			hideDetails,
+			hideDetailsOverride,
 			innerValue,
 			innerValueUpdate,
 			initValue

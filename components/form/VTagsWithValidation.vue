@@ -17,7 +17,7 @@
 <script>
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
@@ -57,9 +57,9 @@ export default {
 		const items = ref([]);
 		const select = ref(props.modelValue ? props.modelValue : []);
 		const search = ref('');
-		
-		const hint = computed((item) => { 
-			return GlobalUtility.$trans.t('errors.tagLine.max', { max: props.max });
+
+		const hint = computed((item) => {
+			return LibraryClientUtility.$trans.t('errors.tagLine.max', { max: props.max });
 		});
 
 		const paste = () => {
@@ -78,12 +78,6 @@ export default {
 				context.emit('input', select.value);
 			});
 		};
-		
-		onMounted(async () => {
-			if (props.items)
-				innerItems.value = props.items;
-			initValue(props.modelValue);
-		});
 
 		watch(() => select,
 			(value) => {
@@ -94,8 +88,14 @@ export default {
 			}
 		);
 
+		onMounted(async () => {
+			if (props.items)
+				innerItems.value = props.items;
+			initValue(props.modelValue);
+		});
+
 		return {
-			
+
 			correlationId,
 			error,
 			hasFailed,

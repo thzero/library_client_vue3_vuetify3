@@ -1,7 +1,7 @@
 <script>
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import VAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/VAdminFormDialog';
 import VCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VCheckboxWithValidation';
@@ -22,7 +22,7 @@ export default {
 	},
 	extends: VAdminFormDialog,
 	created() {
-		this.serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		this.serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 	},
 	methods: {
 		async preComplete(correlationId) {

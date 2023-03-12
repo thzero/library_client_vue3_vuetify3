@@ -22,8 +22,8 @@
 				:key="error.$uid"
 			>
 				<strong>{{ error.$message }}</strong>
-				<small> on </small>
-				<strong>{{ error.$property }}</strong>
+				<!--<small> on </small>
+				<strong>{{ error.$property }}</strong>-->
 			</div>
 		</template>
 	</v-textarea>
@@ -73,7 +73,7 @@ export default {
 		const countClass = computed(() => {
 			return (props.maxcount && !String.isNullOrEmpty(innerValu.value) ? innerValue.value.length > props.maxcount ? 'negative ' : '' : '') + 'title-body2';
 		});
-		
+
 		return {
 			correlationId,
 			error,

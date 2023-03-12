@@ -5,6 +5,7 @@
 		:item-text="text"
 		item-value="id"
 		:hide-details="hideDetails"
+		:readonly="readonly"
 		:label="$attrs.label"
 		:flat="flat"
 		:solo-inverted="soloInverted"
@@ -55,24 +56,24 @@ export default {
 			initValue,
 			innerValueUpdate
 		} = useBaseControlEditComponent(props, context);
-		
+
 		const innerItems = ref([]);
-		
-		const text = (item) => { 
+
+		const text = (item) => {
 			return item.displayName ? item.displayName : item.name;
-		}
-		
-		onMounted(async () => {
-			if (props.items)
-				innerItems.value = props.items;
-			initValue(props.modelValue);
-		});
+		};
 
 		watch(() => props.items,
 			(value) => {
 				innerItems.value = value;
 			}
 		);
+
+		onMounted(async () => {
+			if (props.items)
+				innerItems.value = props.items;
+			initValue(props.modelValue);
+		});
 
 		return {
 			correlationId,

@@ -122,9 +122,9 @@
 <script>
 import { computed, getCurrentInstance, ref } from 'vue';
 
-import LibraryConstants from '@thzero/library_client/constants';
+import LibraryClientConstants from '@thzero/library_client/constants';
 
-import GlobalUtility from '@thzero/library_client/utility/global';
+import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import baseLayout from '@thzero/library_client_vue3/layouts/baseLayout';
 
@@ -145,8 +145,8 @@ export default {
 	setup(props) {
 		const instance = getCurrentInstance();
 
-		const serviceAuth = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_AUTH);
-		const serviceStore = GlobalUtility.$injector.getService(LibraryConstants.InjectorKeys.SERVICE_STORE);
+		const serviceAuth = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_AUTH);
+		const serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 
 		const closeOnContentClick = ref(true);
 		const dialogSignOut = ref(new DialogSupport());
@@ -159,10 +159,10 @@ export default {
 		});
 
 		const clickAbout = () => {
-			GlobalUtility.$navRouter.push('/about');
+			LibraryClientUtility.$navRouter.push('/about');
 		};
 		const clickSignIn = async () => {
-			GlobalUtility.$navRouter.push('/auth');
+			LibraryClientUtility.$navRouter.push('/auth');
 		};
 		const dialogSignOutOk = async () => {
 			dialogSignOut.value.ok();
@@ -184,18 +184,18 @@ export default {
 	// }),
 	// computed: {
 	// 	isAuthCompleted() {
-	// 		return GlobalUtility.$store.state.user && GlobalUtility.$store.state.user.authCompleted;
+	// 		return LibraryClientUtility.$store.state.user && LibraryClientUtility.$store.state.user.authCompleted;
 	// 	},
 	// 	isLoggedIn() {
-	// 		return GlobalUtility.$store.state.user && GlobalUtility.$store.state.user.isLoggedIn;
+	// 		return LibraryClientUtility.$store.state.user && LibraryClientUtility.$store.state.user.isLoggedIn;
 	// 	}
 	// },
 	// methods: {
 	// 	clickAbout() {
-	// 		GlobalUtility.$navRouter.push('/about');
+	// 		LibraryClientUtility.$navRouter.push('/about');
 	// 	},
 	// 	async clickSignIn() {
-	// 		GlobalUtility.$navRouter.push('/auth');
+	// 		LibraryClientUtility.$navRouter.push('/auth');
 	// 	},
 	// 	async dialogSignOutOk() {
 	// 		this.dialogSignOut.ok();

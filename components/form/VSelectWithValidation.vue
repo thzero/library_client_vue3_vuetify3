@@ -6,8 +6,9 @@
 		:item-value="itemValue"
 		:items="innerItems"
 		:hide-details="hideDetails"
-		:label="$attrs.label"
 		:multiple="multiple"
+		:readonly="readonly"
+		:label="$attrs.label"
       	density="compact"
 		@update:modelValue="innerValueUpdate"
 	>
@@ -17,8 +18,8 @@
 				:key="error.$uid"
 			>
 				<strong>{{ error.$message }}</strong>
-				<small> on </small>
-				<strong>{{ error.$property }}</strong>
+				<!--<small> on </small>
+				<strong>{{ error.$property }}</strong>-->
 			</div>
 		</template>
 	</v-select>
@@ -49,6 +50,10 @@ export default {
 		multiple: {
 			type: Boolean,
 			default: false
+		},
+		vidOverride: {
+			type: String,
+			default: null
 		}
 	},
 	setup (props, context) {
@@ -72,14 +77,16 @@ export default {
 			innerValue,
 			initValue,
 			innerValueUpdate
-		} = useBaseControlEditComponent(props, context);
-		
+		} = useBaseControlEditComponent(props, context, {
+			vidOverride: props.vidOverride
+		});
+
 		const innerItems = ref([]);
-		
-		const text = (item) => { 
+
+		const text = (item) => {
 			return item.displayName ? item.displayName : item.name;
 		}
-		
+
 		onMounted(async () => {
 			if (props.items)
 				innerItems.value = props.items;

@@ -16,8 +16,8 @@
 				:key="error.$uid"
 			>
 				<strong>{{ error.$message }}</strong>
-				<small> on </small>
-				<strong>{{ error.$property }}</strong>
+				<!--<small> on </small>
+				<strong>{{ error.$property }}</strong>-->
 			</div>
 		</template>
 	</v-switch>
@@ -58,7 +58,7 @@ export default {
 			innerValueUpdate,
 			initValue
 		} = useBaseControlEditComponent(props, context);
-		
+
 		return {
 			correlationId,
 			error,
