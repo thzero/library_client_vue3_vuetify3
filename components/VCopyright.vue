@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { useBaseCopyrightComponent } from '@/library_vue/components/baseCopyright';
+import { useBaseCopyrightComponent } from '@thzero/library_client_vue3/components/baseCopyright';
 
 export default {
 	name: 'VtCopyright',

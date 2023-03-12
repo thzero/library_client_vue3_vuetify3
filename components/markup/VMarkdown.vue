@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import { useBaseMarkdownComponent } from '@/library_vue/components/markup/baseMarkdown';
-import { baseMarkdownProps } from '@/library_vue/components/markup/baseMarkdownProps';
+import { useBaseMarkdownComponent } from '@thzero/library_client_vue3/components/markup/baseMarkdown';
+import { baseMarkdownProps } from '@thzero/library_client_vue3/components/markup/baseMarkdownProps';
 
 export default {
 	name: 'VtMarkdown',

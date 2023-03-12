@@ -34,8 +34,8 @@
 <script>
 import { computed } from 'vue';
 
-import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
-import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
+import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
 export default {
 	name: 'VtTextFieldWithValidation',
@@ -76,14 +76,14 @@ export default {
 			innerValueUpdate,
 			initValue
 		} = useBaseControlEditComponent(props, context);
-		
+
 		const count = computed(() => {
 			return props.maxcount ? '(' + (innerValue .value? innerValue.value.length : 0) + ')' : '';
 		});
 		const countClass = computed(() => {
 			return (props.maxcount && !String.isNullOrEmpty(innerValu.value) ? innerValue.value.length > props.maxcount ? 'negative ' : '' : '') + 'title-body2';
 		});
-		
+
 		return {
 			correlationId,
 			error,

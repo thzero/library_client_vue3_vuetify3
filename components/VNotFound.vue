@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { useBaseNotFoundComponent } from '@/library_vue/components/baseNotFound';
+import { useBaseNotFoundComponent } from '@thzero/library_client_vue3/components/baseNotFound';
 
 export default {
 	name: 'VNotFound',

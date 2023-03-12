@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
-import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
+import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
 export default {
 	name: 'VtSelect',
@@ -56,10 +56,10 @@ export default {
 			initValue,
 			innerValueUpdate
 		} = useBaseControlEditComponent(props, context);
-		
+
 		const innerItems = ref([]);
-		
-		const text = (item) => { 
+
+		const text = (item) => {
 			return item.displayName ? item.displayName : item.name;
 		};
 
@@ -68,7 +68,7 @@ export default {
 				innerItems.value = value;
 			}
 		);
-		
+
 		onMounted(async () => {
 			if (props.items)
 				innerItems.value = props.items;

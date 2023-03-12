@@ -19,8 +19,8 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import { useBaseControlEditComponent } from '@/library_vue/components/baseControlEdit';
-import { useBaseControlEditProps } from '@/library_vue/components/baseControlEditProps';
+import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
+import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
 export default {
 	name: 'VtTagsWithValidation',
@@ -57,8 +57,8 @@ export default {
 		const items = ref([]);
 		const select = ref(props.modelValue ? props.modelValue : []);
 		const search = ref('');
-		
-		const hint = computed((item) => { 
+
+		const hint = computed((item) => {
 			return LibraryClientUtility.$trans.t('errors.tagLine.max', { max: props.max });
 		});
 
@@ -87,7 +87,7 @@ export default {
 				nextTick(() => select.value.pop());
 			}
 		);
-		
+
 		onMounted(async () => {
 			if (props.items)
 				innerItems.value = props.items;
@@ -95,7 +95,7 @@ export default {
 		});
 
 		return {
-			
+
 			correlationId,
 			error,
 			hasFailed,

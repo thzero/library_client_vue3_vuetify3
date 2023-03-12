@@ -126,13 +126,13 @@ import LibraryClientConstants from '@thzero/library_client/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import baseLayout from '@/library_vue/layouts/baseLayout';
+import baseLayout from '@thzero/library_client_vue3/layouts/baseLayout';
 
-import VConfirmationDialog from '@/library_vue_vuetify/components/VConfirmationDialog';
-import VLayoutFooter from '@/library_vue_vuetify/components/VLayoutFooter';
-import VLoadingOverlay from '@/library_vue_vuetify/components/VLoadingOverlay';
+import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
+import VLayoutFooter from '@thzero/library_client_vue3_vuetify3/components/VLayoutFooter';
+import VLoadingOverlay from '@thzero/library_client_vue3_vuetify3/components/VLoadingOverlay';
 
-import DialogSupport from '@/library_vue/components/support/dialog';
+import DialogSupport from '@thzero/library_client_vue3/components/support/dialog';
 
 export default {
 	name: 'AdminLayout',

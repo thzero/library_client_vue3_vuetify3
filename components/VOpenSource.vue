@@ -141,7 +141,7 @@
 </template>
 
 <script>
-import { useFrameworkOpenSourceComponent } from '@/library_vue_vuetify/components/frameworkOpenSource';
+import { useFrameworkOpenSourceComponent } from '@thzero/library_client_vue3_vuetify3/components/frameworkOpenSource';
 
 export default {
 	name: 'VOpenSource',

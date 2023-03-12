@@ -1,18 +1,13 @@
 <template>
-	<v-footer
-		app
-		absolute
+	<VVersion v-model="version" />
+	<v-spacer />
+	<VCopyright v-model="version" />
+	<span
+		v-if="isDev"
+		style="padding-left: 4px;"
 	>
-		<VVersion v-model="version" />
-		<v-spacer />
-		<VCopyright v-model="version" />
-		<span
-			v-if="isDev"
-			style="padding-left: 4px;"
-		>
-			{{ breakpointName }}
-		</span>
-	</v-footer>
+		{{ breakpointName }}
+	</span>
 </template>
 
 <script>
@@ -24,7 +19,7 @@ import LibraryClientConstants from '@thzero/library_client/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LIbraryCommonUtility from '@thzero/library_common/utility';
 
-import { useBaseComponent } from '@/library_vue/components/base';
+import { useBaseComponent } from '@thzero/library_client_vue3/components/base';
 
 import VCopyright from './VCopyright';
 import VVersion from './VVersion';

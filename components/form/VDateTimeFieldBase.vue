@@ -109,7 +109,7 @@ const DEFAULT_TIME = '00:00:00';
 const OUTPUT_TYPE_DATE = 'date';
 const OUTPUT_TYPE_TIMESTAMP = 'timestamp';
 
-import baseControlEdit from '@/library_vue/components/baseControlEdit';
+import baseControlEdit from '@thzero/library_client_vue3/components/baseControlEdit';
 
 export default {
 	name: 'VtDatetimePickerBase',
