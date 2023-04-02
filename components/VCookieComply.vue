@@ -25,7 +25,8 @@ export default {
             logger,
             noBreakingSpaces,
             notImplementedError,
-            success
+            success,
+			successResponse
 		} = useBaseComponent(props, context);
 
 		return {
@@ -37,7 +38,8 @@ export default {
             logger,
             noBreakingSpaces,
             notImplementedError,
-            success
+            success,
+			successResponse
 		};
 	}
 };

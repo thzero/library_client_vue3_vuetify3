@@ -10,7 +10,7 @@
 				:style="!isFullscreen ? { maxWidth: maxWidth, width: width, margin: 'auto', } : {}"
 			>
 				<!-- <div class="text-center">
-					dirty: {{ dirty }} invalid: {{ invalid }} disabled: {{ disabled }} buttonOkDisabled: {{ buttonOkDisabled }}
+					dirty: {{ dirty }} invalid: {{ invalid }} buttonOkDisabled: {{ buttonOkDisabled }}
 				</div> -->
 				<v-card-item>
 					<div class="text-center text-h5">{{ label }}</div>
@@ -77,6 +77,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			successResponse,
 			isSaving,
 			serverErrors,
 			setErrors,
@@ -125,6 +126,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			successResponse,
 			isSaving,
 			serverErrors,
 			setErrors,

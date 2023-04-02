@@ -42,6 +42,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			successResponse,
 			clickHome,
 			imageWidth
 		} = useBaseNotFoundComponent(props, context);
@@ -56,6 +57,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			successResponse,
 			clickHome,
 			imageWidth
 		};
