@@ -89,13 +89,9 @@
 <script>
 import { computed, ref } from 'vue';
 
-// import LibraryClientVueUtility from '@thzero/library_client_vue/utility/index';
-
 import { useBaseFormDialogControlComponent } from '@thzero/library_client_vue3/components/form/baseFormDialogControl';
 import { baseFormDialogControlProps } from '@thzero/library_client_vue3/components/form/baseFormDialogControlProps';
 import { useDisplayComponent } from '@thzero/library_client_vue3_vuetify3/components/display';
-
-// import DialogSupport from '@thzero/library_client_vue3/components/support/dialog';
 
 export default {
 	name: 'VtFormDialog',

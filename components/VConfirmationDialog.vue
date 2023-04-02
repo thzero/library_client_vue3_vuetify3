@@ -12,13 +12,6 @@
 			<v-card-text>
 				<div v-if="messageRaw" v-html="internalMessage"></div>
 				<div v v-if="!messageRaw">{{ internalMessage }}</div>
-				<div
-					v-for="(item, index) in serverErrors"
-					:key="index"
-					class="red--text text--lighten-1 v-messages"
-				>
-					{{ item }}
-				</div>
 			</v-card-text>
 			<v-card-actions>
 				<v-btn
@@ -31,7 +24,7 @@
 				<v-btn
 					color="primary"
 					text
-					:disabled="invalid"
+					:disabled="buttonOkDisabled"
 					@click.stop="dialogOk()"
 				>
 					{{ $t('buttons.ok') }}
@@ -45,7 +38,6 @@
 import { computed } from 'vue';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
-import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 
 import { useBaseConfirmationDialogComponent } from '@thzero/library_client_vue3/components/baseConfirmationDialogComponent';
 import { baseConfirmationDialogProps } from '@thzero/library_client_vue3/components/baseConfirmationDialogProps';
@@ -67,24 +59,14 @@ export default {
 			notImplementedError,
 			success,
 			successResponse,
+			buttonOkDisabled,
 			dialogCancel,
 			dialogOk,
 			dialogSignal,
 			handleError,
-			internalItem
-		} = useBaseConfirmationDialogComponent(
-			props,
-			context,
-			{
-				handleErrorI: (response, correlationId) => {
-					LibraryClientVueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
-				}
-			}
-		);
-
-		// const handleError = (response, correlationId) => {
-		// 	LibraryClientVueUtility.handleError(this.$refs.obs, this.serverErrors, response, correlationId);
-		// }
+			internalItem,
+			invalid
+		} = useBaseConfirmationDialogComponent(props, context);
 
 		const internalMessage = computed(() => {
 			return props.message ? props.message : props.nonRecoverable ? LibraryClientUtility.$trans.t('questions.areYouSureNonRecoverable') : LibraryClientUtility.$trans.t('questions.areYouSure')
@@ -101,12 +83,14 @@ export default {
 			notImplementedError,
 			success,
 			successResponse,
+			buttonOkDisabled,
 			dialogCancel,
 			dialogOk,
 			dialogSignal,
 			handleError,
 			internalItem,
-			internalMessage
+			internalMessage,
+			invalid
 		};
 	}
 };
