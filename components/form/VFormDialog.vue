@@ -13,9 +13,9 @@
 			<v-card
 				:style="!isFullscreen ? { maxWidth: maxWidth, width: width, margin: 'auto', } : {}"
 			>
-				<div class="text-center">
+				<!-- <div class="text-center">
 					dirty: {{ dirty }} invalid: {{ invalid }} buttonOkDisabled: {{ buttonOkDisabled }}
-				</div>
+				</div> -->
 				<v-card-title class="headline">
 					{{ label }}
 				</v-card-title>
@@ -76,6 +76,14 @@
 			</v-card>
 		</v-dialog>
 	</div>
+	<v-snackbar
+		ref="notifyRef"
+		v-model="notifySignal"
+		:color="notifyColor"
+		:timeout="notifyTimeout"
+	>
+		{{ notifyMessage }}
+	</v-snackbar>
 </template>
 
 <script>
