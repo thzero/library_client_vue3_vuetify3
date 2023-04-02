@@ -28,6 +28,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			successResponse,
 			version
 		} = useBaseVersionComponent(props, context);
 
@@ -45,6 +46,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			successResponse,
 			version
 		};
 	}

@@ -41,6 +41,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			successResponse
 		} = useBaseComponent(props, context);
 
 		const useDisplayI = useDisplay();
@@ -71,6 +72,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+			successResponse,
 			breakpointName,
 			isDev,
 			version

@@ -52,15 +52,7 @@ export default {
 			imageWidth,
 			progressSize
 		};
-	},
-	// computed: {
-	// 	imageWidth() {
-	// 		return LibraryClientVueUtility.overlayImageWidth();
-	// 	},
-	// 	progressSize() {
-	// 		return LibraryClientVueUtility.overlayProgressSize();
-	// 	}
-	// }
+	}
 };
 </script>
 

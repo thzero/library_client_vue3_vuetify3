@@ -35,6 +35,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+		successResponse,
 			display,
 			markdownClass,
 			serviceMarkup
@@ -50,6 +51,7 @@ export default {
 			noBreakingSpaces,
 			notImplementedError,
 			success,
+		successResponse,
 			display,
 			markdownClass,
 			serviceMarkup
