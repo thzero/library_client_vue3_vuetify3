@@ -1,4 +1,6 @@
 <script>
+import { unref } from 'vue';
+
 import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 
@@ -15,9 +17,65 @@ export function useDisplayComponent(props, context, options) {
 	const isFullscreen = computed(() => {
 		return LibraryClientVuetifyUtility.fullscreen(useDisplayI);
 	});
+	const isMd = computed(() => {
+		return unref(unref(useDisplayI).md);
+	});
+	const isLg = computed(() => {
+		return unref(unref(useDisplayI).lg);
+	});
+	const isSm = computed(() => {
+		return unref(unref(useDisplayI).sm);
+	});
+	const isXl = computed(() => {
+		return unref(unref(useDisplayI).xl);
+	});
+	const isXs = computed(() => {
+		return unref(unref(useDisplayI).xs);
+	});
+	const isXxl = computed(() => {
+		return unref(unref(useDisplayI).xxl);
+	});
+	const lgAndDown = computed(() => {
+		return unref(unref(useDisplayI).lgAndDown);
+	});
+	const lgAndUp = computed(() => {
+		return unref(unref(useDisplayI).lgAndUp);
+	});
+	const mdAndDown = computed(() => {
+		return unref(unref(useDisplayI).mdAndDown);
+	});
+	const mdAndUp = computed(() => {
+		return unref(unref(useDisplayI).mdAndUp);
+	});
+	const smAndDown = computed(() => {
+		return unref(unref(useDisplayI).smAndDown);
+	});
+	const smAndUp = computed(() => {
+		return unref(unref(useDisplayI).smAndUp);
+	});
+	const xlndDown = computed(() => {
+		return unref(unref(useDisplayI).xlndDown);
+	});
+	const xlndUp = computed(() => {
+		return unref(unref(useDisplayI).xlndUp);
+	});
 
 	return {
-		isFullscreen
+		isFullscreen,
+		isMd,
+		isLg,
+		isSm,
+		isXl,
+		isXs,
+		isXxl,
+		lgAndDown,
+		lgAndUp,
+		mdAndDown,
+		mdAndUp,
+		smAndDown,
+		smAndUp,
+		xlndDown,
+		xlndUp
 	};
 };
 </script>

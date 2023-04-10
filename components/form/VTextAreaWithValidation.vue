@@ -2,14 +2,15 @@
 	<v-textarea
 		v-model="innerValue"
 		:error="errorI"
-		:hide-details="hideDetails"
 		v-bind="$attrs"
 		auto-grow
-		clearable
+		:hide-details="hideDetails"
 		:readonly="readonly"
 		:disabled="disabled"
+		:clearable="clearable"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
+		:counter="maxcount"
 		@blur="blur"
 		@update:modelValue="change"
 	>
@@ -18,6 +19,7 @@
 		</template>
 		<template v-slot:details>
 			<div
+				v-if="validation"
 				v-for="error of errorsI"
 				:key="error.$uid"
 			>
@@ -42,6 +44,10 @@ export default {
 		blur: {
 			type: Function,
 			default: () => {}
+		},
+		maxcount: {
+			type: Number,
+			default: null
 		}
 	},
 	setup (props, context) {
