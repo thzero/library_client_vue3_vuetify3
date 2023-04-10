@@ -18,14 +18,15 @@
 			<div
 				v-if="errorsI && errorsI.length > 0"
 			>
-			<div
-				v-for="error of errorsI"
-				:key="error.$uid"
-			>
-				<strong>{{ error.$message }}</strong>
-				<!--<small> on </small>
-				<strong>{{ error.$property }}</strong>-->
-			</div>
+				<div
+					v-if="validation"
+					v-for="error of errorsI"
+					:key="error.$uid"
+				>
+					<strong>{{ error.$message }}</strong>
+					<!--<small> on </small>
+					<strong>{{ error.$property }}</strong>-->
+				</div>
 			</div>
 		</template>
 	</v-text-field>

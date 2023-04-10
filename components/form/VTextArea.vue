@@ -3,9 +3,10 @@
 		v-model="innerValue"
 		v-bind="$attrs"
 		auto-grow
-		clearable
+		:hide-details="hideDetails"
 		:readonly="readonly"
 		:disabled="disabled"
+		:clearable="clearable"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
 		@blur="blur"

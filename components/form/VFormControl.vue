@@ -26,7 +26,18 @@
 					<v-spacer />
 					<slot name="buttons_pre"/>
 					<v-btn
-						v-if="buttonDelete"
+						v-if="!readonly && buttonCancel"
+						:disabled="buttonCancelDisabled"
+						color="primary lighten-1"
+						text
+						@click="handleCancel"
+						class="mr-2"
+						:loading="isLoading"
+					>
+						{{ $t(buttonCancelName) }}
+					</v-btn>
+					<v-btn
+						v-if="!readonly && buttonDelete"
 						color="primary lighten-1"
 						text
 						@click="handleDelete"
@@ -36,7 +47,7 @@
 						{{ $t(buttonDeleteName) }}
 					</v-btn>
 					<v-btn
-						v-if="buttonClear"
+						v-if="!readonly && buttonClear"
 						color="primary lighten-1"
 						text
 						@click="handleClear"
@@ -46,7 +57,7 @@
 						{{ $t(buttonClearName) }}
 					</v-btn>
 					<v-btn
-						v-if="buttonOk"
+						v-if="!readonly && buttonOk"
 						:disabled="buttonOkDisabled"
 						color="green darken-1"
 						text
@@ -122,10 +133,16 @@
 			</v-card>
 		</v-overlay>
 		<VConfirmationDialog
+			v-if="buttonCancel"
+			:message="messageCancel"
+			:signal="dialogCancelConfirmSignal.signal"
+			@cancel="dialogCancelConfirmSignal.cancel()"
+			@ok="handleCancelConfirmOk"
+		/>
+		<VConfirmationDialog
 			v-if="buttonDelete"
-			:non-recoverable="nonRecoverable"
 			:signal="dialogDeleteConfirmSignal.signal"
-			@cancel="dialogDeleteConfirmSignal.cancelI()"
+			@cancel="dialogDeleteConfirmSignal.cancel()"
 			@ok="handleDeleteConfirmOk"
 		/>
 	</div>
@@ -152,7 +169,7 @@ export default {
 	props: {
 		...baseFormControlProps
 	},
-	emits: ['ok'],
+	emits: ['cancel', 'ok'],
 	setup(props, context) {
 		const {
 			correlationId,
@@ -168,17 +185,23 @@ export default {
 			isSaving,
 			serverErrors,
 			setErrors,
+			buttonCancelDisabled,
 			buttonOkDisabled,
+			dialogCancelConfirmSignal,
 			dialogDeleteConfirmSignal,
 			dirty,
 			invalid,
+			isCancelling,
 			isClearing,
 			isDeleting,
 			isLoading,
 			overlayLoading,
+			handleCancel,
+			handleCancelConfirmOk,
 			handleClear,
 			handleDelete,
 			handleDeleteConfirmOk,
+			messageCancel,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
@@ -202,17 +225,23 @@ export default {
 			isSaving,
 			serverErrors,
 			setErrors,
+			buttonCancelDisabled,
 			buttonOkDisabled,
+			dialogCancelConfirmSignal,
 			dialogDeleteConfirmSignal,
 			dirty,
 			invalid,
+			isCancelling,
 			isClearing,
 			isDeleting,
 			isLoading,
 			overlayLoading,
+			handleCancel,
+			handleCancelConfirmOk,
 			handleClear,
 			handleDelete,
 			handleDeleteConfirmOk,
+			messageCancel,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
