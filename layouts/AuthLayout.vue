@@ -29,7 +29,11 @@
 				<router-view />
 			</v-container>
 		</v-main>
-		<VLayoutFooter />
+		<v-footer
+			app
+		>
+			<VLayoutFooter />
+		</v-footer>
 	</v-app>
 </template>
 
