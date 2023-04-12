@@ -111,7 +111,11 @@
 			@ok="dialogSignOutOk"
 		/>
 
-		<VLayoutFooter />
+		<v-footer
+			app
+		>
+			<VLayoutFooter />
+		</v-footer>
 
 		<VLoadingOverlay
 			:signal="isAuthCompleted"
