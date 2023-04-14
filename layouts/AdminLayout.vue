@@ -124,19 +124,11 @@
 </template>
 
 <script>
-import { computed, getCurrentInstance, ref } from 'vue';
-
-import LibraryClientConstants from '@thzero/library_client/constants';
-
-import LibraryClientUtility from '@thzero/library_client/utility/index';
-
-import baseLayout from '@thzero/library_client_vue3/layouts/baseLayout';
-
 import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
 import VLayoutFooter from '@thzero/library_client_vue3_vuetify3/components/VLayoutFooter';
 import VLoadingOverlay from '@thzero/library_client_vue3_vuetify3/components/VLoadingOverlay';
 
-import DialogSupport from '@thzero/library_client_vue3/components/support/dialog';
+import { useBaseAdminLayout } from '@thzero/library_client_vue3/layouts/baseAdminLayout';
 
 export default {
 	name: 'AdminLayout',
@@ -145,67 +137,51 @@ export default {
 		VLayoutFooter,
 		VLoadingOverlay
 	},
-	extends: baseLayout,
-	setup(props) {
-		const instance = getCurrentInstance();
-
-		const serviceAuth = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_AUTH);
-		const serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
-
-		const closeOnContentClick = ref(true);
-		const dialogSignOut = ref(new DialogSupport());
-
-		const isAuthCompleted = computed(() => {
-			return instance.ctx.serviceStore.user && instance.ctx.serviceStore.userAuthCompleted;
-		});
-		const isLoggedIn = computed(() => {
-			return instance.ctx.serviceStore.user && instance.ctx.serviceStore.userAuthIsLoggedIn;
-		});
-
-		const clickAbout = () => {
-			LibraryClientUtility.$navRouter.push('/about');
-		};
-		const clickSignIn = async () => {
-			LibraryClientUtility.$navRouter.push('/auth');
-		};
-		const dialogSignOutOk = async () => {
-			dialogSignOut.value.ok();
-			await instance.ctx.serviceAuth.signOut(this.correlationId());
-		};
-
-		return Object.assign(baseLayout.setup(props), {
+	components: {
+		VLayoutFooter,
+		// VVersion
+	},
+	setup(props, context) {
+		const {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			features,
 			closeOnContentClick,
 			dialogSignOut,
 			isAuthCompleted,
 			isLoggedIn,
-			serviceAuth,
-			serviceStore,
-		});
-	},
-	// data: () => ({
-	// 	closeOnContentClick: true,
-	// 	dialogSignOut: new DialogSupport()
-	// }),
-	// computed: {
-	// 	isAuthCompleted() {
-	// 		return LibraryClientUtility.$store.state.user && LibraryClientUtility.$store.state.user.authCompleted;
-	// 	},
-	// 	isLoggedIn() {
-	// 		return LibraryClientUtility.$store.state.user && LibraryClientUtility.$store.state.user.isLoggedIn;
-	// 	}
-	// },
-	// methods: {
-	// 	clickAbout() {
-	// 		LibraryClientUtility.$navRouter.push('/about');
-	// 	},
-	// 	async clickSignIn() {
-	// 		LibraryClientUtility.$navRouter.push('/auth');
-	// 	},
-	// 	async dialogSignOutOk() {
-	// 		this.dialogSignOut.ok();
-	// 		await auth.signOut(this.correlationId());
-	// 	}
-	// }
+			clickAbout,
+			clickSignIn,
+			dialogSignOutOk
+		} = useBaseAdminLayout(props, context);
+
+		return {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			features,
+			closeOnContentClick,
+			dialogSignOut,
+			isAuthCompleted,
+			isLoggedIn,
+			clickAbout,
+			clickSignIn,
+			dialogSignOutOk
+		}
+	}
 };
 </script>
 
