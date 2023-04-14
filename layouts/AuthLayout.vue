@@ -38,7 +38,6 @@
 </template>
 
 <script>
-// import baseLayout from '@thzero/library_client_vue3/layouts/baseLayout';
 import { useBaseLayout } from '@thzero/library_client_vue3/layouts/baseLayout';
 
 import VLayoutFooter from '@thzero/library_client_vue3_vuetify3/components/VLayoutFooter';
@@ -46,8 +45,7 @@ import VLayoutFooter from '@thzero/library_client_vue3_vuetify3/components/VLayo
 export default {
 	name: 'AuthLayout',
 	components: {
-		VLayoutFooter,
-		// VVersion
+		VLayoutFooter
 	},
 	setup(props, context) {
 		const {
