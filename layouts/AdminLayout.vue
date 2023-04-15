@@ -120,10 +120,6 @@ export default {
 		VLayoutFooter,
 		VLoadingOverlay
 	},
-	components: {
-		VLayoutFooter,
-		// VVersion
-	},
 	setup(props, context) {
 		const {
 			correlationId,
