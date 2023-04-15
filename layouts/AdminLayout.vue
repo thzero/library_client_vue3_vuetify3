@@ -5,13 +5,6 @@
 			dense
 			dark
 		>
-			<v-btn
-				text
-				class="hidden-md-and-up"
-				@click.stop="toggleDrawer"
-			>
-				<v-icon>menu</v-icon>
-			</v-btn>
 			<v-toolbar-title class="headline text-uppercase">
 				<router-link
 					to="/"
@@ -26,70 +19,60 @@
 				left
 				:close-on-content-click="closeOnContentClick"
 			>
-				<template #activator="{ on }">
+				<template v-slot:activator="{ props }">
 					<v-btn
-						icon
-						v-on="on"
-					>
-						<v-icon>more_vert</v-icon>
-					</v-btn>
+						v-bind="props"
+						icon="mdi-dots-vertical"
+					></v-btn>
 				</template>
-				<v-list>
+				<v-list density="compact">
 					<!-- <v-list-item
 						v-if="isLoggedIn"
 						to="/profile"
 					>
-						<v-list-item-action>
-							<v-icon>account_circle</v-icon>
-						</v-list-item-action>
-						<v-list-item-content>
-							<v-list-item-title>{{ $t('titles.profile') }}</v-list-item-title>
-						</v-list-item-content>
+						<template v-slot:prepend>
+							<v-icon color="green darken-2">
+								mdi-account
+							</v-icon>
+						</template>
+						<v-list-item-title>{{ $t('titles.profile') }}</v-list-item-title>
 					</v-list-item> -->
 					<v-list-item
 						v-if="isLoggedIn"
 						to="/settings"
 					>
-						<v-list-item-action>
-							<v-icon>settings</v-icon>
-						</v-list-item-action>
-						<v-list-item-content>
-							<v-list-item-title>{{ $t('titles.settings') }}</v-list-item-title>
-						</v-list-item-content>
+						<template v-slot:prepend>
+							<v-icon>mdi-cog</v-icon>
+						</template>
+						<v-list-item-title>{{ $t('titles.settings') }}</v-list-item-title>
 					</v-list-item>
 					<!-- <v-list-item @click="clickAbout">
-						<v-list-item-action>
-							<v-icon>info</v-icon>
-						</v-list-item-action>
-						<v-list-item-content>
-							<v-list-item-title>About</v-list-item-title>
-						</v-list-item-content>
+						<template v-slot:prepend>
+							mdi-info
+						</template>
+						<v-list-item-title>About</v-list-item-title>
 					</v-list-item> -->
 					<v-list-item
 						v-if="!isLoggedIn"
 						@click="clickSignIn"
 					>
-						<v-list-item-action>
+						<template v-slot:prepend>
 							<v-icon color="green darken-2">
-								power_settings_new
+								mdi-account
 							</v-icon>
-						</v-list-item-action>
-						<v-list-item-content>
-							<v-list-item-title>{{ $t('titles.signIn') }}</v-list-item-title>
-						</v-list-item-content>
+						</template>
+						<v-list-item-title>{{ $t('titles.signIn') }}</v-list-item-title>
 					</v-list-item>
 					<v-list-item
 						v-if="isLoggedIn"
 						@click="dialogSignOut.open()"
 					>
-						<v-list-item-action>
+						<template v-slot:prepend>
 							<v-icon color="red darken-2">
-								power_settings_new
+								mdi-account
 							</v-icon>
-						</v-list-item-action>
-						<v-list-item-content>
-							<v-list-item-title>{{ $t('titles.signOut') }}</v-list-item-title>
-						</v-list-item-content>
+						</template>
+						<v-list-item-title>{{ $t('titles.signOut') }}</v-list-item-title>
 					</v-list-item>
 				</v-list>
 			</v-menu>
