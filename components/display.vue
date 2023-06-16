@@ -14,6 +14,9 @@ export function useDisplayComponent(props, context, options) {
 
 	const useDisplayI = useDisplay();
 
+	const height = computed(() => {
+		return unref(unref(useDisplayI).height);
+	});
 	const isFullscreen = computed(() => {
 		return LibraryClientVuetifyUtility.fullscreen(useDisplayI);
 	});
@@ -47,6 +50,9 @@ export function useDisplayComponent(props, context, options) {
 	const mdAndUp = computed(() => {
 		return unref(unref(useDisplayI).mdAndUp);
 	});
+	const name = computed(() => {
+		return unref(unref(useDisplayI).name);
+	});
 	const smAndDown = computed(() => {
 		return unref(unref(useDisplayI).smAndDown);
 	});
@@ -59,8 +65,12 @@ export function useDisplayComponent(props, context, options) {
 	const xlndUp = computed(() => {
 		return unref(unref(useDisplayI).xlndUp);
 	});
+	const width = computed(() => {
+		return unref(unref(useDisplayI).width);
+	});
 
 	return {
+		height,
 		isFullscreen,
 		isMd,
 		isLg,
@@ -72,10 +82,12 @@ export function useDisplayComponent(props, context, options) {
 		lgAndUp,
 		mdAndDown,
 		mdAndUp,
+		name,
 		smAndDown,
 		smAndUp,
 		xlndDown,
-		xlndUp
+		xlndUp,
+		width
 	};
 };
 </script>
