@@ -3,9 +3,10 @@
 		<div class="headline text-center text-h6">
 			{{ label }}
 		</div>
-		<!-- <div class="text-center">
-			 dirty: {{ dirty }} invalid: {{ invalid }} disabled: {{ disabled }} buttonOkDisabled: {{ buttonOkDisabled }}
-		</div> -->
+		<div class="text-center">
+			 dirty: {{ dirty }} invalid: {{ invalid }} disabled: {{ disabled }} 
+			 buttonCancelDisabled: {{ buttonCancelDisabled }}  buttonClearDisabled: {{ buttonClearDisabled }}  buttonOkDisabled: {{ buttonOkDisabled }}
+		</div>
 		<div>
 			<v-form>
 				<slot />
@@ -52,7 +53,7 @@
 						text
 						@click="handleClear"
 						class="mr-2"
-						:loading="isLoading"
+						:disabled="buttonClearDisabled"
 					>
 						{{ $t(buttonClearName) }}
 					</v-btn>
@@ -140,6 +141,13 @@
 			@ok="handleCancelConfirmOk"
 		/>
 		<VConfirmationDialog
+			v-if="buttonClear"
+			:message="messageClear"
+			:signal="dialogClearConfirmSignal.signal"
+			@cancel="dialogClearConfirmSignal.cancel()"
+			@ok="handleClearConfirmOk"
+		/>
+		<VConfirmationDialog
 			v-if="buttonDelete"
 			:signal="dialogDeleteConfirmSignal.signal"
 			@cancel="dialogDeleteConfirmSignal.cancel()"
@@ -158,6 +166,7 @@
 
 <script>
 import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
+
 import { useBaseFormControlComponent } from '@thzero/library_client_vue3/components/form/baseFormControl';
 import { baseFormControlProps } from '@thzero/library_client_vue3/components/form/baseFormControlProps';
 
@@ -169,10 +178,9 @@ export default {
 	props: {
 		...baseFormControlProps
 	},
-	emits: ['cancel', 'ok'],
+	emits: ['cancel', 'delete', 'ok', 'reset'],
 	setup(props, context) {
-		const {
-			correlationId,
+		const {	correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -185,12 +193,21 @@ export default {
 			isSaving,
 			serverErrors,
 			setErrors,
-			buttonCancelDisabled,
-			buttonOkDisabled,
+			notifyColor,
+			notifyMessage,
+			notifySignal,
+			notifyTimeout,
+			setNotify,
 			dialogCancelConfirmSignal,
+			dialogClearConfirmSignal,
 			dialogDeleteConfirmSignal,
 			dirty,
 			invalid,
+			messageCancel,
+			messageClear,
+			buttonCancelDisabled,
+			buttonClearDisabled,
+			buttonOkDisabled,
 			isCancelling,
 			isClearing,
 			isDeleting,
@@ -199,15 +216,11 @@ export default {
 			handleCancel,
 			handleCancelConfirmOk,
 			handleClear,
+			handleClearConfirmOk,
 			handleDelete,
 			handleDeleteConfirmOk,
-			messageCancel,
-			notifyColor,
-			notifyMessage,
-			notifySignal,
-			notifyTimeout,
 			reset,
-			setNotify,
+			resetForm,
 			submit
 		} = useBaseFormControlComponent(props, context);
 
@@ -225,12 +238,21 @@ export default {
 			isSaving,
 			serverErrors,
 			setErrors,
-			buttonCancelDisabled,
-			buttonOkDisabled,
+			notifyColor,
+			notifyMessage,
+			notifySignal,
+			notifyTimeout,
+			setNotify,
 			dialogCancelConfirmSignal,
+			dialogClearConfirmSignal,
 			dialogDeleteConfirmSignal,
 			dirty,
 			invalid,
+			messageCancel,
+			messageClear,
+			buttonCancelDisabled,
+			buttonClearDisabled,
+			buttonOkDisabled,
 			isCancelling,
 			isClearing,
 			isDeleting,
@@ -239,15 +261,11 @@ export default {
 			handleCancel,
 			handleCancelConfirmOk,
 			handleClear,
+			handleClearConfirmOk,
 			handleDelete,
 			handleDeleteConfirmOk,
-			messageCancel,
-			notifyColor,
-			notifyMessage,
-			notifySignal,
-			notifyTimeout,
 			reset,
-			setNotify,
+			resetForm,
 			submit
 		};
 	},

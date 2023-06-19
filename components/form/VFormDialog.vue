@@ -76,6 +76,25 @@
 			</v-card>
 		</v-dialog>
 	</div>
+	<VConfirmationDialog
+		v-if="buttonCancel"
+		:message="messageCancel"
+		:signal="dialogCancelConfirmSignal.signal"
+		@cancel="dialogCancelConfirmSignal.cancel()"
+		@ok="handleCancelConfirmOk"
+	/>
+	<VConfirmationDialog
+		v-if="buttonClear"
+		:message="messageClear"
+		:signal="dialogClearConfirmSignal.signal"
+		@cancel="dialogClearConfirmSignal.cancel()"
+	/>
+	<VConfirmationDialog
+		v-if="buttonDelete"
+		:signal="dialogDeleteConfirmSignal.signal"
+		@cancel="dialogDeleteConfirmSignal.cancel()"
+		@ok="handleDeleteConfirmOk"
+	/>
 	<v-snackbar
 		ref="notifyRef"
 		v-model="notifySignal"
@@ -89,12 +108,17 @@
 <script>
 import { computed, ref } from 'vue';
 
+import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
+
 import { useBaseFormDialogControlComponent } from '@thzero/library_client_vue3/components/form/baseFormDialogControl';
 import { baseFormDialogControlProps } from '@thzero/library_client_vue3/components/form/baseFormDialogControlProps';
 import { useDisplayComponent } from '@thzero/library_client_vue3_vuetify3/components/display';
 
 export default {
 	name: 'VtFormDialog',
+	components: {
+		VConfirmationDialog
+	},
 	props: {
 		...baseFormDialogControlProps
 	},
@@ -114,26 +138,42 @@ export default {
 			isSaving,
 			serverErrors,
 			setErrors,
-			// buttonOkDisabled,
-			dialogHeightI,
-			dialogDeleteConfirmSignal,
-			dialogSignal,
-			dirty,
-			invalid,
-			handleClear,
-			handleClose,
-			handleDelete,
-			handleDeleteConfirmOk,
-			loading,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
-			onResize,
-			reset,
+			setNotify,
+			dialogHeightI,
+			dialogCancelConfirmSignal,
+			dialogClearConfirmSignal,
+			dialogCloseConfirmSignal,
+			dialogDeleteConfirmSignal,
+			dialogSignal,
+			dirty,
+			invalid,
+			messageCancel,
+			messageClear,
+			messageClose,
+			buttonCancelDisabled,
+			buttonClearDisabled,
+			buttonOkDisabled,
+			isCancelling,
+			isClearing,
+			isDeleting,
+			isLoading,
+			overlayLoading,
 			scrollableI,
 			scrollableHeightI,
-			setNotify,
+			handleCancel,
+			handleCancelConfirmOk,
+			handleClear,
+			handleClearConfirmOk,
+			handleClose,
+			handleDelete,
+			handleDeleteConfirmOk,
+			onResize,
+			reset,
+			resetDialog,
 			submit
 		} = useBaseFormDialogControlComponent(props, context);
 
@@ -143,10 +183,6 @@ export default {
 
 		const isFullscreen = computed(() => {
 			return display.isFullscreen.value;
-		});
-
-		const buttonOkDisabled = computed(() => {
-			return invalid.value;
 		});
 
 		return {
@@ -163,29 +199,45 @@ export default {
 			isSaving,
 			serverErrors,
 			setErrors,
-			buttonOkDisabled,
-			dialogHeightI,
-			dialogDeleteConfirmSignal,
-			dialogSignal,
-			dirty,
-			invalid,
-			handleClear,
-			handleClose,
-			handleDelete,
-			handleDeleteConfirmOk,
-			loading,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
-			onResize,
-			reset,
+			setNotify,
+			dialogHeightI,
+			dialogCancelConfirmSignal,
+			dialogClearConfirmSignal,
+			dialogCloseConfirmSignal,
+			dialogDeleteConfirmSignal,
+			dialogSignal,
+			dirty,
+			invalid,
+			messageCancel,
+			messageClear,
+			messageClose,
+			buttonCancelDisabled,
+			buttonClearDisabled,
+			buttonOkDisabled,
+			isCancelling,
+			isClearing,
+			isDeleting,
+			isLoading,
+			overlayLoading,
 			scrollableI,
 			scrollableHeightI,
-			setNotify,
+			handleCancel,
+			handleCancelConfirmOk,
+			handleClear,
+			handleClearConfirmOk,
+			handleClose,
+			handleDelete,
+			handleDeleteConfirmOk,
+			onResize,
+			reset,
+			resetDialog,
 			submit,
-			isFullscreen,
-			internalItem
+			internalItem,
+			isFullscreen
 		};
 	}
 };
