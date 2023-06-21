@@ -4,7 +4,7 @@
 			v-model="dialogSignal"
 			persistent
 			:fullscreen="isFullscreen"
-			@keydown.esc="handleClose"
+			@keydown.esc="handleCancel"
 		>
 		<!--
 			v-resize="onResize"
@@ -13,9 +13,11 @@
 			<v-card
 				:style="!isFullscreen ? { maxWidth: maxWidth, width: width, margin: 'auto', } : {}"
 			>
-				<!-- <div class="text-center">
-					dirty: {{ dirty }} invalid: {{ invalid }} buttonOkDisabled: {{ buttonOkDisabled }}
-				</div> -->
+				<div class="text-center">
+					dirty: {{ dirty }} invalid: {{ invalid }} <br>
+					buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
+					buttonDeleteDisabled: {{ buttonDeleteDisabled }} buttonOkDisabled: {{ buttonOkDisabled }}
+				</div>
 				<v-card-title class="headline">
 					{{ label }}
 				</v-card-title>
@@ -40,37 +42,40 @@
 						color="error lighten-1"
 						text
 						@click="handleDelete"
-						:loading="loading"
+						:disabled="buttonDeleteDisabled"
+						:loading="isDeleting || isLoading"
 					>
-						{{ $t('buttons.delete') }}
+						{{ $t(props.buttonDeleteName) }}
 					</v-btn>
 					<v-btn
 						v-if="buttonClear"
 						color="primary lighten-1"
 						text
 						@click="handleClear"
-						:loading="loading"
+						:disabled="buttonClearDisabled"
+						:loading="isClearing || isLoading"
 					>
-						{{ $t('buttons.clear') }}
+						{{ $t(props.buttonClearName) }}
 					</v-btn>
 					<v-btn
 						v-if="buttonCancel"
 						color="primary lighten-1"
 						text
-						@click="handleClose"
-						:loading="loading"
+						@click="handleCancel"
+						:disabled="buttonCancelDisabled"
+						:loading="isCancecling || isLoading"
 					>
-						{{ $t('buttons.cancel') }}
+						{{ $t(props.buttonCancelName) }}
 					</v-btn>
 					<v-btn
 						v-if="buttonOk"
-						:disabled="buttonOkDisabled || (invalidOverride != null ? invalidOverride : false)"
 						color="green darken-1"
 						text
 						@click="submit"
-						:loading="loading"
+						:disabled="buttonOkDisabled"
+						:loading="isLoading"
 					>
-						{{ $t('buttons.ok') }}
+						{{ $t(props.buttonOkName) }}
 					</v-btn>
 				</v-card-actions>
 			</v-card>
@@ -88,6 +93,7 @@
 		:message="messageClear"
 		:signal="dialogClearConfirmSignal.signal"
 		@cancel="dialogClearConfirmSignal.cancel()"
+		@ok="handleClearConfirmOk"
 	/>
 	<VConfirmationDialog
 		v-if="buttonDelete"
@@ -146,18 +152,17 @@ export default {
 			dialogHeightI,
 			dialogCancelConfirmSignal,
 			dialogClearConfirmSignal,
-			dialogCloseConfirmSignal,
 			dialogDeleteConfirmSignal,
 			dialogSignal,
 			dirty,
 			invalid,
 			messageCancel,
 			messageClear,
-			messageClose,
 			buttonCancelDisabled,
 			buttonClearDisabled,
+			buttonDeleteDisabled,
 			buttonOkDisabled,
-			isCancelling,
+			isCanceling,
 			isClearing,
 			isDeleting,
 			isLoading,
@@ -168,7 +173,6 @@ export default {
 			handleCancelConfirmOk,
 			handleClear,
 			handleClearConfirmOk,
-			handleClose,
 			handleDelete,
 			handleDeleteConfirmOk,
 			onResize,
@@ -207,18 +211,17 @@ export default {
 			dialogHeightI,
 			dialogCancelConfirmSignal,
 			dialogClearConfirmSignal,
-			dialogCloseConfirmSignal,
 			dialogDeleteConfirmSignal,
 			dialogSignal,
 			dirty,
 			invalid,
 			messageCancel,
 			messageClear,
-			messageClose,
 			buttonCancelDisabled,
 			buttonClearDisabled,
+			buttonDeleteDisabled,
 			buttonOkDisabled,
-			isCancelling,
+			isCanceling,
 			isClearing,
 			isDeleting,
 			isLoading,
@@ -229,7 +232,6 @@ export default {
 			handleCancelConfirmOk,
 			handleClear,
 			handleClearConfirmOk,
-			handleClose,
 			handleDelete,
 			handleDeleteConfirmOk,
 			onResize,

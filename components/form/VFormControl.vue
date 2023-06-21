@@ -4,8 +4,9 @@
 			{{ label }}
 		</div>
 		<div class="text-center">
-			 dirty: {{ dirty }} invalid: {{ invalid }} disabled: {{ disabled }} 
-			 buttonCancelDisabled: {{ buttonCancelDisabled }}  buttonClearDisabled: {{ buttonClearDisabled }}  buttonOkDisabled: {{ buttonOkDisabled }}
+			dirty: {{ dirty }} invalid: {{ invalid }} disabled: {{ disabled }} <br>
+			buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
+			buttonDeleteDisabled: {{ buttonDeleteDisabled }} buttonOkDisabled: {{ buttonOkDisabled }}
 		</div>
 		<div>
 			<v-form>
@@ -28,41 +29,43 @@
 					<slot name="buttons_pre"/>
 					<v-btn
 						v-if="!readonly && buttonCancel"
-						:disabled="buttonCancelDisabled"
-						color="primary lighten-1"
+						class="mr-2"
 						text
 						@click="handleCancel"
-						class="mr-2"
+						color="primary lighten-1"
+						:disabled="buttonCancelDisabled"
 						:loading="isLoading"
 					>
 						{{ $t(buttonCancelName) }}
 					</v-btn>
 					<v-btn
 						v-if="!readonly && buttonDelete"
+						class="mr-2"
 						color="primary lighten-1"
 						text
 						@click="handleDelete"
-						class="mr-2"
+						:disabled="buttonDeleteDisabled"
 						:loading="isLoading"
 					>
 						{{ $t(buttonDeleteName) }}
 					</v-btn>
 					<v-btn
 						v-if="!readonly && buttonClear"
+						class="mr-2"
 						color="primary lighten-1"
 						text
 						@click="handleClear"
-						class="mr-2"
 						:disabled="buttonClearDisabled"
+						:loading="isLoading"
 					>
 						{{ $t(buttonClearName) }}
 					</v-btn>
 					<v-btn
 						v-if="!readonly && buttonOk"
-						:disabled="buttonOkDisabled"
 						color="green darken-1"
 						text
 						@click="submit"
+						:disabled="buttonOkDisabled"
 						:loading="isLoading"
 					>
 						{{ $t(buttonOkName) }}
@@ -180,7 +183,8 @@ export default {
 	},
 	emits: ['cancel', 'delete', 'ok', 'reset'],
 	setup(props, context) {
-		const {	correlationId,
+		const {
+			correlationId,
 			error,
 			hasFailed,
 			hasSucceeded,
@@ -207,6 +211,7 @@ export default {
 			messageClear,
 			buttonCancelDisabled,
 			buttonClearDisabled,
+			buttonDeleteDisabled,
 			buttonOkDisabled,
 			isCancelling,
 			isClearing,
@@ -252,6 +257,7 @@ export default {
 			messageClear,
 			buttonCancelDisabled,
 			buttonClearDisabled,
+			buttonDeleteDisabled,
 			buttonOkDisabled,
 			isCancelling,
 			isClearing,

@@ -4,18 +4,20 @@
 			v-model="dialogSignal"
 			persistent
 			:fullscreen="isFullscreen"
-			@keydown.esc="handleClose"
+			@keydown.esc="handleCancel"
 		>
 			<v-card
 				:style="!isFullscreen ? { maxWidth: maxWidth, width: width, margin: 'auto', } : {}"
 			>
-				<!-- <div class="text-center">
-					dirty: {{ dirty }} invalid: {{ invalid }} buttonOkDisabled: {{ buttonOkDisabled }}
-				</div> -->
+				<div class="text-center">
+					dirty: {{ dirty }} invalid: {{ invalid }} <br>
+					buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
+					buttonOkDisabled: {{ buttonOkDisabled }}
+				</div>
 				<v-card-item>
 					<div class="text-center text-h5">{{ label }}</div>
 					<v-form>
-						<slot :buttonOkDisabled="buttonOkDisabled" :loading="loading" />
+						<slot :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :invalid="invalid" :isLoading="isLoading" />
 						<div
 							v-for="(item, index) in serverErrors"
 							:key="index"
@@ -43,18 +45,34 @@
 					<v-btn
 						variant="flat"
 						color="primary"
-						@click="handleClose"
+						@click="handleCancel"
 					>
-						{{ $t('buttons.close') }}
+						{{ $t(buttonCloseName) }}
 					</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
+		<VConfirmationDialog
+			v-if="buttonClear"
+			:message="messageClear"
+			:signal="dialogClearConfirmSignal.signal"
+			@cancel="dialogClearConfirmSignal.cancel()"
+			@ok="handleClearConfirmOk"
+		/>
+		<VConfirmationDialog
+			v-if="buttonCancel"
+			:message="messageCancel"
+			:signal="dialogCancelConfirmSignal.signal"
+			@cancel="dialogCancelConfirmSignal.cancel()"
+			@ok="handleCancelConfirmOk"
+		/>
 	</div>
 </template>
 
 <script>
 import { computed, ref } from 'vue';
+
+import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
 
 import { useBaseFormDialogControlComponent } from '@thzero/library_client_vue3/components/form/baseFormDialogControl';
 import { baseFormDialogControlProps } from '@thzero/library_client_vue3/components/form/baseFormDialogControlProps';
@@ -62,6 +80,9 @@ import { useDisplayComponent } from '@thzero/library_client_vue3_vuetify3/compon
 
 export default {
 	name: 'VtFormListingDialog',
+	components: {
+		VConfirmationDialog
+	},
 	props: {
 		...baseFormDialogControlProps
 	},
@@ -81,28 +102,45 @@ export default {
 			isSaving,
 			serverErrors,
 			setErrors,
-			// buttonOkDisabled,
-			dialogHeightI,
-			dialogDeleteConfirmSignal,
-			dialogSignal,
-			dirty,
-			invalid,
-			handleClear,
-			handleClose,
-			handleDelete,
-			handleDeleteConfirmOk,
-			loading,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
-			onResize,
-			reset,
+			setNotify,
+			dialogHeightI,
+			dialogCancelConfirmSignal,
+			dialogClearConfirmSignal,
+			dialogDeleteConfirmSignal,
+			dialogSignal,
+			dirty,
+			invalid,
+			messageCancel,
+			messageClear,
+			buttonCancelDisabled,
+			buttonClearDisabled,
+			buttonDeleteDisabled,
+			buttonOkDisabled,
+			isCanceling,
+			isClearing,
+			isDeleting,
+			isLoading,
+			overlayLoading,
 			scrollableI,
 			scrollableHeightI,
-			setNotify,
+			handleCancel,
+			handleCancelConfirmOk,
+			handleClear,
+			handleClearConfirmOk,
+			handleDelete,
+			handleDeleteConfirmOk,
+			onResize,
+			reset,
+			resetDialog,
 			submit
-		} = useBaseFormDialogControlComponent(props, context);
+		} = useBaseFormDialogControlComponent(props, context, {
+			resetOnSubmit: false,
+			signalOnSubmit: false
+		});
 
 		const display = useDisplayComponent();
 
@@ -110,10 +148,6 @@ export default {
 
 		const isFullscreen = computed(() => {
 			return display.isFullscreen.value;
-		});
-
-		const buttonOkDisabled = computed(() => {
-			return invalid.value;
 		});
 
 		return {
@@ -130,26 +164,40 @@ export default {
 			isSaving,
 			serverErrors,
 			setErrors,
-			buttonOkDisabled,
-			dialogHeightI,
-			dialogDeleteConfirmSignal,
-			dialogSignal,
-			dirty,
-			invalid,
-			handleClear,
-			handleClose,
-			handleDelete,
-			handleDeleteConfirmOk,
-			loading,
 			notifyColor,
 			notifyMessage,
 			notifySignal,
 			notifyTimeout,
-			onResize,
-			reset,
+			setNotify,
+			dialogHeightI,
+			dialogCancelConfirmSignal,
+			dialogClearConfirmSignal,
+			dialogDeleteConfirmSignal,
+			dialogSignal,
+			dirty,
+			invalid,
+			messageCancel,
+			messageClear,
+			buttonCancelDisabled,
+			buttonClearDisabled,
+			buttonDeleteDisabled,
+			buttonOkDisabled,
+			isCanceling,
+			isClearing,
+			isDeleting,
+			isLoading,
+			overlayLoading,
 			scrollableI,
 			scrollableHeightI,
-			setNotify,
+			handleCancel,
+			handleCancelConfirmOk,
+			handleClear,
+			handleClearConfirmOk,
+			handleDelete,
+			handleDeleteConfirmOk,
+			onResize,
+			reset,
+			resetDialog,
 			submit,
 			isFullscreen,
 			internalItem
