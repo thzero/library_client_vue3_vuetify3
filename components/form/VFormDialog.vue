@@ -13,11 +13,11 @@
 			<v-card
 				:style="!isFullscreen ? { maxWidth: maxWidth, width: width, margin: 'auto', } : {}"
 			>
-				<div class="text-center">
+				<!-- <div class="text-center">
 					dirty: {{ dirty }} invalid: {{ invalid }} <br>
 					buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
 					buttonDeleteDisabled: {{ buttonDeleteDisabled }} buttonOkDisabled: {{ buttonOkDisabled }}
-				</div>
+				</div> -->
 				<v-card-title class="headline">
 					{{ label }}
 				</v-card-title>
