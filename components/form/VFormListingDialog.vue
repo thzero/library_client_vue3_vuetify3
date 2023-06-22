@@ -135,7 +135,6 @@ export default {
 			handleDeleteConfirmOk,
 			onResize,
 			reset,
-			resetDialog,
 			submit
 		} = useBaseFormDialogControlComponent(props, context, {
 			resetOnSubmit: false,
@@ -197,7 +196,6 @@ export default {
 			handleDeleteConfirmOk,
 			onResize,
 			reset,
-			resetDialog,
 			submit,
 			isFullscreen,
 			internalItem
