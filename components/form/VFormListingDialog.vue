@@ -9,11 +9,14 @@
 			<v-card
 				:style="!isFullscreen ? { maxWidth: maxWidth, width: width, margin: 'auto', } : {}"
 			>
-				<!-- <div class="text-center">
+				<div
+					v-if="debug"
+					class="text-center"
+				>
 					dirty: {{ dirty }} invalid: {{ invalid }} <br>
 					buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
 					buttonOkDisabled: {{ buttonOkDisabled }}
-				</div> -->
+				</div>
 				<v-card-item>
 					<div class="text-center text-h5">{{ label }}</div>
 					<v-form>
