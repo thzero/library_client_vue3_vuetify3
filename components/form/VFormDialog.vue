@@ -13,11 +13,14 @@
 			<v-card
 				:style="!isFullscreen ? { maxWidth: maxWidth, width: width, margin: 'auto', } : {}"
 			>
-				<!-- <div class="text-center">
+				<div
+					v-if="debug"
+					class="text-center"
+				>
 					dirty: {{ dirty }} invalid: {{ invalid }} <br>
 					buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
 					buttonDeleteDisabled: {{ buttonDeleteDisabled }} buttonOkDisabled: {{ buttonOkDisabled }}
-				</div> -->
+				</div>
 				<v-card-title class="headline">
 					{{ label }}
 				</v-card-title>
@@ -45,7 +48,7 @@
 						:disabled="buttonDeleteDisabled"
 						:loading="isDeleting || isLoading"
 					>
-						{{ $t(props.buttonDeleteName) }}
+						{{ $t(buttonDeleteName) }}
 					</v-btn>
 					<v-btn
 						v-if="buttonClear"
@@ -55,7 +58,7 @@
 						:disabled="buttonClearDisabled"
 						:loading="isClearing || isLoading"
 					>
-						{{ $t(props.buttonClearName) }}
+						{{ $t(buttonClearName) }}
 					</v-btn>
 					<v-btn
 						v-if="buttonCancel"
@@ -63,9 +66,9 @@
 						text
 						@click="handleCancel"
 						:disabled="buttonCancelDisabled"
-						:loading="isCancecling || isLoading"
+						:loading="isCanceling || isLoading"
 					>
-						{{ $t(props.buttonCancelName) }}
+						{{ $t(buttonCancelName) }}
 					</v-btn>
 					<v-btn
 						v-if="buttonOk"
@@ -75,7 +78,7 @@
 						:disabled="buttonOkDisabled"
 						:loading="isLoading"
 					>
-						{{ $t(props.buttonOkName) }}
+						{{ $t(buttonOkName) }}
 					</v-btn>
 				</v-card-actions>
 			</v-card>
@@ -128,7 +131,7 @@ export default {
 	props: {
 		...baseFormDialogControlProps
 	},
-	emits: ['close', 'ok', 'open'],
+	emits: ['close', 'delete', 'ok', 'open', 'reset'],
 	setup (props, context) {
 		const {
 			correlationId,

@@ -3,11 +3,14 @@
 		<div class="headline text-center text-h6">
 			{{ label }}
 		</div>
-		<!-- <div class="text-center">
+		<div
+			v-if="debug"
+			class="text-center"
+		>
 			dirty: {{ dirty }} invalid: {{ invalid }} disabled: {{ disabled }} <br>
 			buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
 			buttonDeleteDisabled: {{ buttonDeleteDisabled }} buttonOkDisabled: {{ buttonOkDisabled }}
-		</div> -->
+		</div>
 		<div>
 			<v-form>
 				<slot />
