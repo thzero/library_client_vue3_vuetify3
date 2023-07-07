@@ -38,7 +38,7 @@ export function useFrameworkOpenSourceComponent(props, context, options) {
 					}
 				];
 			}
-		}, {}));
+		}, options));
 
 	return {
 		correlationId,
