@@ -149,15 +149,13 @@
 </template>
 
 <script>
+import { baseOpenSourceProps } from '@thzero/library_client_vue3/components/baseOpenSourceProps';
 import { useFrameworkOpenSourceComponent } from '@thzero/library_client_vue3_vuetify3/components/frameworkOpenSource';
 
 export default {
 	name: 'VOpenSource',
 	props: {
-		modelValue: {
-			type: Array,
-			default: []
-		}
+		...baseOpenSourceProps
 	},
 	setup(props, context) {
 		const {
@@ -180,7 +178,7 @@ export default {
 			serviceStore
 		} = useFrameworkOpenSourceComponent(props, context, {
 			initializeDependenciesClient: () => {
-				return props.modelValue;
+				return props.value;
 			}
 		});
 
