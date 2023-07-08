@@ -8,7 +8,7 @@
 		:label="$attrs.label"
 		density="compact"
 		:color="color"
-		@update:modelValue="change"
+		@update:modelValue="innerValueUpdate"
 	>
 		<template v-slot:details>
 			<div

@@ -10,7 +10,7 @@
 		:hint="$attrs.hint"
 		:label="$attrs.label"
 		@blur="blur"
-		@update:modelValue="change"
+		@update:modelValue="innerValueUpdate"
 	/>
 </template>
 
