@@ -228,7 +228,6 @@ export default {
 			handleDelete,
 			handleDeleteConfirmOk,
 			reset,
-			// resetForm,
 			submit
 		} = useBaseFormControlComponent(props, context);
 
@@ -274,7 +273,6 @@ export default {
 			handleDelete,
 			handleDeleteConfirmOk,
 			reset,
-			// resetForm,
 			submit
 		};
 	},
