@@ -11,7 +11,7 @@
 		:class="displayClass"
 		v-bind="$attrs"
 		@blur="blur"
-		@update:modelValue="change"
+		@update:modelValue="innerValueUpdate"
 	>
 		<template v-slot:details>
 			<div

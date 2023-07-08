@@ -9,7 +9,7 @@
 		:label="$attrs.label"
 		v-bind="$attrs"
 		@blur="blur"
-		@update:modelValue="change"
+		@update:modelValue="innerValueUpdate"
 	/>
 </template>
 

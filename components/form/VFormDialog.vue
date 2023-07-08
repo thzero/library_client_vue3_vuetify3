@@ -131,7 +131,7 @@ export default {
 	props: {
 		...baseFormDialogControlProps
 	},
-	emits: ['close', 'delete', 'ok', 'open', 'reset'],
+	emits: ['close', 'delete', 'error', 'ok', 'open', 'reset'],
 	setup (props, context) {
 		const {
 			correlationId,

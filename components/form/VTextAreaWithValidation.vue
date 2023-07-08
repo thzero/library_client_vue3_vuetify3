@@ -12,7 +12,7 @@
 		:label="$attrs.label"
 		:counter="maxcount"
 		@blur="blur"
-		@update:modelValue="change"
+		@update:modelValue="innerValueUpdate"
 	>
 		<template v-slot:append>
 			<span :class="countClass">{{ count }}</span>

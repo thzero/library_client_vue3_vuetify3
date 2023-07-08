@@ -47,6 +47,7 @@ export default {
 	props: {
 		...baseConfirmationDialogProps
 	},
+	emits: ['cancel', 'error', 'ok'],
 	setup(props, context) {
 		const {
 			correlationId,
@@ -61,6 +62,7 @@ export default {
 			successResponse,
 			buttonOkDisabled,
 			dialogCancel,
+			dialogError,
 			dialogOk,
 			dialogSignal,
 			handleError,
@@ -85,6 +87,7 @@ export default {
 			successResponse,
 			buttonOkDisabled,
 			dialogCancel,
+			dialogError,
 			dialogOk,
 			dialogSignal,
 			handleError,
