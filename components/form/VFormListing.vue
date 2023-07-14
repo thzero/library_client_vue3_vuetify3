@@ -121,9 +121,8 @@ export default {
 			handleClearConfirmOk,
 			handleDelete,
 			handleDeleteConfirmOk,
-			onResize,
 			reset,
-			submit
+			submit,
 		} = useBaseFormListingControlComponent(props, context, {
 			resetOnSubmit: false,
 			signalOnSubmit: false
@@ -173,7 +172,6 @@ export default {
 			handleClearConfirmOk,
 			handleDelete,
 			handleDeleteConfirmOk,
-			onResize,
 			reset,
 			submit,
 			internalItem
