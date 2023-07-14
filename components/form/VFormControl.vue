@@ -1,4 +1,5 @@
 <template>
+	[[ {{ debug}} vform ]]
 	<div>
 		<div class="headline text-center text-h6">
 			{{ label }}
@@ -9,7 +10,8 @@
 		>
 			dirty: {{ dirty }} invalid: {{ invalid }} disabled: {{ disabled }} <br>
 			buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
-			buttonDeleteDisabled: {{ buttonDeleteDisabled }} buttonOkDisabled: {{ buttonOkDisabled }}
+			buttonDeleteDisabled: {{ buttonDeleteDisabled }} buttonOkDisabled: {{ buttonOkDisabled }} <br>
+			silentErrors: {{ silentErrors }}
 		</div>
 		<div>
 			<v-form>
@@ -210,6 +212,7 @@ export default {
 			dialogDeleteConfirmSignal,
 			dirty,
 			invalid,
+			silentErrors,
 			messageCancel,
 			messageClear,
 			buttonCancelDisabled,
@@ -255,6 +258,7 @@ export default {
 			dialogDeleteConfirmSignal,
 			dirty,
 			invalid,
+			silentErrors,
 			messageCancel,
 			messageClear,
 			buttonCancelDisabled,

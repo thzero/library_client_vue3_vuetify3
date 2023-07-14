@@ -1,25 +1,19 @@
 <template>
 	<div>
-		<v-dialog
-			v-model="signal"
-			persistent
-			:fullscreen="isFullscreen"
-			@keydown.esc="handleCancel"
-		>
-			<v-card
-				:style="!isFullscreen ? { maxWidth: maxWidth, width: width, margin: 'auto', } : {}"
+		<v-card>
+			<div
+				v-if="debug"
+				class="text-center"
 			>
+				dirty: {{ dirty }} invalid: {{ invalid }} <br>
+				buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
+				buttonOkDisabled: {{ buttonOkDisabled }} <br>
+				silentErrors: {{ silentErrors }}
+			</div>
+			<v-card-item>
 				<div
-					v-if="debug"
-					class="text-center"
+					v-if="visibleFilters"
 				>
-					dirty: {{ dirty }} invalid: {{ invalid }} <br>
-					buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
-					buttonOkDisabled: {{ buttonOkDisabled }} <br>
-					silentErrors: {{ silentErrors }}
-				</div>
-				<v-card-item>
-					<div class="text-center text-h5">{{ label }}</div>
 					<v-form>
 						<slot :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :invalid="invalid" :isLoading="isLoading" />
 						<div
@@ -38,28 +32,18 @@
 					>
 						{{ notifyMessage }}
 					</v-snackbar>
-				</v-card-item>
-			</v-card>
-			<v-card
-				class="mt-4"
-				:style="!isFullscreen ? { maxWidth: maxWidth, width: width, margin: 'auto', } : {}"
+				</div>
+			</v-card-item>
+		</v-card>
+		<v-card
+			class="mt-4"
+		>
+			<v-card-text 
+				v-if="visibleListing"
 			>
-				<v-card-text style="overflow-y: auto;" class="scroll">
-					<slot name="listing"/>
-				</v-card-text>
-
-				<v-card-actions align="right">
-					<v-spacer />
-					<v-btn
-						variant="flat"
-						color="primary"
-						@click="handleCancel"
-					>
-						{{ $t(buttonCloseName) }}
-					</v-btn>
-				</v-card-actions>
-			</v-card>
-		</v-dialog>
+				<slot name="listing"/>
+			</v-card-text>
+		</v-card>
 		<VConfirmationDialog
 			v-if="buttonClear"
 			:message="messageClear"
@@ -78,21 +62,20 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 
 import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
 
-import { useBaseFormDialogControlComponent } from '@thzero/library_client_vue3/components/form/baseFormDialogControl';
-import { baseFormDialogControlProps } from '@thzero/library_client_vue3/components/form/baseFormDialogControlProps';
-import { useDisplayComponent } from '@thzero/library_client_vue3_vuetify3/components/display';
+import { useBaseFormListingControlComponent } from '@thzero/library_client_vue3/components/form/baseFormListingControl';
+import { baseFormListingControlProps } from '@thzero/library_client_vue3/components/form/baseFormListingControlProps';
 
 export default {
-	name: 'VtFormListingDialog',
+	name: 'VtFormListing',
 	components: {
 		VConfirmationDialog
 	},
 	props: {
-		...baseFormDialogControlProps
+		...baseFormListingControlProps
 	},
 	emits: ['close', 'error', 'ok', 'open'],
 	setup (props, context) {
@@ -115,11 +98,9 @@ export default {
 			notifySignal,
 			notifyTimeout,
 			setNotify,
-			dialogHeightI,
 			dialogCancelConfirmSignal,
 			dialogClearConfirmSignal,
 			dialogDeleteConfirmSignal,
-			dialogSignal,
 			dirty,
 			invalid,
 			silentErrors,
@@ -134,8 +115,6 @@ export default {
 			isDeleting,
 			isLoading,
 			overlayLoading,
-			scrollableI,
-			scrollableHeightI,
 			handleCancel,
 			handleCancelConfirmOk,
 			handleClear,
@@ -145,18 +124,12 @@ export default {
 			onResize,
 			reset,
 			submit
-		} = useBaseFormDialogControlComponent(props, context, {
+		} = useBaseFormListingControlComponent(props, context, {
 			resetOnSubmit: false,
 			signalOnSubmit: false
 		});
 
-		const display = useDisplayComponent();
-
 		const internalItem = ref(null);
-
-		const isFullscreen = computed(() => {
-			return display.isFullscreen.value;
-		});
 
 		return {
 			correlationId,
@@ -177,11 +150,9 @@ export default {
 			notifySignal,
 			notifyTimeout,
 			setNotify,
-			dialogHeightI,
 			dialogCancelConfirmSignal,
 			dialogClearConfirmSignal,
 			dialogDeleteConfirmSignal,
-			dialogSignal,
 			dirty,
 			invalid,
 			silentErrors,
@@ -196,8 +167,6 @@ export default {
 			isDeleting,
 			isLoading,
 			overlayLoading,
-			scrollableI,
-			scrollableHeightI,
 			handleCancel,
 			handleCancelConfirmOk,
 			handleClear,
@@ -207,7 +176,6 @@ export default {
 			onResize,
 			reset,
 			submit,
-			isFullscreen,
 			internalItem
 		};
 	}

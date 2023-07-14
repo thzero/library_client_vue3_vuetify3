@@ -19,7 +19,8 @@
 				>
 					dirty: {{ dirty }} invalid: {{ invalid }} <br>
 					buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
-					buttonDeleteDisabled: {{ buttonDeleteDisabled }} buttonOkDisabled: {{ buttonOkDisabled }}
+					buttonDeleteDisabled: {{ buttonDeleteDisabled }} buttonOkDisabled: {{ buttonOkDisabled }} <br>
+					silentErrors: {{ silentErrors }}
 				</div>
 				<v-card-title class="headline">
 					{{ label }}
@@ -159,6 +160,7 @@ export default {
 			dialogSignal,
 			dirty,
 			invalid,
+			silentErrors,
 			messageCancel,
 			messageClear,
 			buttonCancelDisabled,
@@ -217,6 +219,7 @@ export default {
 			dialogSignal,
 			dirty,
 			invalid,
+			silentErrors,
 			messageCancel,
 			messageClear,
 			buttonCancelDisabled,
