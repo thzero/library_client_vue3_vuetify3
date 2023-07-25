@@ -122,9 +122,11 @@ export default {
 			dialogSignal,
 			dirty,
 			invalid,
-			silentErrors,
+			innerValue,
+			innerValueOrig,
 			messageCancel,
 			messageClear,
+			silentErrors,
 			buttonCancelDisabled,
 			buttonClearDisabled,
 			buttonDeleteDisabled,
@@ -151,8 +153,6 @@ export default {
 		});
 
 		const display = useDisplayComponent();
-
-		const internalItem = ref(null);
 
 		const isFullscreen = computed(() => {
 			return display.isFullscreen.value;
@@ -184,9 +184,11 @@ export default {
 			dialogSignal,
 			dirty,
 			invalid,
-			silentErrors,
+			innerValue,
+			innerValueOrig,
 			messageCancel,
 			messageClear,
+			silentErrors,
 			buttonCancelDisabled,
 			buttonClearDisabled,
 			buttonDeleteDisabled,
@@ -207,8 +209,7 @@ export default {
 			onResize,
 			reset,
 			submit,
-			isFullscreen,
-			internalItem
+			isFullscreen
 		};
 	}
 };

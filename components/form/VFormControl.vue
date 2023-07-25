@@ -8,7 +8,7 @@
 			v-if="debug"
 			class="text-center"
 		>
-			dirty: {{ dirty }} invalid: {{ invalid }} disabled: {{ disabled }} <br>
+			dirty: {{ dirty }} invalid: {{ invalid }} disabled: {{ disabled }} readonly: {{ readonly }} <br>
 			buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
 			buttonDeleteDisabled: {{ buttonDeleteDisabled }} buttonOkDisabled: {{ buttonOkDisabled }} <br>
 			silentErrors: {{ silentErrors }}

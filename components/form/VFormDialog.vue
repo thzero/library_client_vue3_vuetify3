@@ -160,9 +160,9 @@ export default {
 			dialogSignal,
 			dirty,
 			invalid,
-			silentErrors,
 			messageCancel,
 			messageClear,
+			silentErrors,
 			buttonCancelDisabled,
 			buttonClearDisabled,
 			buttonDeleteDisabled,
@@ -186,8 +186,6 @@ export default {
 		} = useBaseFormDialogControlComponent(props, context);
 
 		const display = useDisplayComponent();
-
-		const internalItem = ref(null);
 
 		const isFullscreen = computed(() => {
 			return display.isFullscreen.value;
@@ -219,9 +217,9 @@ export default {
 			dialogSignal,
 			dirty,
 			invalid,
-			silentErrors,
 			messageCancel,
 			messageClear,
+			silentErrors,
 			buttonCancelDisabled,
 			buttonClearDisabled,
 			buttonDeleteDisabled,
@@ -242,7 +240,6 @@ export default {
 			onResize,
 			reset,
 			submit,
-			internalItem,
 			isFullscreen
 		};
 	}
