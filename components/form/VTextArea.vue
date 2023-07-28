@@ -6,7 +6,7 @@
 		:hide-details="hideDetails"
 		:readonly="readonly"
 		:disabled="disabled"
-		:clearable="clearable"
+		:clearable="false"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
 		@blur="blur"
