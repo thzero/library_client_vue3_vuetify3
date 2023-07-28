@@ -30,6 +30,12 @@
 					v-if="!autoSave"
 					class="mt-4 text-right"
 				>
+					<div
+						v-if="debug"
+						class="text-center"
+					>
+						buttonCancel: {{ buttonCancel }} buttonClear: {{ buttonClear }}
+					</div>
 					<v-spacer />
 					<slot name="buttons_pre"/>
 					<v-btn
@@ -64,6 +70,17 @@
 						:loading="isLoading"
 					>
 						{{ $t(buttonClearName) }}
+					</v-btn>
+					<v-btn
+						v-if="buttonClose"
+						class="mr-2"
+						color="primary lighten-1"
+						text
+						@click="handleClose"
+						:disabled="buttonCloseDisabled"
+						:loading="isLoading"
+					>
+						{{ $t(buttonCloseName) }}
 					</v-btn>
 					<v-btn
 						v-if="!readonly && buttonOk"
@@ -209,18 +226,22 @@ export default {
 			setNotify,
 			dialogCancelConfirmSignal,
 			dialogClearConfirmSignal,
+			dialogCloseConfirmSignal,
 			dialogDeleteConfirmSignal,
 			dirty,
 			invalid,
-			silentErrors,
 			messageCancel,
 			messageClear,
+			messageClose,
+			silentErrors,
 			buttonCancelDisabled,
 			buttonClearDisabled,
+			buttonCloseDisabled,
 			buttonDeleteDisabled,
 			buttonOkDisabled,
 			isCancelling,
 			isClearing,
+			isClosing,
 			isDeleting,
 			isLoading,
 			overlayLoading,
@@ -228,6 +249,8 @@ export default {
 			handleCancelConfirmOk,
 			handleClear,
 			handleClearConfirmOk,
+			handleClose,
+			handleCloseConfirmOk,
 			handleDelete,
 			handleDeleteConfirmOk,
 			reset,
@@ -255,18 +278,22 @@ export default {
 			setNotify,
 			dialogCancelConfirmSignal,
 			dialogClearConfirmSignal,
+			dialogCloseConfirmSignal,
 			dialogDeleteConfirmSignal,
 			dirty,
 			invalid,
-			silentErrors,
 			messageCancel,
 			messageClear,
+			messageClose,
+			silentErrors,
 			buttonCancelDisabled,
 			buttonClearDisabled,
+			buttonCloseDisabled,
 			buttonDeleteDisabled,
 			buttonOkDisabled,
 			isCancelling,
 			isClearing,
+			isClosing,
 			isDeleting,
 			isLoading,
 			overlayLoading,
@@ -274,6 +301,8 @@ export default {
 			handleCancelConfirmOk,
 			handleClear,
 			handleClearConfirmOk,
+			handleClose,
+			handleCloseConfirmOk,
 			handleDelete,
 			handleDeleteConfirmOk,
 			reset,
