@@ -20,7 +20,6 @@ import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/
 
 export default {
 	name: 'VtTextArea',
-	extends: baseControlEdit,
 	props: {
 		...useBaseControlEditProps,
 		blur: {
