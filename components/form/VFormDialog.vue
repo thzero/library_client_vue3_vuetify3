@@ -23,7 +23,13 @@
 					silentErrors: {{ silentErrors }}
 				</div>
 				<v-card-title class="headline">
+					<v-sheet 
+						color="primary" 
+						rounded
+						class="pl-4 pr-4 pt-2 pb-2"
+					>
 					{{ label }}
+					</v-sheet>
 				</v-card-title>
 				<v-card-item
 					:style="scrollableHeightI"
@@ -43,8 +49,8 @@
 					<v-spacer />
 					<v-btn
 						v-if="buttonDelete"
-						color="error lighten-1"
-						text
+						:variant="buttonsForms.variant.delete"
+						:color="buttonsForms.color.delete"
 						@click="handleDelete"
 						:disabled="buttonDeleteDisabled"
 						:loading="isDeleting || isLoading"
@@ -53,8 +59,8 @@
 					</v-btn>
 					<v-btn
 						v-if="buttonClear"
-						color="primary lighten-1"
-						text
+						:variant="buttonsForms.variant.clear"
+						:color="buttonsForms.color.clear"
 						@click="handleClear"
 						:disabled="buttonClearDisabled"
 						:loading="isClearing || isLoading"
@@ -63,8 +69,8 @@
 					</v-btn>
 					<v-btn
 						v-if="buttonCancel"
-						color="primary lighten-1"
-						text
+						:variant="buttonsForms.variant.cancel"
+						:color="buttonsForms.color.cancel"
 						@click="handleCancel"
 						:disabled="buttonCancelDisabled"
 						:loading="isCanceling || isLoading"
@@ -73,8 +79,8 @@
 					</v-btn>
 					<v-btn
 						v-if="buttonOk"
-						color="green darken-1"
-						text
+						:variant="buttonsForms.variant.ok"
+						:color="buttonsForms.color.ok"
 						@click="submit"
 						:disabled="buttonOkDisabled"
 						:loading="isLoading"
@@ -123,6 +129,8 @@ import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components
 import { useBaseFormDialogControlComponent } from '@thzero/library_client_vue3/components/form/baseFormDialogControl';
 import { baseFormDialogControlProps } from '@thzero/library_client_vue3/components/form/baseFormDialogControlProps';
 import { useDisplayComponent } from '@thzero/library_client_vue3_vuetify3/components/display';
+
+import { useButtonComponent } from '@thzero/library_client_vue3_vuetify3/components/buttonComponent';
 
 export default {
 	name: 'VtFormDialog',
@@ -185,6 +193,11 @@ export default {
 			submit
 		} = useBaseFormDialogControlComponent(props, context);
 
+		const {
+			buttonsDialog,
+			buttonsForms
+		} = useButtonComponent(props, context);
+
 		const display = useDisplayComponent();
 
 		const isFullscreen = computed(() => {
@@ -240,7 +253,9 @@ export default {
 			onResize,
 			reset,
 			submit,
-			isFullscreen
+			isFullscreen,
+			buttonsDialog,
+			buttonsForms
 		};
 	}
 };

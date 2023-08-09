@@ -40,10 +40,10 @@
 					<slot name="buttons_pre"/>
 					<v-btn
 						v-if="!readonly && buttonCancel"
+						:variant="buttonsForms.variant.cancel"
+						:color="buttonsForms.color.cancel"
 						class="mr-2"
-						text
 						@click="handleCancel"
-						color="primary lighten-1"
 						:disabled="buttonCancelDisabled"
 						:loading="isLoading"
 					>
@@ -51,9 +51,9 @@
 					</v-btn>
 					<v-btn
 						v-if="!readonly && buttonDelete"
+						:variant="buttonsForms.variant.delete"
+						:color="buttonsForms.color.delete"
 						class="mr-2"
-						color="primary lighten-1"
-						text
 						@click="handleDelete"
 						:disabled="buttonDeleteDisabled"
 						:loading="isLoading"
@@ -62,9 +62,9 @@
 					</v-btn>
 					<v-btn
 						v-if="!readonly && buttonClear"
+						:variant="buttonsForms.variant.clear"
+						:color="buttonsForms.color.clear"
 						class="mr-2"
-						color="primary lighten-1"
-						text
 						@click="handleClear"
 						:disabled="buttonClearDisabled"
 						:loading="isLoading"
@@ -73,9 +73,9 @@
 					</v-btn>
 					<v-btn
 						v-if="buttonClose"
+						:variant="buttonsForms.variant.close"
+						:color="buttonsForms.color.close"
 						class="mr-2"
-						color="primary lighten-1"
-						text
 						@click="handleClose"
 						:disabled="buttonCloseDisabled"
 						:loading="isLoading"
@@ -84,8 +84,8 @@
 					</v-btn>
 					<v-btn
 						v-if="!readonly && buttonOk"
-						color="green darken-1"
-						text
+						:variant="buttonsForms.variant.ok"
+						:color="buttonsForms.color.ok"
 						@click="submit"
 						:disabled="buttonOkDisabled"
 						:loading="isLoading"
@@ -107,8 +107,8 @@
 			<slot name="buttons_pre"/>
 			<v-btn
 				v-if="buttonDelete"
-				color="primary lighten-1"
-				text
+				:variant="buttonsForms.variant.delete"
+				:color="buttonsForms.color.delete"
 				@click="handleDelete"
 				class="mr-2"
 				:loading="isLoading"
@@ -117,8 +117,8 @@
 			</v-btn>
 			<v-btn
 				v-if="buttonClear"
-				color="primary lighten-1"
-				text
+				:variant="buttonsForms.variant.clear"
+				:color="buttonsForms.color.clear"
 				@click="handleClear"
 				class="mr-2"
 				:loading="isLoading"
@@ -127,10 +127,10 @@
 			</v-btn>
 			<v-btn
 				v-if="buttonOk"
-				:disabled="buttonOkDisabled"
-				color="green darken-1"
-				text
+				:variant="buttonsForms.variant.ok"
+				:color="buttonsForms.color.ok"
 				@click="submit"
+				:disabled="buttonOkDisabled"
 				:loading="isLoading"
 			>
 				{{ $t(buttonOkName) }}
@@ -195,6 +195,8 @@ import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components
 import { useBaseFormControlComponent } from '@thzero/library_client_vue3/components/form/baseFormControl';
 import { baseFormControlProps } from '@thzero/library_client_vue3/components/form/baseFormControlProps';
 
+import { useButtonComponent } from '@thzero/library_client_vue3_vuetify3/components/buttonComponent';
+
 export default {
 	name: 'VtFormControl',
 	components: {
@@ -257,6 +259,11 @@ export default {
 			submit
 		} = useBaseFormControlComponent(props, context);
 
+		const {
+			buttonsDialog,
+			buttonsForms
+		} = useButtonComponent(props, context);
+
 		return {
 			correlationId,
 			error,
@@ -306,7 +313,9 @@ export default {
 			handleDelete,
 			handleDeleteConfirmOk,
 			reset,
-			submit
+			submit,
+			buttonsDialog,
+			buttonsForms
 		};
 	},
 }

@@ -13,6 +13,7 @@
 					v-if="debug"
 					class="text-center"
 				>
+					isFullscreen: {{ isFullscreen }} maxWidth: {{ maxWidth }} width: {{ width }} style {{ !isFullscreen ? { maxWidth: maxWidth, width: width, margin: 'auto', } : {} }} <br>
 					dirty: {{ dirty }} invalid: {{ invalid }} <br>
 					buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
 					buttonOkDisabled: {{ buttonOkDisabled }} <br>
@@ -51,8 +52,8 @@
 				<v-card-actions align="right">
 					<v-spacer />
 					<v-btn
-						variant="flat"
-						color="primary"
+						:variant="buttonsForms.variant.cancel"
+						:color="buttonsForms.color.cancel"
 						@click="handleCancel"
 					>
 						{{ $t(buttonCloseName) }}
@@ -85,6 +86,8 @@ import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components
 import { useBaseFormDialogControlComponent } from '@thzero/library_client_vue3/components/form/baseFormDialogControl';
 import { baseFormDialogControlProps } from '@thzero/library_client_vue3/components/form/baseFormDialogControlProps';
 import { useDisplayComponent } from '@thzero/library_client_vue3_vuetify3/components/display';
+
+import { useButtonComponent } from '@thzero/library_client_vue3_vuetify3/components/buttonComponent';
 
 export default {
 	name: 'VtFormListingDialog',
@@ -152,6 +155,11 @@ export default {
 			signalOnSubmit: false
 		});
 
+		const {
+			buttonsDialog,
+			buttonsForms
+		} = useButtonComponent(props, context);
+
 		const display = useDisplayComponent();
 
 		const isFullscreen = computed(() => {
@@ -209,6 +217,8 @@ export default {
 			onResize,
 			reset,
 			submit,
+			buttonsDialog,
+			buttonsForms,
 			isFullscreen
 		};
 	}

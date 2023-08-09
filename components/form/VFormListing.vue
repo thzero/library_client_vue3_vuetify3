@@ -69,6 +69,8 @@ import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components
 import { useBaseFormListingControlComponent } from '@thzero/library_client_vue3/components/form/baseFormListingControl';
 import { baseFormListingControlProps } from '@thzero/library_client_vue3/components/form/baseFormListingControlProps';
 
+import { useButtonComponent } from '@thzero/library_client_vue3_vuetify3/components/buttonComponent';
+
 export default {
 	name: 'VtFormListing',
 	components: {
@@ -128,6 +130,11 @@ export default {
 			signalOnSubmit: false
 		});
 
+		const {
+			buttonsDialog,
+			buttonsForms
+		} = useButtonComponent(props, context);
+
 		const internalItem = ref(null);
 
 		return {
@@ -174,6 +181,8 @@ export default {
 			handleDeleteConfirmOk,
 			reset,
 			submit,
+			buttonsDialog,
+			buttonsForms,
 			internalItem
 		};
 	}
