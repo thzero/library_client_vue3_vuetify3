@@ -40,11 +40,11 @@
 						{{ notifyMessage }}
 					</v-snackbar>
 				</v-card-item>
-			</v-card>
+			<!-- </v-card>
 			<v-card
 				class="mt-4"
 				:style="!isFullscreen ? { maxWidth: maxWidth, width: width, margin: 'auto', } : {}"
-			>
+			> -->
 				<v-card-text style="overflow-y: auto;" class="scroll">
 					<slot name="listing"/>
 				</v-card-text>
