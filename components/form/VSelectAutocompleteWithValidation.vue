@@ -2,6 +2,7 @@
 	<v-select
 		v-model="innerValue"
 		:error="errorI"
+		:hide-details="hideDetails"
 		:items="innerItems"
 		:success="valid"
 		item-text="name"

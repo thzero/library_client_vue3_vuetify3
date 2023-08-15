@@ -3,6 +3,7 @@
 		v-model="innerValue"
 		type="number"
 		:class="displayClass"
+		:hide-details="hideDetails"
 		:readonly="readonly"
 		:disabled="disabled"
 		:hint="$attrs.hint"
