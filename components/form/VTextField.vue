@@ -2,6 +2,7 @@
 	<v-text-field
 		v-model="innerValue"
 		v-bind="$attrs"
+		:hide-details="hideDetails"
 		:readonly="readonly"
 		:disabled="disabled"
 		:hint="$attrs.hint"
