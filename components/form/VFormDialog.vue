@@ -4,7 +4,6 @@
 			v-model="dialogSignal"
 			persistent
 			:fullscreen="isFullscreen"
-			@keydown.esc="handleCancel"
 		>
 		<!--
 			v-resize="onResize"

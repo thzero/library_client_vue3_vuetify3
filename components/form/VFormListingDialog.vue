@@ -1,10 +1,9 @@
 <template>
 	<div>
 		<v-dialog
-			v-model="signal"
+			v-model="dialogSignal"
 			persistent
 			:fullscreen="isFullscreen"
-			@keydown.esc="handleCancel"
 		>
 			<v-card
 				:style="!isFullscreen ? { maxWidth: maxWidth, width: width, margin: 'auto', } : {}"
