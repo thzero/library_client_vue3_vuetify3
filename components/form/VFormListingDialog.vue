@@ -151,6 +151,7 @@ export default {
 			reset,
 			submit
 		} = useBaseFormDialogControlComponent(props, context, {
+			notifySaved: false,
 			resetOnSubmit: false,
 			signalOnSubmit: false
 		});

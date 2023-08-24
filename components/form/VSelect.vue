@@ -4,6 +4,7 @@
 		:items="innerItems"
 		:item-text="text"
 		item-value="id"
+		:menu-props="innerProps"
 		:hide-details="hideDetails"
 		:readonly="readonly"
 		:label="$attrs.label"
@@ -14,6 +15,8 @@
 </template>
 
 <script>
+import { onMounted, ref, watch } from 'vue';
+
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
@@ -58,6 +61,7 @@ export default {
 			innerValueUpdate
 		} = useBaseControlEditComponent(props, context);
 
+		const innerProps = ref({ zIndex: 1000 });
 		const innerItems = ref([]);
 
 		const text = (item) => {
@@ -97,6 +101,7 @@ export default {
 			innerValue,
 			initValue,
 			innerValueUpdate,
+			innerProps,
 			innerItems,
 			text
 		};

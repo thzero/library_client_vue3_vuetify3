@@ -5,6 +5,7 @@
 		:item-title="itemTitle"
 		:item-value="itemValue"
 		:items="innerItems"
+		:menu-props="innerProps"
 		:hide-details="hideDetails"
 		:multiple="multiple"
 		:readonly="readonly"
@@ -82,6 +83,7 @@ export default {
 			vidOverride: props.vidOverride
 		});
 
+		const innerProps = ref({ zIndex: 9000 });
 		const innerItems = ref([]);
 
 		const text = (item) => {
@@ -121,6 +123,7 @@ export default {
 			innerValue,
 			initValue,
 			innerValueUpdate,
+			innerProps,
 			innerItems,
 			text
 		};
