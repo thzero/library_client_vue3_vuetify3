@@ -6,8 +6,8 @@
 		:disabled="disabled"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
-		density="compact"
 		:color="color"
+		density="compact"
 		@update:modelValue="innerValueUpdate"
 	>
 		<template v-slot:details>

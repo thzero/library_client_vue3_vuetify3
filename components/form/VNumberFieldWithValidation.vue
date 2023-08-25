@@ -9,6 +9,7 @@
 		:hint="$attrs.hint"
 		:label="$attrs.label"
 		:class="displayClass"
+		density="compact"
 		v-bind="$attrs"
 		@blur="blur"
 		@update:modelValue="innerValueUpdate"

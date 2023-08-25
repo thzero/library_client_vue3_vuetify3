@@ -2,9 +2,9 @@
 	<v-checkbox
 		v-model="innerValue"
 		:hide-details="hideDetailsOverride"
+		:readonly="readonly"
 		v-bind="$attrs"
 		density="compact"
-		:readonly="readonly"
 		@update:modelValue="innerValueUpdate"
 	>
 		<template v-slot:details>
