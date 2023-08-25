@@ -9,6 +9,7 @@
 		:readonly="readonly"
 		:label="$attrs.label"
 		:flat="flat"
+		density="compact"
 		:solo-inverted="soloInverted"
 		@update:modelValue="innerValueUpdate"
 	/>

@@ -9,6 +9,7 @@
 		:clearable="false"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
+		density="compact"
 		@blur="blur"
 		@update:modelValue="innerValueUpdate"
 	/>

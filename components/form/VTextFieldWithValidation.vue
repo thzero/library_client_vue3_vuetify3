@@ -8,6 +8,7 @@
 		:hint="$attrs.hint"
 		:label="$attrs.label"
 		:counter="maxcount"
+		density="compact"
 		@blur="blur"
 		@update:modelValue="innerValueUpdate"
 	>

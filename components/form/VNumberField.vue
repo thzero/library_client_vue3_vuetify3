@@ -8,6 +8,7 @@
 		:disabled="disabled"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
+		density="compact"
 		v-bind="$attrs"
 		@blur="blur"
 		@update:modelValue="innerValueUpdate"
