@@ -1,18 +1,19 @@
 <template>
 	<v-select
 		v-model="innerValue"
+		:error="errorI"
+		:item-title="itemTitle"
+		:item-value="itemValue"
 		:items="innerItems"
-		:item-text="text"
-		item-value="id"
 		:menu-props="innerProps"
 		:hide-details="hideDetails"
+		:multiple="multiple"
 		:readonly="readonly"
 		:label="$attrs.label"
-		:flat="flat"
-		density="compact"
-		:solo-inverted="soloInverted"
+      	density="compact"
 		@update:modelValue="innerValueUpdate"
-	/>
+	>
+	</v-select>
 </template>
 
 <script>
@@ -22,20 +23,28 @@ import { useBaseControlEditComponent } from '@thzero/library_client_vue3/compone
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
 export default {
-	name: 'VtSelect',
+	name: 'VtSelect2',
 	props: {
 		...useBaseControlEditProps,
-		flat: {
-			type: Boolean,
-			default: false
-		},
 		items: {
 			type: [Object, Array],
 			default: null
 		},
-		soloInverted: {
+		itemTitle: {
+			type: String,
+			default: 'name'
+		},
+		itemValue: {
+			type: String,
+			default: 'id'
+		},
+		multiple: {
 			type: Boolean,
 			default: false
+		},
+		vidOverride: {
+			type: String,
+			default: null
 		}
 	},
 	setup (props, context) {
@@ -60,26 +69,28 @@ export default {
 			innerValue,
 			initValue,
 			innerValueUpdate
-		} = useBaseControlEditComponent(props, context);
+		} = useBaseControlEditComponent(props, context, {
+			vidOverride: props.vidOverride
+		});
 
-		const innerProps = ref({ zIndex: 1000 });
+		const innerProps = ref({ zIndex: 9000 });
 		const innerItems = ref([]);
 
 		const text = (item) => {
 			return item.displayName ? item.displayName : item.name;
-		};
-
-		watch(() => props.items,
-			(value) => {
-				innerItems.value = value;
-			}
-		);
+		}
 
 		onMounted(async () => {
 			if (props.items)
 				innerItems.value = props.items;
 			initValue(props.modelValue);
 		});
+
+		watch(() => props.items,
+			(value) => {
+				innerItems.value = value;
+			}
+		);
 
 		return {
 			correlationId,
