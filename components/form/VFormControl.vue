@@ -1,5 +1,4 @@
 <template>
-	[[ {{ debug}} vform ]]
 	<div>
 		<div class="headline text-center text-h6">
 			{{ label }}
