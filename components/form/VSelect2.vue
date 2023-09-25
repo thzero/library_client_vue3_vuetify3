@@ -8,6 +8,7 @@
 		:menu-props="innerProps"
 		:hide-details="hideDetails"
 		:multiple="multiple"
+		:chips="multiple"
 		:readonly="readonly"
 		:label="$attrs.label"
       	density="compact"
