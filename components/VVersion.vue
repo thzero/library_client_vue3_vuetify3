@@ -1,7 +1,20 @@
 <template>
-	<div>
-		<span v-if="version !== null">{{ $t('version.label') }} {{ $t('version.majorMinorDate', version.client) }}&nbsp;-&nbsp;{{ $t('version.majorMinorDate', version.server) }}</span>
-	</div>
+	<span
+		v-if="version !== null"
+	>
+		{{ $t('version.label') }} {{ $t('version.majorMinorDate', version.client) }}
+		<span
+			v-if="$vuetify.display.smAndUp"
+		>
+			&nbsp;-&nbsp;
+		</span>
+		<span
+			v-if="$vuetify.display.xs"
+		>
+			<br>
+		</span>
+		{{ $t('version.majorMinorDate', version.server) }}
+	</span>
 </template>
 
 <script>
