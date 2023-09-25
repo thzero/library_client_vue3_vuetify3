@@ -1,6 +1,9 @@
 <template>
 	<span v-if="modelValue !== null">
 		© <span v-if="hasCopyright">{{ copyright }}</span>
+		<br
+			v-if="$vuetify.display.xs"
+		>
 		<a
 			v-if="hasAuthor"
 			class="ml-1"
