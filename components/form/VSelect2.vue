@@ -4,6 +4,7 @@
 		:error="errorI"
 		:item-title="itemTitle"
 		:item-value="itemValue"
+		:item-props="itemProps"
 		:items="innerItems"
 		:menu-props="innerProps"
 		:hide-details="hideDetails"
@@ -30,6 +31,10 @@ export default {
 		items: {
 			type: [Object, Array],
 			default: null
+		},
+		itemProps: {
+			type: String,
+			default: 'subtitle'
 		},
 		itemTitle: {
 			type: String,
