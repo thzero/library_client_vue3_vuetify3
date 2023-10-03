@@ -15,7 +15,7 @@
 			</v-list> -->
 			<div>
 				<v-form>
-					<slot :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :invalid="invalid" :isLoading="isLoading" :reset="reset" :submit="submit" />
+					<slot :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :filterDrawer="filterDrawer" :invalid="invalid" :isLoading="isLoading" :reset="reset" :submit="submit" />
 					<div
 						v-for="(item, index) in serverErrors"
 						:key="index"
@@ -36,7 +36,6 @@
 		</v-navigation-drawer>
 		<v-card>
 			<div
-				v-if="debug"
 				class="text-center"
 			>
 				dirty: {{ dirty }} invalid: {{ invalid }} <br>
@@ -50,7 +49,7 @@
 					v-if="visibleFilters && !filterDrawer"
 				>
 					<v-form>
-						<slot :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :invalid="invalid" :isLoading="isLoading" :submit="submit" />
+						<slot :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :filterDrawer="filterDrawer" :invalid="invalid" :isLoading="isLoading" :submit="submit" :reset="reset" />
 						<div
 							v-for="(item, index) in serverErrors"
 							:key="index"
@@ -69,16 +68,27 @@
 					</v-snackbar>
 				</div>
 				<div
-					v-if="visibleFilters && filterDrawer"
+					v-if="visibleFilters"
 					class="text-right"
 				>
+					<span
+						class="mr-2"
+					>
+						<slot name="preActions" :dirty="dirty" :filterDrawer="filterDrawer" :invalid="invalid" :isLoading="isLoading" />
+					</span>
 					<v-btn
+						v-if="filterDrawer"
 						:color="buttonsForms.color.filter"
 						:disabled="toggleDrawer"
 						@click="handleFilter"
 					>
 						{{ $t('buttons.filter') }}
 					</v-btn>
+					<span
+						class="mr-2"
+					>
+						<slot name="postActions" :dirty="dirty" :filterDrawer="filterDrawer" :invalid="invalid" :isLoading="isLoading" />
+					</span>
 				</div>
 			</v-card-item>
 		</v-card>
