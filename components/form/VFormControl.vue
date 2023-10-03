@@ -172,6 +172,13 @@
 			@ok="handleClearConfirmOk"
 		/>
 		<VConfirmationDialog
+			v-if="buttonClose"
+			:message="messageClose"
+			:signal="dialogCloseConfirmSignal.signal"
+			@cancel="dialogCloseConfirmSignal.cancel()"
+			@ok="handleCloseConfirmOk"
+		/>
+		<VConfirmationDialog
 			v-if="buttonDelete"
 			:signal="dialogDeleteConfirmSignal.signal"
 			@cancel="dialogDeleteConfirmSignal.cancel()"
