@@ -1,5 +1,39 @@
 <template>
 	<div>
+		<v-navigation-drawer
+			v-if="filterDrawer"
+			v-model="toggleDrawer"
+			temporary
+			:style="$vuetify.display.xs ? 'width: 100%;' : 'min-width: 450px;'"
+		>
+			<!-- <v-list
+				density="compact"
+				nav
+				>
+				<v-list-item prepend-icon="mdi-view-dashboard" title="Home" value="home"></v-list-item>
+				<v-list-item prepend-icon="mdi-forum" title="About" value="about"></v-list-item>
+			</v-list> -->
+			<div>
+				<v-form>
+					<slot :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :invalid="invalid" :isLoading="isLoading" :submit="submit" />
+					<div
+						v-for="(item, index) in serverErrors"
+						:key="index"
+						class="red--text text--lighten-1 v-messages"
+					>
+						{{ item }}
+					</div>
+				</v-form>
+				<v-snackbar
+					ref="notifyRef"
+					v-model="notifySignal"
+					:color="notifyColor"
+					:timeout="notifyTimeout"
+				>
+					{{ notifyMessage }}
+				</v-snackbar>
+			</div>
+		</v-navigation-drawer>
 		<v-card>
 			<div
 				v-if="debug"
@@ -9,13 +43,15 @@
 				buttonCancelDisabled: {{ buttonCancelDisabled }} buttonClearDisabled: {{ buttonClearDisabled }} <br>
 				buttonOkDisabled: {{ buttonOkDisabled }} <br>
 				silentErrors: {{ silentErrors }}
+				filterDrawer: {{ filterDrawer }} toggleDrawer: {{ toggleDrawer }}
+				{{ buttonsForms }}
 			</div>
 			<v-card-item>
 				<div
-					v-if="visibleFilters"
+					v-if="visibleFilters && !filterDrawer"
 				>
 					<v-form>
-						<slot :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :invalid="invalid" :isLoading="isLoading" />
+						<slot :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :invalid="invalid" :isLoading="isLoading" :submit="submit" />
 						<div
 							v-for="(item, index) in serverErrors"
 							:key="index"
@@ -32,6 +68,18 @@
 					>
 						{{ notifyMessage }}
 					</v-snackbar>
+				</div>
+				<div
+					v-if="visibleFilters && filterDrawer"
+					class="text-right"
+				>
+					<v-btn
+						:color="buttonsForms.color.filter"
+						:disabled="toggleDrawer"
+						@click="handleFilter"
+					>
+						{{ $t('buttons.filter') }}
+					</v-btn>
 				</div>
 			</v-card-item>
 		</v-card>
@@ -105,9 +153,11 @@ export default {
 			dialogDeleteConfirmSignal,
 			dirty,
 			invalid,
-			silentErrors,
+			isSearching,
 			messageCancel,
 			messageClear,
+			silentErrors,
+			toggleDrawer,
 			buttonCancelDisabled,
 			buttonClearDisabled,
 			buttonDeleteDisabled,
@@ -123,8 +173,9 @@ export default {
 			handleClearConfirmOk,
 			handleDelete,
 			handleDeleteConfirmOk,
+			handleFilter,
 			reset,
-			submit,
+			submit
 		} = useBaseFormListingControlComponent(props, context, {
 			resetOnSubmit: false,
 			signalOnSubmit: false
@@ -161,9 +212,11 @@ export default {
 			dialogDeleteConfirmSignal,
 			dirty,
 			invalid,
-			silentErrors,
+			isSearching,
 			messageCancel,
 			messageClear,
+			silentErrors,
+			toggleDrawer,
 			buttonCancelDisabled,
 			buttonClearDisabled,
 			buttonDeleteDisabled,
@@ -179,6 +232,7 @@ export default {
 			handleClearConfirmOk,
 			handleDelete,
 			handleDeleteConfirmOk,
+			handleFilter,
 			reset,
 			submit,
 			buttonsDialog,
