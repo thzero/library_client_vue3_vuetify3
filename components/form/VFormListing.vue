@@ -15,7 +15,7 @@
 			</v-list> -->
 			<div>
 				<v-form>
-					<slot :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :invalid="invalid" :isLoading="isLoading" :submit="submit" />
+					<slot :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :invalid="invalid" :isLoading="isLoading" :reset="reset" :submit="submit" />
 					<div
 						v-for="(item, index) in serverErrors"
 						:key="index"
@@ -44,7 +44,6 @@
 				buttonOkDisabled: {{ buttonOkDisabled }} <br>
 				silentErrors: {{ silentErrors }}
 				filterDrawer: {{ filterDrawer }} toggleDrawer: {{ toggleDrawer }}
-				{{ buttonsForms }}
 			</div>
 			<v-card-item>
 				<div
