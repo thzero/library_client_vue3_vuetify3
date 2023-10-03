@@ -41,6 +41,7 @@ export function useButtonComponent(props, context, options) {
             copy: 'primary lighten-1',
             delete: 'error lighten-1',
             edit: 'primary lighten-1',
+            filter: 'primary lighten-1',
             error: 'error lighten-1',
             ok: 'green darken-1'
         },
@@ -54,6 +55,7 @@ export function useButtonComponent(props, context, options) {
             delete: 'flat',
             edit: 'flat',
             error: 'flat',
+            filter: 'flat',
             ok: 'flat',
         }
     };
@@ -71,6 +73,7 @@ export function useButtonComponent(props, context, options) {
             delete: 'error lighten-1',
             edit: 'primary lighten-1',
             error: 'error lighten-1',
+            filter: 'primary lighten-1',
             ok: 'green darken-1'
         },
         variant: {
@@ -83,6 +86,7 @@ export function useButtonComponent(props, context, options) {
             delete: 'flat',
             edit: 'flat',
             error: 'flat',
+            filter: 'flat',
             ok: 'flat',
         }
     };
