@@ -36,6 +36,7 @@
 		</v-navigation-drawer>
 		<v-card>
 			<div
+				v-if="debug"
 				class="text-center"
 			>
 				dirty: {{ dirty }} invalid: {{ invalid }} <br>
@@ -79,7 +80,7 @@
 					<v-btn
 						v-if="filterDrawer"
 						:color="buttonsForms.color.filter"
-						:disabled="toggleDrawer"
+						:disabled="toggleDrawer || filterDisabled"
 						@click="handleFilter"
 					>
 						{{ $t('buttons.filter') }}
