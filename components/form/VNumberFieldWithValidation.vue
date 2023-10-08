@@ -3,6 +3,7 @@
 		v-model="innerValue"
 		type="number"
 		:error="errorI"
+		:messages="(errorsI ?? []).map(l => l.$message)"
 		:hide-details="hideDetails"
 		:readonly="readonly"
 		:disabled="disabled"
@@ -14,7 +15,7 @@
 		@blur="blur"
 		@update:modelValue="innerValueUpdate"
 	>
-		<template v-slot:details>
+		<!-- <template v-slot:details>
 			<div
 				v-if="errorsI && errorsI.length > 0"
 			>
@@ -23,11 +24,9 @@
 					:key="error.$uid"
 				>
 					<strong>{{ error.$message }}</strong>
-				<!--<small> on </small>
-				<strong>{{ error.$property }}</strong>-->
 				</div>
 			</div>
-		</template>
+		</template> -->
 	</v-text-field>
 </template>
 

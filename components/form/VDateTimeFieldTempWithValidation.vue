@@ -1,6 +1,19 @@
 <template>
-	<v-text-field
+    <!-- <Datepicker
 		v-model="innerValue"
+		:enable-time-picker="false"
+		:dark="dark"
+		@update:modelValue="innerValueUpdate"
+	/>
+	<div
+		v-if="validation"
+		v-for="error of errorsI"
+		:key="error.$uid"
+		style="border-bottom-color: red; border-top-width: 24px; border-top-style:solid;"
+	>
+		<small><strong>{{ error.$message }}</strong></small>
+	</div> -->
+	<v-input
 		:error="errorI"
 		:messages="(errorsI ?? []).map(l => l.$message)"
 		:hide-details="hideDetails"
@@ -8,17 +21,18 @@
 		:disabled="disabled"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
-		:counter="maxcount"
 		density="compact"
-		@blur="blur"
-		@update:modelValue="innerValueUpdate"
 	>
-		<template v-slot:append>
-			<span :class="countClass">{{ count }}</span>
-		</template>
+		<Datepicker
+			v-model="innerValue"
+			:enable-time-picker="false"
+			:dark="dark"
+			@update:modelValue="innerValueUpdate"
+		/>
 		<!-- <template v-slot:details>
 			<div
 				v-if="errorsI && errorsI.length > 0"
+				style="border-top-color: red; border-top-width: 1px; border-top-style:solid;padding-top: 8px;"
 			>
 				<div
 					v-if="validation"
@@ -29,30 +43,29 @@
 				</div>
 			</div>
 		</template> -->
-	</v-text-field>
+	</v-input>
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed} from 'vue';
+import { useTheme } from 'vuetify';
+
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
 export default {
-	name: 'VtTextFieldWithValidation',
+	name: 'VtDatetimePickerWithValidation',
+    components: {
+		Datepicker
+	},
 	props: {
 		...useBaseControlEditProps,
-		blur: {
-			type: Function,
-			default: () => {}
-		},
-		maxcount: {
-			type: Number,
-			default: null
-		},
-		mincount: {
-			type: Number,
-			default: null
+		defaultDate: {
+			type: Boolean,
+			default: true
 		}
 	},
 	setup (props, context) {
@@ -77,13 +90,16 @@ export default {
 			innerValue,
 			innerValueUpdate,
 			initValue
-		} = useBaseControlEditComponent(props, context);
+		} = useBaseControlEditComponent(props, context, {
+			convertValueI: (value) => {
+				return value ? value : props.defaultDate === true ? Date() : null;
+			}}
+		);
 
-		const count = computed(() => {
-			return props.maxcount ? '(' + (innerValue .value? innerValue.value.length : 0) + ')' : '';
-		});
-		const countClass = computed(() => {
-			return (props.maxcount && !String.isNullOrEmpty(innerValu.value) ? innerValue.value.length > props.maxcount ? 'negative ' : '' : '') + 'title-body2';
+		const theme = useTheme();
+
+		const dark = computed(() => {
+			return theme.current.value.dark;
 		});
 
 		return {
@@ -105,10 +121,10 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			initValue,
 			innerValueUpdate,
-			count,
-			countClass
+			initValue,
+			dark,
+			theme
 		};
 	}
 };
