@@ -1,22 +1,22 @@
 <template>
 	<v-checkbox
 		v-model="innerValue"
+		:error="errorI"
+		:messages="(errorsI ?? []).map(l => l.$message)"
 		:hide-details="hideDetailsOverride"
 		:readonly="readonly"
 		v-bind="$attrs"
 		density="compact"
 		@update:modelValue="innerValueUpdate"
 	>
-		<template v-slot:details>
+		<!-- <template v-slot:details>
 			<div
 				v-for="error of errorsI"
 				:key="error.$uid"
 			>
 				<strong>{{ error.$message }}</strong>
-				<!--<small> on </small>
-				<strong>{{ error.$property }}</strong>-->
 			</div>
-		</template>
+		</template> -->
 	</v-checkbox>
 </template>
 

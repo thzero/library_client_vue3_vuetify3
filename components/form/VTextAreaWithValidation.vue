@@ -2,6 +2,7 @@
 	<v-textarea
 		v-model="innerValue"
 		:error="errorI"
+		:messages="(errorsI ?? []).map(l => l.$message)"
 		v-bind="$attrs"
 		auto-grow
 		:hide-details="hideDetails"
@@ -18,17 +19,15 @@
 		<template v-slot:append>
 			<span :class="countClass">{{ count }}</span>
 		</template>
-		<template v-slot:details>
+		<!-- <template v-slot:details>
 			<div
 				v-if="validation"
 				v-for="error of errorsI"
 				:key="error.$uid"
 			>
 				<strong>{{ error.$message }}</strong>
-				<!--<small> on </small>
-				<strong>{{ error.$property }}</strong>-->
 			</div>
-		</template>
+		</template> -->
 	</v-textarea>
 </template>
 
