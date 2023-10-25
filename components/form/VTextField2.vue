@@ -1,12 +1,10 @@
 <template>
-	<v-textarea
+	<v-text-field
 		v-model="innerValue"
 		v-bind="$attrs"
-		auto-grow
 		:hide-details="hideDetails"
 		:readonly="readonly"
 		:disabled="disabled"
-		:clearable="false"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
 		density="compact"
@@ -20,7 +18,7 @@ import { useBaseControlEditComponent } from '@thzero/library_client_vue3/compone
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
 export default {
-	name: 'VtTextArea',
+	name: 'VtTextField2',
 	props: {
 		...useBaseControlEditProps,
 		blur: {

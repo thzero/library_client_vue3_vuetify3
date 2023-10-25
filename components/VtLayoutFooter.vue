@@ -1,7 +1,7 @@
 <template>
-	<VVersion v-model="version" />
+	<VtVersion v-model="version" />
 	<v-spacer />
-	<VCopyright v-model="version" />
+	<VtCopyright v-model="version" />
 	<span
 		v-if="isDev"
 		style="padding-left: 4px;"
@@ -21,14 +21,14 @@ import LIbraryCommonUtility from '@thzero/library_common/utility';
 
 import { useBaseComponent } from '@thzero/library_client_vue3/components/base';
 
-import VCopyright from './VCopyright';
-import VVersion from './VVersion';
+import VtCopyright from './VtCopyright';
+import VtVersion from './VtVersion';
 
 export default {
 	name: 'VtLayoutFooter',
 	components: {
-		VCopyright,
-		VVersion
+		VtCopyright,
+		VtVersion
 	},
 	setup(props, context) {
 		const {

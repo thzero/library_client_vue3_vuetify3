@@ -1,5 +1,5 @@
 <template>
-	<VDateTimeField
+	<VtDateTimePickerField
 		v-model="innerValue"
 		slot-scope="{ errors, valid }"
 		:error-messages="errors"
@@ -16,14 +16,14 @@
 </template>
 
 <script>
-import VDateTimeField from './VDateTimeField';
+import VtDateTimePickerField from './VtDateTimePickerField';
 
 import base from '@thzero/library_client_vue3/components/base';
 
 export default {
-	name: 'VtDateTimePickerWithValidation',
+	name: 'VtDateTimePickerFieldWithValidation',
 	components: {
-		VDateTimeField
+		VtDateTimePickerField
 	},
 	extends: base,
 	props: {

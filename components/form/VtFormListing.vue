@@ -102,14 +102,14 @@
 				<slot name="listing"/>
 			</v-card-text>
 		</v-card>
-		<VConfirmationDialog
+		<VtConfirmationDialog
 			v-if="buttonClear"
 			:message="messageClear"
 			:signal="dialogClearConfirmSignal.signal"
 			@cancel="dialogClearConfirmSignal.cancel()"
 			@ok="handleClearConfirmOk"
 		/>
-		<VConfirmationDialog
+		<VtConfirmationDialog
 			v-if="buttonCancel"
 			:message="messageCancel"
 			:signal="dialogCancelConfirmSignal.signal"
@@ -122,7 +122,7 @@
 <script>
 import { ref } from 'vue';
 
-import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
+import VtConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VtConfirmationDialog';
 
 import { useBaseFormListingControlComponent } from '@thzero/library_client_vue3/components/form/baseFormListingControl';
 import { baseFormListingControlProps } from '@thzero/library_client_vue3/components/form/baseFormListingControlProps';
@@ -132,7 +132,7 @@ import { useButtonComponent } from '@thzero/library_client_vue3_vuetify3/compone
 export default {
 	name: 'VtFormListing',
 	components: {
-		VConfirmationDialog
+		VtConfirmationDialog
 	},
 	props: {
 		...baseFormListingControlProps

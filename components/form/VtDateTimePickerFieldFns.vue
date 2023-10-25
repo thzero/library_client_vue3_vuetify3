@@ -2,11 +2,11 @@
 <script>
 import { format, parse } from 'date-fns';
 
-import VDateTimeFieldBase from './VDateTimeFieldBase';
+import VtDateTimePickerBase from './VtDateTimePickerBase';
 
 export default {
-	name: 'VtDatetimePicker',
-	extends: VDateTimeFieldBase,
+	name: 'VtDateTimePickerFieldFns',
+	extends: VtDateTimePickerBase,
 	methods: {
 		convert(value) {
 			return format(value, this.getDefaultDateFormat() + ' ' + this.getDefaultTimeMillisecondsFormat());

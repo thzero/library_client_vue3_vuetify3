@@ -12,7 +12,7 @@
 
 <script>
 export default {
-	name: 'VListing',
+	name: 'VtListing',
 	props: {
 		// must be included in props
 		value: {

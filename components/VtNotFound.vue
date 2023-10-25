@@ -30,7 +30,7 @@
 import { useBaseNotFoundComponent } from '@thzero/library_client_vue3/components/baseNotFound';
 
 export default {
-	name: 'VNotFound',
+	name: 'VtNotFound',
 	setup(props, context) {
 		const {
 			correlationId,
