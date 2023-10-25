@@ -3,14 +3,14 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import VtAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/VtAdminFormDialog';
 import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
-import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
+import VtTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextFieldWithValidation';
 
 export default {
 	name: 'VtUsersAdminFormDialog',
 	components: {
 		VtAdminFormDialog,
 		VSelectWithValidation,
-		VTextFieldWithValidation
+		VtTextFieldWithValidation
 	},
 	extends: VtAdminFormDialog,
 	computed: {

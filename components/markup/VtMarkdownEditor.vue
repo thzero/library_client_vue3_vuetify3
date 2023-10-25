@@ -5,7 +5,7 @@
 				cols="6"
 				class="pa-0"
 			>
-				<VTextAreaWithValidation
+				<VtTextAreaWithValidation
 					ref="markdownRef"
 					v-model="innerValue"
 					:vid="vid"
@@ -28,12 +28,12 @@
 
 <script>
 import baseMarkdownEditor from '@thzero/library_client_vue3/components/markup/baseMarkdownEditor';
-import VTextAreaWithValidation from '../form/VTextAreaWithValidation';
+import VtTextAreaWithValidation from '../form/VtTextAreaWithValidation';
 
 export default {
 	name: 'VtMarkdownEditor',
 	components: {
-		VTextAreaWithValidation
+		VtTextAreaWithValidation
 	},
 	extends: baseMarkdownEditor
 };
