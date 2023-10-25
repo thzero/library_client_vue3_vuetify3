@@ -153,7 +153,7 @@ import { baseOpenSourceProps } from '@thzero/library_client_vue3/components/base
 import { useFrameworkOpenSourceComponent } from '@thzero/library_client_vue3_vuetify3/components/frameworkOpenSource';
 
 export default {
-	name: 'VOpenSource',
+	name: 'VtOpenSource',
 	props: {
 		...baseOpenSourceProps
 	},

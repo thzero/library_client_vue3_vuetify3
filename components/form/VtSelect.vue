@@ -25,7 +25,7 @@ import { useBaseControlEditComponent } from '@thzero/library_client_vue3/compone
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
 export default {
-	name: 'VtSelect2',
+	name: 'VtSelect',
 	props: {
 		...useBaseControlEditProps,
 		items: {

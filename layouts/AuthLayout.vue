@@ -32,7 +32,7 @@
 		<v-footer
 			app
 		>
-			<VLayoutFooter />
+			<VtLayoutFooter />
 		</v-footer>
 	</v-app>
 </template>
@@ -40,12 +40,12 @@
 <script>
 import { useBaseLayout } from '@thzero/library_client_vue3/layouts/baseLayout';
 
-import VLayoutFooter from '@thzero/library_client_vue3_vuetify3/components/VLayoutFooter';
+import VtLayoutFooter from '@thzero/library_client_vue3_vuetify3/components/VtLayoutFooter';
 
 export default {
 	name: 'AuthLayout',
 	components: {
-		VLayoutFooter
+		VtLayoutFooter
 	},
 	setup(props, context) {
 		const {

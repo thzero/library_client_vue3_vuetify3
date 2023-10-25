@@ -3,24 +3,24 @@ import LibraryClientConstants from '@thzero/library_client/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import VAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/VAdminFormDialog';
-import VCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VCheckboxWithValidation';
-import VDateTimeFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VDateTimeFieldWithValidation';
+import VtAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/VtAdminFormDialog';
+import VtCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtCheckboxWithValidation';
+import VtDateTimePickerFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtDatetimePickerFieldWithValidationTemp';
 import VMarkdownEditor from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdownEditor';
 import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
 import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
 
 export default {
-	name: 'VNewsAdminFormDialog',
+	name: 'VtNewsAdminFormDialog',
 	components: {
-		VAdminFormDialog,
-		VCheckboxWithValidation,
-		VDateTimeFieldWithValidation,
+		VtAdminFormDialog,
+		VtCheckboxWithValidation,
+		VtDateTimePickerFieldWithValidation,
 		VMarkdownEditor,
 		VSelectWithValidation,
 		VTextFieldWithValidation
 	},
-	extends: VAdminFormDialog,
+	extends: VtAdminFormDialog,
 	created() {
 		this.serviceStore = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_STORE);
 	},

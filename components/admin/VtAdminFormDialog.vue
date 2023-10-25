@@ -12,7 +12,7 @@ const DEFAULT_DATE_FORMAT = 'MM/DD/YYYY';
 const DEFAULT_TIME_FORMAT = 'HH:mm';
 
 export default {
-	name: 'VAdminFormDialog',
+	name: 'VtAdminFormDialog',
 	components: {
 		VFormDialog
 	},
@@ -81,7 +81,7 @@ export default {
 			const response = isUpdate ?
 				await this.preCompleteSubmitUpdate(correlationId, this.serviceStore.dispatcher, value) :
 				await this.preCompleteSubmitCreate(correlationId, this.serviceStore.dispatcher, value);
-			this.logger.debug('VAdminFormDialog', 'preComplete', 'response', response, correlationId);
+			this.logger.debug('VtAdminFormDialog', 'preComplete', 'response', response, correlationId);
 			return response;
 		},
 		// eslint-disable-next-line

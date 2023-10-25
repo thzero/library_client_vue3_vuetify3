@@ -4,11 +4,11 @@ import { getCurrentInstance } from 'vue';
 
 import dayjs from 'dayjs';
 
-import vDateTimeFieldBase from './VDateTimeFieldBase';
+import VtDateTimePickerBase from './VtDateTimePickerBase';
 
 export default {
 	name: 'VtDatetimePicker',
-	extends: vDateTimeFieldBase,
+	extends: VtDatetimePickerBase,
 	setup (props) {
 		const instance = getCurrentInstance();
 
@@ -46,7 +46,7 @@ export default {
 			time.value = initDateTime.format(instance.ctx.getDefaultTimeFormat());
 		};
 
-		return Object.assign(vDateTimeFieldBase.setup(props), {
+		return Object.assign(VtDateTimePickerBase.setup(props), {
 			convert,
 			formatDateTime,
 			getDefaultDateFormat,

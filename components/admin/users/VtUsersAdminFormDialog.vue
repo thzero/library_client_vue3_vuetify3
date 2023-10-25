@@ -1,18 +1,18 @@
 <script>
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
-import VAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/VAdminFormDialog';
+import VtAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/VtAdminFormDialog';
 import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
 import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
 
 export default {
-	name: 'VUsersAdminFormDialog',
+	name: 'VtUsersAdminFormDialog',
 	components: {
-		VAdminFormDialog,
+		VtAdminFormDialog,
 		VSelectWithValidation,
 		VTextFieldWithValidation
 	},
-	extends: VAdminFormDialog,
+	extends: VtAdminFormDialog,
 	computed: {
 		id() {
 			return this.innerValue ? this.innerValue.id : '';
@@ -41,7 +41,7 @@ export default {
 				updatedTimestamp: this.innerValue.updatedTimestamp
 			};
 			const response = await LibraryClientUtility.$store.dispatcher.adminUsers.updateAdminUser(correlationId, item);
-			this.logger.debug('VUsersAdminFormDialog', 'preComplete', 'response', response, correlationId);
+			this.logger.debug('VtUsersAdminFormDialog', 'preComplete', 'response', response, correlationId);
 			return response;
 		}
 	}

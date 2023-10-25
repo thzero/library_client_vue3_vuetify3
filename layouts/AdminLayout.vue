@@ -87,7 +87,7 @@
 			</v-container>
 		</v-main>
 
-		<VConfirmationDialog
+		<VtConfirmationDialog
 			:non-recoverable="true"
 			:signal="dialogSignOut.signal"
 			@cancel="dialogSignOut.cancel()"
@@ -97,28 +97,28 @@
 		<v-footer
 			app
 		>
-			<VLayoutFooter />
+			<VtLayoutFooter />
 		</v-footer>
 
-		<VLoadingOverlay
+		<VtLoadingOverlay
 			:signal="isAuthCompleted"
 		/>
 	</v-app>
 </template>
 
 <script>
-import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
-import VLayoutFooter from '@thzero/library_client_vue3_vuetify3/components/VLayoutFooter';
-import VLoadingOverlay from '@thzero/library_client_vue3_vuetify3/components/VLoadingOverlay';
+import VtConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VtConfirmationDialog';
+import VtLayoutFooter from '@thzero/library_client_vue3_vuetify3/components/VtLayoutFooter';
+import VtLoadingOverlay from '@thzero/library_client_vue3_vuetify3/components/VtLoadingOverlay';
 
 import { useBaseAdminLayout } from '@thzero/library_client_vue3/layouts/baseAdminLayout';
 
 export default {
 	name: 'AdminLayout',
 	components: {
-		VConfirmationDialog,
-		VLayoutFooter,
-		VLoadingOverlay
+		VtConfirmationDialog,
+		VtLayoutFooter,
+		VtLoadingOverlay
 	},
 	setup(props, context) {
 		const {

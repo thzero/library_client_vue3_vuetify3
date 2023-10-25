@@ -48,11 +48,11 @@
 </template>
 
 <script>
-import VUsersAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/users/VUsersAdminFormDialog';
+import VtUsersAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/users/VtUsersAdminFormDialog';
 
 export default {
 	name: 'AdminUsersEditDialog',
-	extends: VUsersAdminFormDialog
+	extends: VtUsersAdminFormDialog
 };
 </script>
 

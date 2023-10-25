@@ -157,28 +157,28 @@
 				</v-card-text>
 			</v-card>
 		</v-overlay>
-		<VConfirmationDialog
+		<VtConfirmationDialog
 			v-if="buttonCancel"
 			:message="messageCancel"
 			:signal="dialogCancelConfirmSignal.signal"
 			@cancel="dialogCancelConfirmSignal.cancel()"
 			@ok="handleCancelConfirmOk"
 		/>
-		<VConfirmationDialog
+		<VtConfirmationDialog
 			v-if="buttonClear"
 			:message="messageClear"
 			:signal="dialogClearConfirmSignal.signal"
 			@cancel="dialogClearConfirmSignal.cancel()"
 			@ok="handleClearConfirmOk"
 		/>
-		<VConfirmationDialog
+		<VtConfirmationDialog
 			v-if="buttonClose"
 			:message="messageClose"
 			:signal="dialogCloseConfirmSignal.signal"
 			@cancel="dialogCloseConfirmSignal.cancel()"
 			@ok="handleCloseConfirmOk"
 		/>
-		<VConfirmationDialog
+		<VtConfirmationDialog
 			v-if="buttonDelete"
 			:signal="dialogDeleteConfirmSignal.signal"
 			@cancel="dialogDeleteConfirmSignal.cancel()"
@@ -196,7 +196,7 @@
 </template>
 
 <script>
-import VConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VConfirmationDialog';
+import VtConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VtConfirmationDialog';
 
 import { useBaseFormControlComponent } from '@thzero/library_client_vue3/components/form/baseFormControl';
 import { baseFormControlProps } from '@thzero/library_client_vue3/components/form/baseFormControlProps';
@@ -206,7 +206,7 @@ import { useButtonComponent } from '@thzero/library_client_vue3_vuetify3/compone
 export default {
 	name: 'VtFormControl',
 	components: {
-		VConfirmationDialog
+		VtConfirmationDialog
 	},
 	props: {
 		...baseFormControlProps

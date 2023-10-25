@@ -112,7 +112,7 @@ const OUTPUT_TYPE_TIMESTAMP = 'timestamp';
 import baseControlEdit from '@thzero/library_client_vue3/components/baseControlEdit';
 
 export default {
-	name: 'VtDatetimePickerBase',
+	name: 'VtDateTimePickerBase',
 	extends: baseControlEdit,
 	props: {
 		cancelText: {
