@@ -9,7 +9,7 @@
 	>
 		<v-layout>
 			<v-flex xs6>
-				<VTextFieldWithValidation
+				<VtTextFieldWithValidation
 					ref="idRef"
 					v-model="id"
 					vid="id"
@@ -18,7 +18,7 @@
 				/>
 			</v-flex>
 			<v-flex xs6>
-				<VTextFieldWithValidation
+				<VtTextFieldWithValidation
 					ref="externalIdRef"
 					v-model="externalId"
 					vid="externalId"
@@ -28,7 +28,7 @@
 			</v-flex>
 		</v-layout>
 
-		<VTextFieldWithValidation
+		<VtTextFieldWithValidation
 			ref="nameRef"
 			v-model="name"
 			vid="name"

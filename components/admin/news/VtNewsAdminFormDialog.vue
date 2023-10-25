@@ -8,7 +8,7 @@ import VtCheckboxWithValidation from '@thzero/library_client_vue3_vuetify3/compo
 import VtDateTimePickerFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtDatetimePickerFieldWithValidationTemp';
 import VMarkdownEditor from '@thzero/library_client_vue3_vuetify3/components/markup/VMarkdownEditor';
 import VSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VSelectWithValidation';
-import VTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VTextFieldWithValidation';
+import VtTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextFieldWithValidation';
 
 export default {
 	name: 'VtNewsAdminFormDialog',
@@ -18,7 +18,7 @@ export default {
 		VtDateTimePickerFieldWithValidation,
 		VMarkdownEditor,
 		VSelectWithValidation,
-		VTextFieldWithValidation
+		VtTextFieldWithValidation
 	},
 	extends: VtAdminFormDialog,
 	created() {
