@@ -7,6 +7,7 @@
 		auto-grow
 		:hide-details="hideDetails"
 		:readonly="readonly"
+		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:disabled="disabled"
 		:clearable="clearable"
 		:hint="$attrs.hint"
@@ -36,19 +37,15 @@ import { computed } from 'vue';
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputProps';
+import { useVuetifyTextInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputTextProps';
 
 export default {
 	name: 'VtTextAreaWithValidation',
 	props: {
 		...useBaseControlEditProps,
-		blur: {
-			type: Function,
-			default: () => {}
-		},
-		maxcount: {
-			type: Number,
-			default: null
-		}
+		...useVuetifyInputProps,
+		...useVuetifyTextInputProps
 	},
 	setup (props, context) {
 		const {

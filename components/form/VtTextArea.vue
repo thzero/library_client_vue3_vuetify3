@@ -5,6 +5,7 @@
 		auto-grow
 		:hide-details="hideDetails"
 		:readonly="readonly"
+		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:disabled="disabled"
 		:clearable="false"
 		:hint="$attrs.hint"
@@ -18,15 +19,15 @@
 <script>
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputProps';
+import { useVuetifyTextInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputTextProps';
 
 export default {
 	name: 'VtTextArea2',
 	props: {
 		...useBaseControlEditProps,
-		blur: {
-			type: Function,
-			default: () => {}
-		}
+		...useVuetifyInputProps,
+		...useVuetifyTextInputProps
 	},
 	setup (props, context) {
 		const {

@@ -5,6 +5,7 @@
 		:messages="(errorsI ?? []).map(l => l.$message)"
 		:hide-details="hideDetails"
 		:readonly="readonly"
+		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:disabled="disabled"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
@@ -26,11 +27,13 @@
 <script>
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputProps';
 
 export default {
 	name: 'VtSwitchWithValidation',
 	props: {
 		...useBaseControlEditProps,
+		...useVuetifyInputProps,
 		color: {
 			type: String,
 			default: 'primary'

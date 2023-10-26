@@ -21,11 +21,13 @@ import LibraryClientUtility from '@thzero/library_client/utility/index';
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputProps';
 
 export default {
 	name: 'VtTagsWithValidation',
 	props: {
 		...useBaseControlEditProps,
+		...useVuetifyInputProps,
 		max: {
 			type: [Number],
 			default: 5

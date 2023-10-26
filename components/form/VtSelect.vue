@@ -11,6 +11,7 @@
 		:multiple="multiple"
 		:chips="multiple"
 		:readonly="readonly"
+		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:label="$attrs.label"
       	density="compact"
 		@update:modelValue="innerValueUpdate"
@@ -23,35 +24,15 @@ import { onMounted, ref, watch } from 'vue';
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputProps';
+import { useVuetifySelectInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputSelectProps';
 
 export default {
 	name: 'VtSelect',
 	props: {
 		...useBaseControlEditProps,
-		items: {
-			type: [Object, Array],
-			default: null
-		},
-		itemProps: {
-			type: String,
-			default: 'subtitle'
-		},
-		itemTitle: {
-			type: String,
-			default: 'name'
-		},
-		itemValue: {
-			type: String,
-			default: 'id'
-		},
-		multiple: {
-			type: Boolean,
-			default: false
-		},
-		vidOverride: {
-			type: String,
-			default: null
-		}
+		...useVuetifyInputProps,
+		...useVuetifySelectInputProps
 	},
 	setup (props, context) {
 		const {

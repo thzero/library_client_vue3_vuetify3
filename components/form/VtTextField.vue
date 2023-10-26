@@ -4,6 +4,7 @@
 		v-bind="$attrs"
 		:hide-details="hideDetails"
 		:readonly="readonly"
+		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:disabled="disabled"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
@@ -16,15 +17,15 @@
 <script>
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputProps';
+import { useVuetifyTextInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputTextProps';
 
 export default {
 	name: 'VtTextField',
 	props: {
 		...useBaseControlEditProps,
-		blur: {
-			type: Function,
-			default: () => {}
-		}
+		...useVuetifyInputProps,
+		...useVuetifyTextInputProps
 	},
 	setup (props, context) {
 		const {
