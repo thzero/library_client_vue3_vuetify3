@@ -30,16 +30,16 @@ import { onMounted, ref, watch } from 'vue';
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputProps';
+import { useVuetifySelectInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputSelectProps';
 
 export default {
 	name: 'VtSelectAutoCompleteWithValidation',
 	extends: baseControlEdit,
 	props: {
 		...useBaseControlEditProps,
-		items: {
-			type: [Object, Array],
-			default: null
-		}
+		...useVuetifyInputProps,
+		...useVuetifySelectInputProps
 	},
 	setup (props, context) {
 		const {

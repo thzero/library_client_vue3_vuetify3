@@ -5,6 +5,7 @@
 		:messages="(errorsI ?? []).map(l => l.$message)"
 		:hide-details="hideDetails"
 		:readonly="readonly"
+		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:disabled="disabled"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
@@ -37,23 +38,15 @@ import { computed } from 'vue';
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputProps';
+import { useVuetifyTextInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputTextProps';
 
 export default {
 	name: 'VtTextFieldWithValidation',
 	props: {
 		...useBaseControlEditProps,
-		blur: {
-			type: Function,
-			default: () => {}
-		},
-		maxcount: {
-			type: Number,
-			default: null
-		},
-		mincount: {
-			type: Number,
-			default: null
-		}
+		...useVuetifyInputProps,
+		...useVuetifyTextInputProps
 	},
 	setup (props, context) {
 		const {

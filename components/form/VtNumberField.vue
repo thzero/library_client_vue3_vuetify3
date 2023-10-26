@@ -5,6 +5,7 @@
 		:class="displayClass"
 		:hide-details="hideDetails"
 		:readonly="readonly"
+		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:disabled="disabled"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
@@ -20,19 +21,15 @@ import { computed } from 'vue';
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputProps';
+import { useVuetifyNumberInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputNumberProps';
 
 export default {
 	name: 'VtNumberField',
 	props: {
 		...useBaseControlEditProps,
-		blur: {
-			type: Function,
-			default: () => {}
-		},
-		negativeColor: {
-			type: Boolean,
-			default: false
-		}
+		...useVuetifyInputProps,
+		...useVuetifyNumberInputProps
 	},
 	setup (props, context) {
 		const {
