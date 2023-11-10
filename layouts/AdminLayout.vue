@@ -88,7 +88,6 @@
 		</v-main>
 
 		<VtConfirmationDialog
-			:non-recoverable="true"
 			:signal="dialogSignOut.signal"
 			@cancel="dialogSignOut.cancel()"
 			@ok="dialogSignOutOk"
