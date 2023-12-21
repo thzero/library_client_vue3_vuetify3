@@ -25,9 +25,12 @@
 	>
 		<Datepicker
 			v-model="innerValue"
-			:enable-time-picker="false"
+			:enable-time-picker="time"
+			model-type="timestamp"
+			:range="range"
 			:dark="dark"
 			@update:modelValue="innerValueUpdate"
+			style="width: 100%;"
 		/>
 		<!-- <template v-slot:details>
 			<div
@@ -66,6 +69,14 @@ export default {
 		defaultDate: {
 			type: Boolean,
 			default: true
+		},
+		range: {
+			type: Boolean,
+			default: false
+		},
+		time: {
+			type: Boolean,
+			default: false
 		}
 	},
 	setup (props, context) {
