@@ -4,16 +4,20 @@
 	>
 		{{ $t('version.label') }} {{ $t('version.majorMinorDate', version.client) }}
 		<span
-			v-if="$vuetify.display.smAndUp"
+			v-if="$vuetify.display.smAndUp && version.server"
 		>
 			&nbsp;-&nbsp;
 		</span>
 		<span
-			v-if="$vuetify.display.xs"
+			v-if="$vuetify.display.xs && version.server"
 		>
 			<br>
 		</span>
+		<span
+			v-if="$vuetify.display.xs && version.server"
+		>
 		{{ $t('version.majorMinorDate', version.server) }}
+		</span>
 	</span>
 </template>
 
