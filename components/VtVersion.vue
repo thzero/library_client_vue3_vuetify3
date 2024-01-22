@@ -14,9 +14,9 @@
 			<br>
 		</span>
 		<span
-			v-if="$vuetify.display.xs && version.server"
+			v-if="version.server"
 		>
-		{{ $t('version.majorMinorDate', version.server) }}
+			{{ $t('version.majorMinorDate', version.server) }}
 		</span>
 	</span>
 </template>
