@@ -93,7 +93,7 @@
 				</div>
 			</v-card-item>
 		</v-card>
-		<v-card
+		<!-- <v-card
 			class="mt-4"
 		>
 			<v-card-text 
@@ -101,7 +101,12 @@
 			>
 				<slot name="listing"/>
 			</v-card-text>
-		</v-card>
+		</v-card> -->
+		<div 
+			v-if="visibleListing"
+		>
+			<slot name="listing"/>
+		</div>
 		<VtConfirmationDialog
 			v-if="buttonClear"
 			:message="messageClear"
