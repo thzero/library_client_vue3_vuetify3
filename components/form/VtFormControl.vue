@@ -94,7 +94,7 @@
 					<slot name="buttons_post"/>
 				</div>
 				<div>
-					<slot name="after"/>
+					<slot name="after" :isLoading="isLoading" />
 				</div>
 			</v-form>
 		</div>
