@@ -44,8 +44,8 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			innerValueUpdate,
-			initValue
+			initValue,
+			innerValueUpdate
 		} = useBaseControlEditComponent(props, context, {
 			convertValueI: (value) => {
 				return value ? value : Date();
@@ -77,8 +77,8 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			innerValueUpdate,
 			initValue,
+			innerValueUpdate,
 			dark,
 			theme
 		};

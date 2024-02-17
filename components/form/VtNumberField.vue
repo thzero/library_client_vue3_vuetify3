@@ -1,7 +1,13 @@
 <template>
+	{{  integer }} {{ integer ? '^[-/d]/d*$' : '' }}
 	<v-text-field
 		v-model="innerValue"
 		type="number"
+		:min="min" 
+		:max="max"
+		ondrop="return false;" 
+		:onpaste="validateNumericField" 
+		:onkeypress="validateNumericField"
 		:class="displayClass"
 		:hide-details="hideDetails"
 		:readonly="readonly"
@@ -17,7 +23,7 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
@@ -51,13 +57,21 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
+			initValue,
 			innerValueUpdate,
-			initValue
+			validateNumericField,
+			validateNumericFieldMinMax
 		} = useBaseControlEditComponent(props, context);
 
 		const displayClass = computed(() => {
 			return props.negativeColor ? (innerValue.value < 0 ? 'text-negative' : null) : null;
 		});
+
+		watch(() => innerValue.value,
+			(value) => {
+				validateNumericFieldMinMax(value);
+			}
+		);
 
 		return {
 			correlationId,
@@ -78,9 +92,10 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			innerValueUpdate,
 			initValue,
-			displayClass
+			innerValueUpdate,
+			validateNumericField,
+			validateNumericFieldMinMax
 		};
 	}
 };
