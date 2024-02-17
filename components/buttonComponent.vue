@@ -64,17 +64,17 @@ export function useButtonComponent(props, context, options) {
 
     const defaultForms = {
         color: {
-            default: 'primary lighten-1',
-            add: 'primary lighten-1',
-            cancel: 'secondary lighten-1',
-            clear: 'secondary lighten-1',
-            close: 'primary lighten-1',
-            copy: 'primary lighten-1',
-            delete: 'error lighten-1',
-            edit: 'primary lighten-1',
-            error: 'error lighten-1',
-            filter: 'primary lighten-1',
-            ok: 'green darken-1'
+            default: 'primary',
+            add: 'green-lighten-1',
+            cancel: 'secondary',
+            clear: 'secondary ',
+            close: 'primary',
+            copy: 'primary',
+            delete: 'error',
+            edit: 'primary',
+            error: 'error',
+            filter: 'primary',
+            ok: 'primary'
         },
         variant: {
             default: 'flat',
