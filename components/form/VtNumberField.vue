@@ -1,5 +1,4 @@
 <template>
-	{{  integer }} {{ integer ? '^[-/d]/d*$' : '' }}
 	<v-text-field
 		v-model="innerValue"
 		type="number"
@@ -95,7 +94,8 @@ export default {
 			initValue,
 			innerValueUpdate,
 			validateNumericField,
-			validateNumericFieldMinMax
+			validateNumericFieldMinMax,
+			displayClass
 		};
 	}
 };

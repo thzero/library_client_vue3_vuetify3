@@ -109,7 +109,8 @@ export default {
 			initValue,
 			innerValueUpdate,
 			validateNumericField,
-			validateNumericFieldMinMax
+			validateNumericFieldMinMax,
+			displayClass
 		};
 	}
 };
