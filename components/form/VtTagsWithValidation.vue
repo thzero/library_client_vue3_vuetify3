@@ -53,8 +53,8 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			innerValueUpdate,
-			initValue
+			initValue,
+			innerValueUpdate
 		} = useBaseControlEditComponent(props, context);
 
 		const items = ref([]);
@@ -98,7 +98,6 @@ export default {
 		});
 
 		return {
-
 			correlationId,
 			error,
 			hasFailed,
@@ -117,8 +116,8 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			innerValueUpdate,
 			initValue,
+			innerValueUpdate,
 			hint,
 			items,
 			paste,

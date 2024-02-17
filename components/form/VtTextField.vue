@@ -47,8 +47,8 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			innerValueUpdate,
-			initValue
+			initValue,
+			innerValueUpdate
 		} = useBaseControlEditComponent(props, context);
 
 		return {
@@ -70,8 +70,8 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			innerValueUpdate,
-			initValue
+			initValue,
+			innerValueUpdate
 		};
 	}
 };

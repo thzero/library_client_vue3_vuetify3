@@ -74,8 +74,8 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			innerValueUpdate,
-			initValue
+			initValue,
+			innerValueUpdate
 		} = useBaseControlEditComponent(props, context);
 
 
@@ -126,8 +126,8 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			innerValueUpdate,
 			initValue,
+			innerValueUpdate,
 			innerItems,
 			loading,
 			search

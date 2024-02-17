@@ -54,8 +54,8 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			innerValueUpdate,
-			initValue
+			initValue,
+			innerValueUpdate
 		} = useBaseControlEditComponent(props, context);
 
 		const hideDetailsOverride = computed(() => {
@@ -80,10 +80,10 @@ export default {
 			errorI,
 			errorsI,
 			hideDetails,
-			hideDetailsOverride,
 			innerValue,
+			initValue,
 			innerValueUpdate,
-			initValue
+			hideDetailsOverride
 		};
 	}
 };

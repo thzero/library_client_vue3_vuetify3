@@ -78,8 +78,8 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			innerValueUpdate,
-			initValue
+			initValue,
+			innerValueUpdate
 		} = useBaseControlEditComponent(props, context);
 
 		const dialogSignal = ref(false);
@@ -114,8 +114,8 @@ export default {
 			errorsI,
 			hideDetails,
 			innerValue,
-			innerValueUpdate,
 			initValue,
+			innerValueUpdate,
 			buttonColor,
 			close,
 			dialogSignal,
