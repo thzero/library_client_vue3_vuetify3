@@ -43,7 +43,8 @@ export function useButtonComponent(props, context, options) {
             edit: 'primary lighten-1',
             filter: 'primary lighten-1',
             error: 'error lighten-1',
-            ok: 'green darken-1'
+            ok: 'green darken-1',
+            selected: 'green lighten-1'
         },
         variant: {
             default: 'flat',
@@ -57,6 +58,7 @@ export function useButtonComponent(props, context, options) {
             error: 'flat',
             filter: 'flat',
             ok: 'flat',
+            selected: 'flat'
         }
     };
     // components.dialogs = Object.assign(components.dialogs, defaultDialog);

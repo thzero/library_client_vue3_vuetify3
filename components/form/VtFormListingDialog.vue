@@ -50,6 +50,7 @@
 
 				<v-card-actions align="right">
 					<v-spacer />
+					<slot name="preActions" :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :invalid="invalid" :isLoading="isLoading" />
 					<v-btn
 						:variant="buttonsForms.variant.cancel"
 						:color="buttonsForms.color.cancel"
@@ -57,6 +58,7 @@
 					>
 						{{ $t(buttonCloseName) }}
 					</v-btn>
+					<slot name="postActions" :buttonClearDisabled="buttonClearDisabled" :buttonOkDisabled="buttonOkDisabled" :dirty="dirty" :invalid="invalid" :isLoading="isLoading" />
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
