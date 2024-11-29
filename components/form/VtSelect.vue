@@ -7,7 +7,7 @@
 		:item-props="itemProps"
 		:items="innerItems"
 		:menu-props="innerProps"
-		:hide-details="hideDetails"
+		hide-details="auto"
 		:multiple="multiple"
 		:chips="multiple"
 		:readonly="readonly"

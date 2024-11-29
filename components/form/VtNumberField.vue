@@ -8,7 +8,7 @@
 		:onpaste="validateNumericField" 
 		:onkeypress="validateNumericField"
 		:class="displayClass"
-		:hide-details="hideDetails"
+		hide-details="auto"
 		:readonly="readonly"
 		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:disabled="disabled"

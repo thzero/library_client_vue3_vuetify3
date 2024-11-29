@@ -16,7 +16,7 @@
 	<v-input
 		:error="errorI"
 		:messages="(errorsI ?? []).map(l => l.$message)"
-		:hide-details="hideDetails"
+		hide-details="auto"
 		:readonly="readonly"
 		:disabled="disabled"
 		:hint="$attrs.hint"
