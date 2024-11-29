@@ -5,7 +5,7 @@
 		:messages="(errorsI ?? []).map(l => l.$message)"
 		v-bind="$attrs"
 		auto-grow
-		:hide-details="hideDetails"
+		hide-details="auto"
 		:readonly="readonly"
 		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:disabled="disabled"
@@ -17,9 +17,9 @@
 		@blur="blur"
 		@update:modelValue="innerValueUpdate"
 	>
-		<template v-slot:append>
+		<!-- <template v-slot:append>
 			<span :class="countClass">{{ count }}</span>
-		</template>
+		</template> -->
 		<!-- <template v-slot:details>
 			<div
 				v-if="validation"
@@ -71,12 +71,12 @@ export default {
 			innerValueUpdate
 		} = useBaseControlEditComponent(props, context);
 
-		const count = computed(() => {
-			return props.maxcount ? '(' + (innerValue.value ? innerValue.value.length : 0) + ')' : '';
-		});
-		const countClass = computed(() => {
-			return (props.maxcount && !String.isNullOrEmpty(innerValu.value) ? innerValue.value.length > props.maxcount ? 'negative ' : '' : '') + 'title-body2';
-		});
+		// const count = computed(() => {
+		// 	return props.maxcount ? '(' + (innerValue.value ? innerValue.value.length : 0) + ')' : '';
+		// });
+		// const countClass = computed(() => {
+		// 	return (props.maxcount && !String.isNullOrEmpty(innerValue.value) ? innerValue.value.length > props.maxcount ? 'negative ' : '' : '') + 'title-body2';
+		// });
 
 		return {
 			correlationId,
@@ -99,8 +99,8 @@ export default {
 			innerValue,
 			initValue,
 			innerValueUpdate,
-			count,
-			countClass
+			// count,
+			// countClass
 		};
 	}
 };

@@ -3,7 +3,7 @@
 		v-model="innerValue"
 		:error="errorI"
 		:messages="(errorsI ?? []).map(l => l.$message)"
-		:hide-details="hideDetailsOverride"
+		hide-details="auto"
 		:readonly="readonly"
 		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		v-bind="$attrs"
@@ -52,15 +52,10 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
-			hideDetails,
 			innerValue,
 			initValue,
 			innerValueUpdate
 		} = useBaseControlEditComponent(props, context);
-
-		const hideDetailsOverride = computed(() => {
-			return !hideDetails.value ? hideDetails.value : true
-		});
 
 		return {
 			correlationId,

@@ -7,7 +7,7 @@
 		:item-value="itemValue"
 		:items="innerItems"
 		:menu-props="innerProps"
-		:hide-details="hideDetails"
+		hide-details="auto"
 		:multiple="multiple"
 		:readonly="readonly"
 		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"

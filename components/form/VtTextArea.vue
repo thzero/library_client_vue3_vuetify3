@@ -3,7 +3,7 @@
 		v-model="innerValue"
 		v-bind="$attrs"
 		auto-grow
-		:hide-details="hideDetails"
+		hide-details="auto"
 		:readonly="readonly"
 		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:disabled="disabled"
