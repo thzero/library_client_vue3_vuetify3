@@ -4,9 +4,11 @@
 			v-if="filterDrawer"
 			v-model="toggleDrawer"
 			temporary
-			:style="$vuetify.display.xs ? 'width: 100%;' : 'min-width: 450px;'"
+			:style="toggleDrawer ? ($vuetify.display.xs ? 'width: 100%;' : 'min-width: 450px;') : ''"
 		>
-			<!-- <v-list
+			<!-- 
+			:style="$vuetify.display.xs ? 'width: 100%;' : 'min-width: 450px;'"
+		<v-list
 				density="compact"
 				nav
 				>
