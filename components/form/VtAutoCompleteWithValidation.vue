@@ -78,7 +78,6 @@ export default {
 			innerValueUpdate
 		} = useBaseControlEditComponent(props, context);
 
-
 		const innerItems = ref([]);
 		const loading = ref(false);
 		const search = ref(null);

@@ -52,6 +52,7 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			hideDetails,
 			innerValue,
 			initValue,
 			innerValueUpdate
@@ -77,8 +78,7 @@ export default {
 			hideDetails,
 			innerValue,
 			initValue,
-			innerValueUpdate,
-			hideDetailsOverride
+			innerValueUpdate
 		};
 	}
 };
