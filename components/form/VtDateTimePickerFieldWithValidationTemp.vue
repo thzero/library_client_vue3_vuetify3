@@ -31,6 +31,7 @@
 			:dark="dark"
 			@update:modelValue="innerValueUpdate"
 			style="width: 100%;"
+			:teleport="true"
 		/>
 		<!-- <template v-slot:details>
 			<div
