@@ -9,6 +9,7 @@
 		:disabled="disabled"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
+		:clearable="clearable ? 'clearable' : ''"
 		:counter="maxcount"
 		density="compact"
 		@blur="blur"

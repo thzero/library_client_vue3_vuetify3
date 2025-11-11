@@ -3,6 +3,10 @@ export const useVuetifyTextInputProps = {
         type: Function,
         default: () => {}
     },
+    clearable: {
+        type: Boolean,
+        default: true
+    },
     maxcount: {
         type: Number,
         default: null
