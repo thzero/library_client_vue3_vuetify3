@@ -23,7 +23,7 @@
 		:label="$attrs.label"
 		density="compact"
 	>
-		<Datepicker
+		<VueDatePicker
 			v-model="innerValue"
 			:enable-time-picker="time"
 			model-type="timestamp"
@@ -54,7 +54,7 @@
 import { computed} from 'vue';
 import { useTheme } from 'vuetify';
 
-import Datepicker from '@vuepic/vue-datepicker';
+import { VueDatePicker } from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
@@ -63,7 +63,7 @@ import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/
 export default {
 	name: 'VtDateTimePickerFieldWithValidationTemp',
     components: {
-		Datepicker
+		VueDatePicker
 	},
 	props: {
 		...useBaseControlEditProps,
