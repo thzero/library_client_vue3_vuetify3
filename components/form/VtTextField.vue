@@ -8,7 +8,7 @@
 		:disabled="disabled"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
-		:clearable="(!readonly ? (clearable ? 'clearable' : false) : false)"
+		:clearable="clearable ? 'clearable' : ''"
 		density="compact"
 		@blur="blur"
 		@update:modelValue="innerValueUpdate"
