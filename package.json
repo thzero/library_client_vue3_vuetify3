@@ -1,10 +1,10 @@
 {
   "name": "@thzero/library_client_vue3_vuetify3",
-  "version": "0.18.31",
+  "version": "0.18.32",
   "version_major": 0,
   "version_minor": 18,
-  "version_patch": 31,
-  "version_date": "12/30/2025",
+  "version_patch": 32,
+  "version_date": "01/26/2026",
   "description": "An opinionated library of common functionality to bootstrap a VueJs 3.0 based SPA application and Vuetify 3.0.",
   "author": "thZero",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
     "@vuepic/vue-datepicker": "^12.1.0",
-    "vue": "^3.5.26",
+    "vue": "^3.5.27",
     "vue-cookie-comply": "^0.0.3"
   },
   "peerDependencies": {
