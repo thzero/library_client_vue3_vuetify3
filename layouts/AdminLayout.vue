@@ -2,7 +2,7 @@
 	<v-app id="root">
 		<v-app-bar
 			app
-			dense
+			density="compact"
 			dark
 		>
 			<v-toolbar-title class="headline text-uppercase">
