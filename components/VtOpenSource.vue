@@ -3,7 +3,7 @@
 		<v-card-text
 			class="pt-2"
 		>
-			<v-row dense>
+			<v-row density="compact">
 				<v-col
 					cols="0"
 					md="2"
@@ -14,7 +14,7 @@
 					md="8"
 					class="text-center"
 				>
-					<v-row dense>
+					<v-row density="compact">
 						<v-col
 							cols="12"
 							class="text-center"
@@ -22,7 +22,7 @@
 							{{ $t('openSource.client') }}
 						</v-col>
 					</v-row>
-					<v-row dense>
+					<v-row density="compact">
 						<v-col
 							cols="9"
 							class="text-left"
@@ -39,7 +39,7 @@
 					<v-row
 						v-for="(item2, jndex) in dependenciesClient"
 						:key="key(jndex, 'b')"
-						dense
+						density="compact"
 					>
 						<v-col
 							cols="9"
@@ -78,7 +78,7 @@
 							</span>
 						</v-col>
 					</v-row>
-					<v-row dense>
+					<v-row density="compact">
 						<v-col
 							cols="12"
 							class="text-center"
@@ -86,7 +86,7 @@
 							{{ $t('openSource.server') }}
 						</v-col>
 					</v-row>
-					<v-row dense>
+					<v-row density="compact">
 						<v-col
 							cols="9"
 							class="text-left"
@@ -103,7 +103,7 @@
 					<v-row
 						v-for="(item2, jndex) in dependenciesServer"
 						:key="key(jndex, 'b')"
-						dense
+						density="compact"
 					>
 						<v-col
 							cols="9"
