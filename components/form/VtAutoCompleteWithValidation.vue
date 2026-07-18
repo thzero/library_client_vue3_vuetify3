@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
-import LIbraryCommonUtility from '@thzero/library_common/utility';
+import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
@@ -82,26 +82,20 @@ export default {
 		const loading = ref(false);
 		const search = ref(null);
 
-		const executeQuery = async (newVal) => {
-			// this.loading = true
-			// if (this.querySelection)
-			//	 this.innerItems = await this.querySelection(newVal)
-			// else
-			//	 this.innerItems = []
-			// this.loading = false
-			update(this, newVal);
-		},
-		const update = LIbraryCommonUtility.debounce(async function(self, newVal) {
+		const update = LibraryCommonUtility.debounce(async function(self, newVal) {
 			loading.value = true;
-			if (querySelection.value)
+			if (props.querySelection)
 				innerItems.value = await props.querySelection(newVal);
 			else
 				innerItems.value = [];
 			loading.value = false;
-		}, 50)
+		}, 50);
+		const executeQuery = async (newVal) => {
+			update(null, newVal);
+		};
 
 		watch(() => search.value,
-			(value) => {
+			async (value) => {
 				value && (value !== innerValue.value) && await executeQuery(value);
 			}
 		);
