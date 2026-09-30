@@ -17,7 +17,7 @@ import { useDisplay } from 'vuetify';
 import LibraryClientConstants from '@thzero/library_client/constants';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
-import LIbraryCommonUtility from '@thzero/library_common/utility';
+import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import { useBaseComponent } from '@thzero/library_client_vue3/components/base';
 
@@ -51,10 +51,10 @@ export default {
 		const version = ref({});
 
 		const breakpointName = computed(() => {
-			return LIbraryCommonUtility.isDev ? useDisplayI.name : '';
+			return LibraryCommonUtility.isDev ? useDisplayI.name : '';
 		});
 		const isDev = computed(() => {
-			return LIbraryCommonUtility.isDev;
+			return LibraryCommonUtility.isDev;
 		});
 
 		onMounted(async () => {

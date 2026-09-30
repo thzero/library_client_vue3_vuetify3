@@ -1,97 +1,34 @@
+<template>
+	<!-- v-model and every other attribute fall through to the base -->
+	<VtDateTimePickerBase :adapter="adapter" />
+</template>
 
 <script>
-import { getCurrentInstance } from 'vue';
-
 import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import VtDateTimePickerBase from './VtDateTimePickerBase';
 
+// dayjs ignores a parse pattern unless this plugin is loaded
+dayjs.extend(customParseFormat);
+
+const adapter = {
+	dateFormat: 'YYYY-MM-DD',
+	timeFormat: 'HH:mm',
+	format: (value, pattern) => dayjs(value).format(pattern),
+	parse: (value, pattern) => dayjs(value, pattern).toDate()
+};
+
 export default {
-	name: 'VtDatetimePicker',
-	extends: VtDatetimePickerBase,
-	setup (props) {
-		const instance = getCurrentInstance();
-
-		const convert = (value) => {
-			return dayjs(value, instance.ctx.getDefaultDateFormat() + ' ' + instance.ctx.getDefaultTimeMillisecondsFormat()).valueOf();
-		};
-		const formatDateTime = (value) => {
-			return value ? dayjs(value).format(dateTimeFormat.value) : '';
-		};
-		const getDefaultDateFormat = () => {
-			return 'YYYY-MM-DD';
-		};
-		const getDefaultTimeFormat = () => {
-			return 'HH:mm';
-		};
-		const getDefaultTimeMillisecondsFormat = () => {
-			return 'HH:mm:ss';
-		};
-		const getOutputTimestamp = (value) => {
-			return value ? dayjs(value).valueOf() : 0;
-		};
-		const init = (newVal) => {
-			if (!newVal)
-				return;
-
-			let initDateTime;
-			if (datetime.value instanceof Date)
-				initDateTime = dayjs(props.modelValue);
-			else if (typeof newVal === 'number' || newVal instanceof Number)
-				initDateTime = dayjs(props.modelValue);
-			else if (typeof newVal === 'string' || newVal instanceof String)
-				initDateTime = dayjs(props.modelValue, dateTimeFormat.value);
-
-			date.value = initDateTime.format(instance.ctx.getDefaultDateFormat());
-			time.value = initDateTime.format(instance.ctx.getDefaultTimeFormat());
-		};
-
-		return Object.assign(VtDateTimePickerBase.setup(props), {
-			convert,
-			formatDateTime,
-			getDefaultDateFormat,
-			getDefaultTimeFormat,
-			getDefaultTimeMillisecondsFormat,
-			getOutputTimestamp,
-			init,
-		});
+	name: 'VtDateTimePickerField',
+	components: {
+		VtDateTimePickerBase
 	},
-	// methods: {
-	// 	convert(value) {
-	// 		return dayjs(value, this.getDefaultDateFormat() + ' ' + this.getDefaultTimeMillisecondsFormat()).valueOf();
-	// 	},
-	// 	formatDateTime(value) {
-	// 		return value ? dayjs(value).format(this.dateTimeFormat) : '';
-	// 	},
-	// 	getDefaultDateFormat() {
-	// 		return 'YYYY-MM-DD';
-	// 	},
-	// 	getDefaultTimeFormat() {
-	// 		return 'HH:mm';
-	// 	},
-	// 	getDefaultTimeMillisecondsFormat() {
-	// 		return 'HH:mm:ss';
-	// 	},
-	// 	// eslint-disable-next-line
-	// 	getOutputTimestamp(value) {
-	// 		return value ? dayjs(value).valueOf() : 0;
-	// 	},
-	// 	init(newVal) {
-	// 		if (!newVal)
-	// 			return;
-
-	// 		let initDateTime;
-	// 		if (this.datetime instanceof Date)
-	// 			initDateTime = dayjs(this.value);
-	// 		else if (typeof newVal === 'number' || newVal instanceof Number)
-	// 			initDateTime = dayjs(this.value);
-	// 		else if (typeof newVal === 'string' || newVal instanceof String)
-	// 			initDateTime = dayjs(this.value, this.dateTimeFormat);
-
-	// 		this.date = initDateTime.format(this.getDefaultDateFormat());
-	// 		this.time = initDateTime.format(this.getDefaultTimeFormat());
-	// 	}
-	// }
+	setup () {
+		return {
+			adapter
+		};
+	}
 };
 </script>
 

@@ -1,49 +1,29 @@
+<template>
+	<!-- v-model and every other attribute fall through to the base -->
+	<VtDateTimePickerBase :adapter="adapter" />
+</template>
 
 <script>
 import { format, parse } from 'date-fns';
 
 import VtDateTimePickerBase from './VtDateTimePickerBase';
 
+const adapter = {
+	dateFormat: 'yyyy-MM-dd',
+	timeFormat: 'HH:mm',
+	format: (value, pattern) => format(value, pattern),
+	parse: (value, pattern) => parse(value, pattern, new Date())
+};
+
 export default {
 	name: 'VtDateTimePickerFieldFns',
-	extends: VtDateTimePickerBase,
-	methods: {
-		convert(value) {
-			return format(value, this.getDefaultDateFormat() + ' ' + this.getDefaultTimeMillisecondsFormat());
-		},
-		formatDateTime(value) {
-			return this.selectedDatetime ? format(value, this.dateTimeFormat) : '';
-		},
-		getDefaultDateFormat() {
-			return 'yyyy-MM-dd';
-		},
-		getDefaultTimeFormat() {
-			return 'HH:mm';
-		},
-		getDefaultTimeMillisecondsFormat() {
-			return 'HH:mm:ss';
-		},
-		// eslint-disable-next-line
-		getOutputTimestamp(value) {
-			return 0;
-		},
-		init() {
-			if (!this.value)
-				return;
-
-			let initDateTime;
-			if (this.datetime instanceof Date)
-				initDateTime = this.datetime;
-			else if (typeof this.value === 'number' || this.value instanceof Number)
-				initDateTime = parse(this.datetime);
-			else if (typeof this.value === 'string' || this.value instanceof String) {
-				// see https://stackoverflow.com/a/9436948
-				initDateTime = parse(this.datetime, this.dateTimeFormat, new Date());
-			}
-
-			this.date = format(initDateTime, this.getDefaultDateFormat());
-			this.time = format(initDateTime, this.getDefaultTimeFormat());
-		}
+	components: {
+		VtDateTimePickerBase
+	},
+	setup () {
+		return {
+			adapter
+		};
 	}
 };
 </script>

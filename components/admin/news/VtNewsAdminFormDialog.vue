@@ -32,7 +32,7 @@ export default {
 				response = await this.serviceStore.dispatcher.adminNews.updateAdminNews(correlationId, this.innerValue);
 			else
 				response = await this.serviceStore.dispatcher.adminNews.createAdminNews(correlationId, this.innerValue);
-			this.logger.debug('VNewsAdminFormDialog', 'preComplete', 'response', response, correlationId);
+			this.logger.debug('VtNewsAdminFormDialog', 'preComplete', 'response', response, correlationId);
 			return response;
 		}
 	}

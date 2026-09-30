@@ -1,5 +1,6 @@
 {
   "name": "@thzero/library_client_vue3_vuetify3",
+  "type": "module",
   "version": "0.18.47",
   "version_major": 0,
   "version_minor": 18,

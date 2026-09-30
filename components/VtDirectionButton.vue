@@ -23,7 +23,7 @@
 <script>
 import { watch } from 'vue';
 
-import LIbraryCommonUtility from '@thzero/library_common/utility';
+import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 
@@ -76,7 +76,7 @@ export default {
 		const update = (value) => {
 			// console.log('update', value);
 			// innerValue.value = value;
-			const func = LIbraryCommonUtility.debounce(async function(value) {
+			const func = LibraryCommonUtility.debounce(async function(value) {
 				// console.log('update.debounce', value);
 				innerValue.value = value;
 			}, 500);

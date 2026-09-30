@@ -1,21 +1,26 @@
 <template>
 	<v-combobox
-		v-model="select"
-		:hide-details="hide-details"
-		:readonly="readonly"
-		:disabled="disabled"
+		v-model="innerValue"
 		:error="errorI"
-		:label="$attrs.label"
+		:messages="(errorsI ?? []).map(l => l.$message)"
+		hide-details="auto"
+		:readonly="readonly"
+		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
+		:disabled="disabled"
 		:hint="hint"
+		:label="$attrs.label"
+		:delimiters="[',']"
 		class="tag-input"
+		density="compact"
 		multiple
 		chips
-		deletable-chips
+		closable-chips
+		@update:modelValue="update"
 	/>
 </template>
 
 <script>
-import { computed, nextTick, onMounted, ref, watch } from 'vue';
+import { computed } from 'vue';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 
@@ -33,6 +38,7 @@ export default {
 			default: 5
 		}
 	},
+	emits: [ 'update:modelValue' ],
 	setup (props, context) {
 		const {
 			correlationId,
@@ -55,47 +61,27 @@ export default {
 			innerValue,
 			initValue,
 			innerValueUpdate
-		} = useBaseControlEditComponent(props, context);
+		} = useBaseControlEditComponent(props, context, {
+			// the combobox needs an array, never null
+			convertValueI: (value) => {
+				return value ?? [];
+			}
+		});
 
-		const items = ref([]);
-		const select = ref(props.modelValue ? props.modelValue : []);
-		const search = ref('');
-
-		const hint = computed((item) => {
+		const hint = computed(() => {
 			return LibraryClientUtility.$trans.t('errors.tagLine.max', { max: props.max });
 		});
 
-		const paste = () => {
-			this.$nextTick(() => {
-				if (String.isNullOrEmpty(search.value))
-					return;
-				select.value.push(...search.value.split(','));
-				nextTick(() => {
-					// context.emit('input', this.search)
-					search.value = '';
-				});
-			});
-		};
-		const updateTags = () => {
-			nextTick(() => {
-				context.emit('input', select.value);
-			});
-		};
-
-		watch(() => select,
-			(value) => {
-				if (value.length <= props.max)
-					return;
-				// TODO: Check last entry to see if fits the rules...
-				nextTick(() => select.value.pop());
+		// the combobox splits pasted or typed text on commas (delimiters), so the
+		// only rule left to enforce here is the maximum number of tags
+		const update = (value) => {
+			let tags = value ?? [];
+			if (tags.length > props.max) {
+				tags = tags.slice(0, props.max);
+				innerValue.value = tags;
 			}
-		);
-
-		onMounted(async () => {
-			if (props.items)
-				innerItems.value = props.items;
-			initValue(props.modelValue);
-		});
+			innerValueUpdate(tags);
+		};
 
 		return {
 			correlationId,
@@ -119,12 +105,7 @@ export default {
 			initValue,
 			innerValueUpdate,
 			hint,
-			items,
-			paste,
-			search,
-			select,
-			text,
-			updateTags
+			update
 		};
 	}
 };

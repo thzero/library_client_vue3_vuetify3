@@ -23,7 +23,7 @@ import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/compo
 import { useVuetifyTextInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputTextProps';
 
 export default {
-	name: 'VtTextArea2',
+	name: 'VtTextArea',
 	props: {
 		...useBaseControlEditProps,
 		...useVuetifyInputProps,

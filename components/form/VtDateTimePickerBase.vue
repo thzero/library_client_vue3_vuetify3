@@ -3,90 +3,83 @@
 		v-model="display"
 		:width="dialogWidth"
 	>
-		<template #activator="{ on }">
+		<template #activator="{ props: activatorProps }">
 			<v-text-field
-				v-bind="textFieldProps"
+				v-bind="mergeProps(activatorProps, $attrs, textFieldProps ?? {})"
 				:disabled="disabled"
 				:loading="loading"
 				:label="label"
-				:value="formattedDateTime"
+				:model-value="formattedDateTime"
 				readonly
-				v-on="on"
-			>
-				<template #progress>
-					<slot name="progress">
-						<v-progress-linear
-							color="primary"
-							indeterminate
-							absolute
-							height="2"
-						/>
-					</slot>
-				</template>
-			</v-text-field>
+			/>
 		</template>
 
 		<v-card>
 			<v-card-text class="px-0 py-0">
 				<v-tabs
 					v-model="activeTab"
-					fixed-tabs
+					grow
 				>
-					<v-tab key="calendar">
+					<v-tab value="calendar">
 						<slot name="dateIcon">
-							<v-icon>event</v-icon>
+							<v-icon>mdi-calendar</v-icon>
 						</slot>
 					</v-tab>
 					<v-tab
-						key="timer"
-						:disabled="dateSelected"
+						value="timer"
+						:disabled="!date"
 					>
 						<slot name="timeIcon">
-							<v-icon>access_time</v-icon>
+							<v-icon>mdi-clock-outline</v-icon>
 						</slot>
 					</v-tab>
-					<v-tab-item key="calendar">
+				</v-tabs>
+				<v-window v-model="activeTab">
+					<v-window-item value="calendar">
 						<v-date-picker
 							v-model="date"
-							v-bind="datePickerProps"
-							full-width
-							@input="showTimePicker"
+							v-bind="datePickerProps ?? {}"
+							width="100%"
+							@update:model-value="showTimePicker"
 						/>
-					</v-tab-item>
-					<v-tab-item key="timer">
-						<v-time-picker
-							ref="timerRef"
+					</v-window-item>
+					<v-window-item value="timer">
+						<!-- a native time input: v-time-picker is not in core Vuetify for every 3.x release -->
+						<v-text-field
 							v-model="time"
-							class="v-time-picker-custom"
-							v-bind="timePickerProps"
-							full-width
+							v-bind="timePickerProps ?? {}"
+							class="pa-4"
+							type="time"
+							hide-details
 						/>
-					</v-tab-item>
-				</v-tabs>
+					</v-window-item>
+				</v-window>
 			</v-card-text>
 			<v-card-actions>
 				<v-spacer />
 				<slot
 					name="actions"
-					:parent="this"
+					:cancel="cancelHandler"
+					:clear="clearHandler"
+					:ok="okHandler"
 				>
 					<v-btn
-						color="primary lighten-1"
-						text
+						color="primary"
+						variant="text"
 						@click="clearHandler"
 					>
 						{{ clearText }}
 					</v-btn>
 					<v-btn
-						color="primary lighten-1"
-						text
+						color="primary"
+						variant="text"
 						@click="cancelHandler"
 					>
 						{{ cancelText }}
 					</v-btn>
 					<v-btn
-						color="green darken-1"
-						text
+						color="green-darken-1"
+						variant="text"
 						@click="okHandler"
 					>
 						{{ okText }}
@@ -98,23 +91,33 @@
 </template>
 
 <script>
-import { computed, getCurrentInstance, ref, watch } from 'vue';
+import { computed, mergeProps, ref, watch } from 'vue';
 
 const DEFAULT_CANCEL_TEXT = 'CANCEL';
 const DEFAULT_CLEAR_TEXT = 'CLEAR';
-const DEFAULT_DATE = '';
 const DEFAULT_DIALOG_WIDTH = 340;
 const DEFAULT_OK_TEXT = 'OK';
-const DEFAULT_TIME = '00:00:00';
+const DEFAULT_TIME = '00:00';
 const OUTPUT_TYPE_DATE = 'date';
 const OUTPUT_TYPE_TIMESTAMP = 'timestamp';
 
-import baseControlEdit from '@thzero/library_client_vue3/components/baseControlEdit';
+const pad = (n) => String(n).padStart(2, '0');
 
+// The date library is supplied by the component that wraps this one
+// (VtDateTimePickerField for dayjs, VtDateTimePickerFieldFns for date-fns) as
+// an adapter:
+//   dateFormat, timeFormat    default display patterns in that library's syntax
+//   format(date, pattern)     Date -> string
+//   parse(value, pattern)     string -> Date (an invalid Date when it cannot)
 export default {
 	name: 'VtDateTimePickerBase',
-	extends: baseControlEdit,
+	// attributes (error, messages, density, hint...) go to the text field, not the dialog
+	inheritAttrs: false,
 	props: {
+		adapter: {
+			type: Object,
+			required: true
+		},
 		cancelText: {
 			type: String,
 			default: DEFAULT_CANCEL_TEXT
@@ -135,28 +138,36 @@ export default {
 			type: Object,
 			default: null
 		},
-		disabled: {
-			type: Boolean
-		},
 		dialogWidth: {
 			type: Number,
 			default: DEFAULT_DIALOG_WIDTH
+		},
+		disabled: {
+			type: Boolean,
+			default: false
 		},
 		label: {
 			type: String,
 			default: ''
 		},
 		loading: {
-			type: Boolean
+			type: Boolean,
+			default: false
+		},
+		// must be included in props
+		modelValue: {
+			type: [Date, String, Number],
+			default: null
 		},
 		okText: {
 			type: String,
 			default: DEFAULT_OK_TEXT
 		},
+		// 'date' emits the formatted string, 'timestamp' emits epoch milliseconds
 		outputType: {
 			type: String,
 			default: OUTPUT_TYPE_DATE,
-			validator: (val) => [OUTPUT_TYPE_DATE, OUTPUT_TYPE_TIMESTAMP].includes(val)
+			validator: (val) => [ OUTPUT_TYPE_DATE, OUTPUT_TYPE_TIMESTAMP ].includes(val)
 		},
 		textFieldProps: {
 			type: Object,
@@ -169,222 +180,102 @@ export default {
 		timePickerProps: {
 			type: Object,
 			default: null
-		},
-		timePickerProps: {
-			type: Object,
-			default: null
 		}
 	},
-	setup (props) {
-		const instance = getCurrentInstance();
-
-		const activeTab = ref(0);
-		const date = ref(DEFAULT_DATE);
+	emits: [ 'update:modelValue' ],
+	setup (props, context) {
+		const activeTab = ref('calendar');
+		const date = ref(null);
 		const display = ref(false);
-		const innerOutputType = ref(props.outputType);
 		const time = ref(DEFAULT_TIME);
 
-		const dateSelected = computed(() => {
-			return !date.value;
-		});
 		const dateTimeFormat = computed(() => {
-			return (dateFormat.value ? dateFormat.value : instance.ctx.getDefaultDateFormat()) + ' ' + (timeFormat.value ? timeFormat.value : instance.ctx.getDefaultTimeFormat());
-		});
-		const formattedDateTime = computed(() => {
-			return instance.ctx.getOutputDateTime(selectedDateTime.value);
+			return (props.dateFormat ?? props.adapter.dateFormat) + ' ' + (props.timeFormat ?? props.adapter.timeFormat);
 		});
 		const selectedDateTime = computed(() => {
-			if (date.value && time.value) {
-				let datetimeString = date.value + ' ' + time.value;
-				if (time.value.length === 5)
-					datetimeString += ':00';
+			if (!date.value)
+				return null;
 
-				const date = instance.ctx.convert(datetimeString);
-				return date;
-			}
-
-			return null;
+			const [ hours, minutes ] = (time.value || DEFAULT_TIME).split(':').map(Number);
+			const value = new Date(date.value);
+			value.setHours(hours || 0, minutes || 0, 0, 0);
+			return value;
+		});
+		const formattedDateTime = computed(() => {
+			return selectedDateTime.value ? props.adapter.format(selectedDateTime.value, dateTimeFormat.value) : '';
 		});
 
-		const cancelHandler = () => {
-			instance.ctx.resetPicker();
+		const toDate = (value) => {
+			if (value === null || value === undefined || value === '')
+				return null;
+			if (value instanceof Date)
+				return value;
+			if (typeof value === 'number')
+				return new Date(value);
+			if (typeof value === 'string')
+				return props.adapter.parse(value, dateTimeFormat.value);
+			return null;
 		};
-		const clearHandler = () => {
-			instance.ctx.resetPicker();
-			date.value = DEFAULT_DATE;
-			time.value = DEFAULT_TIME;
-			instance.ctx.$emit('input', null);
+		const init = (value) => {
+			const initDateTime = toDate(value);
+			if (!initDateTime || isNaN(initDateTime.getTime())) {
+				date.value = null;
+				time.value = DEFAULT_TIME;
+				return;
+			}
+
+			date.value = new Date(initDateTime.getFullYear(), initDateTime.getMonth(), initDateTime.getDate());
+			time.value = pad(initDateTime.getHours()) + ':' + pad(initDateTime.getMinutes());
 		};
-		// eslint-disable-next-line
-		const convert = (value) => {
-			return '';
+		const output = (value) => {
+			if (!value)
+				return null;
+			return props.outputType === OUTPUT_TYPE_TIMESTAMP ? value.getTime() : props.adapter.format(value, dateTimeFormat.value);
 		};
-		// eslint-disable-next-line
-		const formatDateTime = (value) => {
-			return '';
-		};
-		const getDefaultDateFormat = () => {
-			return '';
-		};
-		const getDefaultTimeFormat = () => {
-			return '';
-		};
-		const getDefaultTimeMillisecondsFormat = () => {
-			return '';
-		};
-		const getOutputDateTime = (value) => {
-			return instance.ctx.formatDateTime(value);
-		};
-		// eslint-disable-next-line
-		const getOutputTimestamp = (value) => {
-			return 0;
-		};
-		const okHandler = () => {
-			const output = innerOutputType.value == OUTPUT_TYPE_DATE ? instance.ctx.getOutputDateTime(selectedDateTime.value) : instance.ctx.getOutputTimestamp(selectedDateTime.value);
-			instance.ctx.$emit('input', output);
-			if (instance.ctx.change)
-				instance.ctx.change();
-			instance.ctx.resetPicker();
+		const update = (value) => {
+			if (props.change)
+				props.change(value);
+			context.emit('update:modelValue', value);
 		};
 		const resetPicker = () => {
 			display.value = false;
-			activeTab.value = 0;
-			if (instance.ctx.$refs.timer)
-				instance.ctx.$refs.timer.selectingHour = true;
+			activeTab.value = 'calendar';
+		};
+
+		const cancelHandler = () => {
+			// discard the unsaved selection
+			init(props.modelValue);
+			resetPicker();
+		};
+		const clearHandler = () => {
+			date.value = null;
+			time.value = DEFAULT_TIME;
+			update(null);
+			resetPicker();
+		};
+		const okHandler = () => {
+			update(output(selectedDateTime.value));
+			resetPicker();
 		};
 		const showTimePicker = () => {
-			activeTab.value = 1;
+			activeTab.value = 'timer';
 		};
 
-		watch(() => props.outputType,
-			(value) => {
-				innerOutputType.value = value;
-			}
-		);
+		watch(() => props.modelValue, (value) => init(value), { immediate: true });
 
-		return Object.assign(baseControlEdit.setup(props), {
+		return {
 			activeTab,
 			date,
 			display,
-			dateSelected,
-			dateTimeFormat,
 			formattedDateTime,
-			innerOutputType,
-			selectedDateTime,
 			time,
 			cancelHandler,
 			clearHandler,
-			convert,
-			formatDateTime,
-			getDefaultDateFormat,
-			getDefaultTimeFormat,
-			getDefaultTimeMillisecondsFormat,
-			getOutputDateTime,
-			getOutputTimestamp,
+			mergeProps,
 			okHandler,
-			resetPicker,
 			showTimePicker
-		});
-	},
-	// data: () => ({
-	// 	display: false,
-	// 	activeTab: 0,
-	// 	date: DEFAULT_DATE,
-	// 	innerOutputType: OUTPUT_TYPE_DATE,
-	// 	time: DEFAULT_TIME
-	// }),
-	// computed: {
-	// 	dateSelected() {
-	// 		return !this.date;
-	// 	},
-	// 	dateTimeFormat() {
-	// 		return (this.dateFormat ? this.dateFormat : this.getDefaultDateFormat()) + ' ' + (this.timeFormat ? this.timeFormat : this.getDefaultTimeFormat());
-	// 	},
-	// 	formattedDateTime() {
-	// 		return this.getOutputDateTime(this.selectedDateTime);
-	// 	},
-	// 	selectedDateTime() {
-	// 		if (this.date && this.time) {
-	// 			let datetimeString = this.date + ' ' + this.time;
-	// 			if (this.time.length === 5)
-	// 				datetimeString += ':00';
-
-	// 			const date = this.convert(datetimeString);
-	// 			return date;
-	// 		}
-
-	// 		return null;
-	// 	}
-	// },
-	// watch: {
-	// 	outputType(newVal) {
-	// 		this.innerOutputType = newVal;
-	// 	},
-	// 	value(newVal) {
-	// 		this.init(newVal);
-	// 	}
-	// },
-	// created() {
-	// 	this.innerOutputType = this.outputType;
-	// 	this.init(this.value);
-	// },
-	// mounted() {
-	// 	this.init(this.value);
-	// },
-	// methods: {
-	// 	cancelHandler() {
-	// 		this.resetPicker();
-	// 	},
-	// 	clearHandler() {
-	// 		this.resetPicker();
-	// 		this.date = DEFAULT_DATE;
-	// 		this.time = DEFAULT_TIME;
-	// 		this.$emit('input', null);
-	// 	},
-	// 	// eslint-disable-next-line
-	// 	convert(value) {
-	// 		return '';
-	// 	},
-	// 	// eslint-disable-next-line
-	// 	formatDateTime(value) {
-	// 		return '';
-	// 	},
-	// 	getDefaultDateFormat() {
-	// 		return '';
-	// 	},
-	// 	getDefaultTimeFormat() {
-	// 		return '';
-	// 	},
-	// 	getDefaultTimeMillisecondsFormat() {
-	// 		return '';
-	// 	},
-	// 	getOutputDateTime(value) {
-	// 		return this.formatDateTime(value);
-	// 	},
-	// 	// eslint-disable-next-line
-	// 	getOutputTimestamp(value) {
-	// 		return 0;
-	// 	},
-	// 	// eslint-disable-next-line
-	// 	init(value) {
-	// 	},
-	// 	okHandler() {
-	// 		const output = this.innerOutputType == OUTPUT_TYPE_DATE ? this.getOutputDateTime(this.selectedDateTime) : this.getOutputTimestamp(this.selectedDateTime);
-	// 		this.$emit('input', output);
-	// 		if (this.change)
-	// 			this.change();
-	// 		this.resetPicker();
-	// 	},
-	// 	resetPicker() {
-	// 		this.display = false;
-	// 		this.activeTab = 0;
-	// 		if (this.$refs.timer)
-	// 			this.$refs.timer.selectingHour = true;
-	// 	},
-	// 	showTimePicker() {
-	// 		this.activeTab = 1;
-	// 	}
-	// }
+		};
+	}
 };
 </script>
 

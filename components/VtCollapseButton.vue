@@ -25,7 +25,7 @@
 <script>
 import { getCurrentInstance, onMounted, watch } from 'vue';
 
-import LIbraryCommonUtility from '@thzero/library_common/utility';
+import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import baseControlEdit from '@thzero/library_client_vue3/components/baseControlEdit';
 
@@ -51,7 +51,7 @@ export default {
 			this.update(this, value);
 			this.$emit('click');
 		};
-		const update = () => LIbraryCommonUtility.debounce(async function(self, value) {
+		const update = () => LibraryCommonUtility.debounce(async function(self, value) {
 			self.innerValue = value;
 		}, 500);
 
@@ -86,7 +86,7 @@ export default {
 	// 		this.update(this, value);
 	// 		this.$emit('click');
 	// 	},
-	// 	update: LIbraryCommonUtility.debounce(async function(self, value) {
+	// 	update: LibraryCommonUtility.debounce(async function(self, value) {
 	// 		self.innerValue = value;
 	// 	}, 500)
 	// }
