@@ -25,9 +25,13 @@ if (!window.matchMedia) {
 		dispatchEvent() { return false; }
 	});
 }
+// the overlays read it bare, behind ?.
+if (!('visualViewport' in globalThis))
+	globalThis.visualViewport = undefined;
 
 // the services the base composables resolve through the injector
 const services = {
+	[LibraryClientConstants.InjectorKeys.SERVICE_CONFIG]: { get: () => null },
 	[LibraryClientConstants.InjectorKeys.SERVICE_LOGGER]: { debug() {}, error() {}, exception() {}, info2() {} }
 };
 LibraryClientUtility.$injector = { getService: (key) => services[key] ?? null };

@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="position-relative">
 		<div class="headline text-center text-h6">
 			{{ label }}
 		</div>
@@ -140,8 +140,9 @@
 			<slot name="after"/>
 		</div> -->
 		<v-overlay
-			absolute
-			:value="overlayLoading"
+			contained
+			persistent
+			:model-value="overlayLoading"
 		>
 			<v-card
 				color="primary"

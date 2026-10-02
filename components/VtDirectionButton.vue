@@ -73,19 +73,16 @@ export default {
 			update(value);
 			context.emit('click');
 		};
+		// one debounce per instance; a new one per click debounced nothing
+		const debounced = LibraryCommonUtility.debounce((value) => {
+			innerValue.value = value;
+		}, 500);
 		const update = (value) => {
-			// console.log('update', value);
-			// innerValue.value = value;
-			const func = LibraryCommonUtility.debounce(async function(value) {
-				// console.log('update.debounce', value);
-				innerValue.value = value;
-			}, 500);
-			func(value);
+			debounced(value);
 		};
 
 		watch(() => innerValue.value,
 			(value) => {
-				console.log('update:modelValue', value);
 				context.emit('update:modelValue', value);
 			}
 		);

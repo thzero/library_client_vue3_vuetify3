@@ -2,7 +2,8 @@
 	<v-overlay
 		opacity="1.0"
 		z-index="5"
-		:value="!signal"
+		persistent
+		:model-value="!signal"
 	>
 		<v-container>
 			<v-row

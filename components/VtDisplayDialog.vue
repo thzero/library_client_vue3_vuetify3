@@ -47,6 +47,7 @@ import { baseDisplayDialogBaseProps } from '@thzero/library_client_vue3/componen
 
 export default {
 	name: 'VtDisplayDialog',
+	emits: ['cancel', 'ok'],
 	props: {
 		...baseDisplayDialogBaseProps
 	},
