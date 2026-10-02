@@ -248,3 +248,16 @@ describe('form listings', () => {
 		expect(Component.emits).toEqual(expect.arrayContaining([ 'close', 'delete', 'error', 'ok', 'open', 'reset' ]));
 	});
 });
+
+describe('the Temp date pickers', () => {
+	it.each([
+		[ 'VtDateTimePickerFieldTemp', () => import('../components/form/VtDateTimePickerFieldTemp') ],
+		[ 'VtDateTimePickerFieldWithValidationTemp', () => import('../components/form/VtDateTimePickerFieldWithValidationTemp') ]
+	])('%s defaults to a date, not a string', async (name, load) => {
+		const Component = (await load()).default;
+		const wrapper = mount(Component, { props: { modelValue: null } });
+
+		// Date() without new returns a string like "Wed Oct 01 2026 ..."
+		expect(wrapper.vm.convertValue(null)).toBeInstanceOf(Date);
+	});
+});

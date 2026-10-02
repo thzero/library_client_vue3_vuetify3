@@ -104,7 +104,7 @@ export default {
 			innerValueUpdate
 		} = useBaseControlEditComponent(props, context, {
 			convertValueI: (value) => {
-				return value ? value : props.defaultDate === true ? Date() : null;
+				return value ? value : props.defaultDate === true ? new Date() : null;
 			}}
 		);
 
