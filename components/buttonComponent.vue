@@ -6,22 +6,7 @@ import LibraryClientConstants from '@thzero/library_client/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
 import LibraryCommonUtility from '@thzero/library_common/utility/index';
 
-import { useBaseComponent } from '@thzero/library_client_vue3/components/base';
-
 export function useButtonComponent(props, context, options) {
-	const {
-		correlationId,
-		error,
-		hasFailed,
-		hasSucceeded,
-		initialize,
-		logger,
-		noBreakingSpaces,
-		notImplementedError,
-		success,
-		successResponse
-	} = useBaseComponent(props, context, options);
-
 	const serviceConfig = LibraryClientUtility.$injector.getService(LibraryClientConstants.InjectorKeys.SERVICE_CONFIG);
 
     let components = serviceConfig.get('components');
