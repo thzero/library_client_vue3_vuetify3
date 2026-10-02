@@ -12,20 +12,13 @@ const modules = import.meta.glob([
 	'../openSource.js'
 ]);
 
-// Known not to load, and waiting on the decision whether to port or delete them
-// (TODO_CLIENT.md, Decisions 1). it.fails passes while they stay broken; fixing
-// one makes its test fail, which is the prompt to take it off this list.
+// Known not to load from these tests, though fixed. The tests take library_client_vue3
+// from npm, and these two import admin composables added to it on 1 Oct 2026; they
+// load once that is published. it.fails passes while they cannot load; when they
+// can, the test fails, which is the prompt to take them off this list.
 const broken = {
-	// AUDIT_CLIENT.md CA1: imports of VMarkdown, VMarkdownEditor, VSelectWithValidation
-	// and admin baseListing files that do not exist
-	'../components/admin/news/VtNewsAdminFormDialog.vue': 'CA1',
-	'../components/admin/news/baseListing.vue': 'CA1',
-	'../components/admin/users/VtUsersAdminFormDialog.vue': 'CA1',
-	'../components/admin/users/baseListing.vue': 'CA1',
-	// imports VtUsersAdminFormDialog
-	'../components/admin/users/EditDialog.vue': 'CA1',
-	// AUDIT_CLIENT.md CA3: extends baseControlEdit, which is never imported
-	'../components/form/VtSelectAutoCompleteWithValidation.vue': 'CA3'
+	'../components/admin/news/baseListing.vue': 'needs library_client_vue3 > 0.18 published',
+	'../components/admin/users/baseListing.vue': 'needs library_client_vue3 > 0.18 published'
 };
 
 const keys = Object.keys(modules);
