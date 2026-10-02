@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 
 import VtConfirmationDialog from '@thzero/library_client_vue3_vuetify3/components/VtConfirmationDialog';
 
@@ -98,7 +98,8 @@ export default {
 	props: {
 		...baseFormDialogControlProps
 	},
-	emits: ['close', 'error', 'ok', 'open'],
+	// everything the listing composable emits, not only what the template uses
+	emits: ['close', 'delete', 'error', 'ok', 'open', 'reset'],
 	setup (props, context) {
 		const {
 			correlationId,

@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import { computed } from 'vue';
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
