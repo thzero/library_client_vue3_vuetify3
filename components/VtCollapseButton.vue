@@ -1,11 +1,11 @@
 <template>
 	<v-btn
-		depressed
+		variant="flat"
 		style="min-width: 0px"
 		@click="click(!innerValue)"
 	>
 		<span
-			v-if="$vuetify.display.smAndUp"
+			v-if="smAndUp"
 		>
 			{{ label }}
 		</span>
@@ -23,15 +23,15 @@
 </template>
 
 <script>
-import { getCurrentInstance, onMounted, watch } from 'vue';
+import { watch } from 'vue';
+import { useDisplay } from 'vuetify';
 
 import LibraryCommonUtility from '@thzero/library_common/utility';
 
-import baseControlEdit from '@thzero/library_client_vue3/components/baseControlEdit';
+import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 
 export default {
 	name: 'VtCollapseButton',
-	extends: baseControlEdit,
 	props: {
 		label: {
 			type: String,
@@ -43,53 +43,77 @@ export default {
 			default: null
 		}
 	},
-	setup (props) {
-		const instance = getCurrentInstance();
+	emits: [ 'click', 'update:modelValue' ],
+	setup (props, context) {
+		const {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			successResponse,
+			isSaving,
+			serverErrors,
+			setErrors,
+			convertValue,
+			errorI,
+			errorsI,
+			hideDetails,
+			innerValue,
+			initValue,
+			innerValueUpdate
+		} = useBaseControlEditComponent(props, context);
 
-		const click = (value) => {
-			//innerValue = value
-			this.update(this, value);
-			this.$emit('click');
-		};
-		const update = () => LibraryCommonUtility.debounce(async function(self, value) {
-			self.innerValue = value;
+		const { smAndUp } = useDisplay();
+
+		// one debounce per instance
+		const debounced = LibraryCommonUtility.debounce((value) => {
+			innerValue.value = value;
 		}, 500);
+		const update = (value) => {
+			debounced(value);
+		};
+		const click = (value) => {
+			update(value);
+			context.emit('click');
+		};
 
-		watch(() => props.modelValue,
+		watch(() => innerValue.value,
 			(value) => {
-				dialogSignal.value = value;
-				instance.ctx.initValue(newVal);
+				context.emit('update:modelValue', value);
 			}
 		);
 
-		onMounted(async () => {
-			instance.ctx.initValue(newVal);
-		});
-
-		return Object.assign(baseControlEdit.setup(props), {
+		return {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			successResponse,
+			isSaving,
+			serverErrors,
+			setErrors,
+			convertValue,
+			errorI,
+			errorsI,
+			hideDetails,
+			innerValue,
+			initValue,
+			innerValueUpdate,
+			smAndUp,
 			click,
 			update
-		});
-	},
-	// watch: {
-	// 	// Handles external model changes.
-	// 	value(newVal) {
-	// 		this.initValue(newVal);
-	// 	}
-	// },
-	// mounted() {
-	// 	this.initValue(this.value);
-	// },
-	// methods: {
-	// 	click(value) {
-	// 		//innerValue = value
-	// 		this.update(this, value);
-	// 		this.$emit('click');
-	// 	},
-	// 	update: LibraryCommonUtility.debounce(async function(self, value) {
-	// 		self.innerValue = value;
-	// 	}, 500)
-	// }
+		};
+	}
 };
 </script>
 
