@@ -59,11 +59,11 @@ export function useDisplayComponent(props, context, options) {
 	const smAndUp = computed(() => {
 		return unref(unref(useDisplayI).smAndUp);
 	});
-	const xlndDown = computed(() => {
-		return unref(unref(useDisplayI).xlndDown);
+	const xlAndDown = computed(() => {
+		return unref(unref(useDisplayI).xlAndDown);
 	});
-	const xlndUp = computed(() => {
-		return unref(unref(useDisplayI).xlndUp);
+	const xlAndUp = computed(() => {
+		return unref(unref(useDisplayI).xlAndUp);
 	});
 	const width = computed(() => {
 		return unref(unref(useDisplayI).width);
@@ -85,8 +85,8 @@ export function useDisplayComponent(props, context, options) {
 		name,
 		smAndDown,
 		smAndUp,
-		xlndDown,
-		xlndUp,
+		xlAndDown,
+		xlAndUp,
 		width
 	};
 };
