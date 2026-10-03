@@ -12,14 +12,12 @@ const modules = import.meta.glob([
 	'../openSource.js'
 ]);
 
-// Known not to load from these tests, though fixed. The tests take library_client_vue3
-// from npm, and these two import admin composables added to it on 1 Oct 2026; they
-// load once that is published. it.fails passes while they cannot load; when they
-// can, the test fails, which is the prompt to take them off this list.
-const broken = {
-	'../components/admin/news/baseListing.vue': 'needs library_client_vue3 > 0.18 published',
-	'../components/admin/users/baseListing.vue': 'needs library_client_vue3 > 0.18 published'
-};
+// Known not to load from these tests, though fixed: a module that imports something
+// not yet published to npm, which is where the tests take their dependencies from.
+// it.fails passes while one cannot load; when it can, the test fails, which is the
+// prompt to take it off this list. Empty since library_client_vue3 0.19.2 shipped the
+// admin composables the two admin listings import.
+const broken = {};
 
 const keys = Object.keys(modules);
 
