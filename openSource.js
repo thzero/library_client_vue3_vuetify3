@@ -30,10 +30,38 @@ export default () => {
         },
         {
             category: 'client',
-            name: 'vee-validate',
-            url: 'https://github.com/logaretm/vee-validate',
+            name: '@vuelidate/core',
+            url: 'https://github.com/vuelidate/vuelidate',
             licenseName: 'MIT',
-            licenseUrl: 'https://github.com/logaretm/vee-validate/blob/master/LICENSE'
+            licenseUrl: 'https://github.com/vuelidate/vuelidate/blob/HEAD/LICENSE'
+        },
+        {
+            category: 'client',
+            name: '@vuelidate/validators',
+            url: 'https://github.com/vuelidate/vuelidate',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/vuelidate/vuelidate/blob/HEAD/LICENSE'
+        },
+        {
+            category: 'client',
+            name: '@vuepic/vue-datepicker',
+            url: 'https://github.com/Vuepic/vue-datepicker',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/Vuepic/vue-datepicker/blob/HEAD/LICENSE'
+        },
+        {
+            category: 'client',
+            name: 'date-fns',
+            url: 'https://github.com/date-fns/date-fns',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/date-fns/date-fns/blob/HEAD/LICENSE.md'
+        },
+        {
+            category: 'client',
+            name: 'dayjs',
+            url: 'https://github.com/iamkun/dayjs',
+            licenseName: 'MIT',
+            licenseUrl: 'https://github.com/iamkun/dayjs/blob/dev/LICENSE'
         },
         {
             category: 'client',
@@ -55,6 +83,6 @@ export default () => {
             url: 'https://github.com/vuetifyjs/vuetify',
             licenseName: 'MIT',
             licenseUrl: 'https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md'
-        },
+        }
     ];
 }

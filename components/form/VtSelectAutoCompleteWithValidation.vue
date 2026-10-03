@@ -1,28 +1,20 @@
 <template>
-	<v-select
+	<v-autocomplete
 		v-model="innerValue"
 		:error="errorI"
-		hide-details="auto"
+		:messages="(errorsI ?? []).map(l => l.$message)"
+		:item-title="text"
+		:item-value="itemValue"
 		:items="innerItems"
-		:success="valid"
-		item-text="name"
-		item-value="id"
 		:menu-props="innerProps"
+		hide-details="auto"
+		:multiple="multiple"
+		:readonly="readonly"
+		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:label="$attrs.label"
 		density="compact"
 		@update:modelValue="innerValueUpdate"
-	>
-		<template v-slot:details>
-			<div
-				v-for="error of errorsI"
-				:key="error.$uid"
-			>
-				<strong>{{ error.$message }}</strong>
-				<!--<small> on </small>
-				<strong>{{ error.$property }}</strong>-->
-			</div>
-		</template>
-	</v-select>
+	/>
 </template>
 
 <script>
@@ -33,14 +25,16 @@ import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/
 import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputProps';
 import { useVuetifySelectInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputSelectProps';
 
+// VtSelectWithValidation with typing to filter the list. It extended an unimported
+// baseControlEdit, so it never loaded, and it rendered a v-select.
 export default {
 	name: 'VtSelectAutoCompleteWithValidation',
-	extends: baseControlEdit,
 	props: {
 		...useBaseControlEditProps,
 		...useVuetifyInputProps,
 		...useVuetifySelectInputProps
 	},
+	emits: [ 'update:modelValue' ],
 	setup (props, context) {
 		const {
 			correlationId,
@@ -63,14 +57,19 @@ export default {
 			innerValue,
 			initValue,
 			innerValueUpdate
-		} = useBaseControlEditComponent(props, context);
+		} = useBaseControlEditComponent(props, context, {
+			vidOverride: props.vidOverride
+		});
 
 		const innerProps = ref({ zIndex: 1000 });
 		const innerItems = ref([]);
 
+		// displayName when an item has one, else the itemTitle field
 		const text = (item) => {
-			return item.displayName ? item.displayName : item.name;
-		}
+			if (!item)
+				return '';
+			return item.displayName ? item.displayName : item[props.itemTitle];
+		};
 
 		onMounted(async () => {
 			if (props.items)

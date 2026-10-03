@@ -22,8 +22,6 @@
 </template>
 
 <script>
-import { computed } from 'vue';
-
 import { useBaseVersionComponent } from '@thzero/library_client_vue3/components/baseVersion';
 
 export default {
@@ -48,10 +46,6 @@ export default {
 			successResponse,
 			version
 		} = useBaseVersionComponent(props, context);
-
-		const innerVersion = computed(() => {
-			return props.version;
-		});
 
 		return {
 			correlationId,

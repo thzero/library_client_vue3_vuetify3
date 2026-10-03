@@ -1,91 +1,97 @@
 <template>
 	<VtDateTimePickerField
 		v-model="innerValue"
-		slot-scope="{ errors, valid }"
-		:error-messages="errors"
-		:success="valid"
-		v-bind="$attrs"
+		:error="errorI"
+		:messages="(errorsI ?? []).map(l => l.$message)"
+		hide-details="auto"
+		:disabled="disabled"
+		:hint="$attrs.hint"
+		:label="$attrs.label"
+		density="compact"
 		:date-format="dateFormat"
-		:output-type="innerOutputType"
+		:output-type="outputType"
 		:time-format="timeFormat"
 		:cancel-text="$t('buttons.cancel')"
 		:clear-text="$t('buttons.clear')"
 		:ok-text="$t('buttons.ok')"
-		v-on="$listeners"
+		@update:model-value="innerValueUpdate"
 	/>
 </template>
 
 <script>
-import VtDateTimePickerField from './VtDateTimePickerField';
+import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
+import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
 
-import base from '@thzero/library_client_vue3/components/base';
+import VtDateTimePickerField from './VtDateTimePickerField';
 
 export default {
 	name: 'VtDateTimePickerFieldWithValidation',
 	components: {
 		VtDateTimePickerField
 	},
-	extends: base,
 	props: {
-		// must be included in props
-		value: {
-			type: [Date, String, Number],
-			default: null
-		},
+		...useBaseControlEditProps,
 		dateFormat: {
 			type: String,
 			default: null
 		},
+		// 'date' emits the formatted string, 'timestamp' emits epoch milliseconds
 		outputType: {
 			type: String,
 			default: 'date'
 		},
-		rules: {
-			type: [Object, String],
-			default: ''
-		},
-		rulesBail: {
-			type: Boolean,
-			default: true
-		},
-		rulesImmediate: {
-			type: Boolean,
-			default: false
-		},
 		timeFormat: {
 			type: String,
 			default: null
-		},
-		vid: {
-			type: String,
-			default: ''
 		}
 	},
-	data: () => ({
-		innerOutputType: 'date',
-		innerValue: ''
-	}),
-	watch: {
-		// Handles internal model changes.
-		innerValue(newVal) {
-			this.$emit('input', newVal);
-		},
-		outputType(newVal) {
-			this.innerOutputType = newVal;
-		},
-		// Handles external model changes.
-		value(newVal) {
-			this.innerValue = newVal;
-		}
-	},
-	created() {
-		this.innerOutputType = this.outputType;
-		this.innerValue = this.value;
-	},
-	methods: {
-		validation() {
-			return this.$refs.prv;
-		}
+	emits: [ 'update:modelValue' ],
+	setup (props, context) {
+		const {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			successResponse,
+			isSaving,
+			serverErrors,
+			setErrors,
+			convertValue,
+			errorI,
+			errorsI,
+			hideDetails,
+			innerValue,
+			initValue,
+			innerValueUpdate
+		} = useBaseControlEditComponent(props, context);
+
+		return {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			successResponse,
+			isSaving,
+			serverErrors,
+			setErrors,
+			convertValue,
+			errorI,
+			errorsI,
+			hideDetails,
+			innerValue,
+			initValue,
+			innerValueUpdate
+		};
 	}
 };
 </script>

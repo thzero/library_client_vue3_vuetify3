@@ -1,31 +1,23 @@
 <template>
 	<v-autocomplete
 		v-model="innerValue"
-		:error-messages="errors"
-		:success="valid"
+		v-model:search="search"
+		:error="errorI"
+		:messages="(errorsI ?? []).map(l => l.$message)"
 		:loading="loading"
 		:items="innerItems"
-		:search-input.sync="search"
-		cache-items
-		item-text="name"
-		item-value="id"
+		:item-title="itemTitle"
+		:item-value="itemValue"
+		hide-details="auto"
+		no-filter
 		:readonly="readonly"
 		:disabled="disabled"
+		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:hint="$attrs.hint"
 		:label="$attrs.label"
+		density="compact"
 		@update:modelValue="innerValueUpdate"
-	>
-		<template v-slot:details>
-			<div
-				v-for="error of errorsI"
-				:key="error.$uid"
-			>
-				<strong>{{ error.$message }}</strong>
-				<!--<small> on </small>
-				<strong>{{ error.$property }}</strong>-->
-			</div>
-		</template>
-	</v-autocomplete>
+	/>
 </template>
 
 <script>
@@ -35,25 +27,29 @@ import LibraryCommonUtility from '@thzero/library_common/utility';
 
 import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/baseControlEditProps';
+import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/components/form/inputProps';
 
+// Items come from querySelection(search) as the user types. It used Vuetify 2's
+// :search-input.sync, so the search never reached the watcher and no items ever loaded.
 export default {
 	name: 'VtAutoCompleteWithValidation',
 	props: {
 		...useBaseControlEditProps,
-		items: {
-			type: [Object, Array],
-			default: null
+		...useVuetifyInputProps,
+		itemTitle: {
+			type: String,
+			default: 'name'
+		},
+		itemValue: {
+			type: String,
+			default: 'id'
 		},
 		querySelection: {
 			type: Function,
 			default: null
-		},
-		// must be included in props
-		value: {
-			type: null,
-			default: null
 		}
 	},
+	emits: [ 'update:modelValue' ],
 	setup (props, context) {
 		const {
 			correlationId,
@@ -76,27 +72,29 @@ export default {
 			innerValue,
 			initValue,
 			innerValueUpdate
-		} = useBaseControlEditComponent(props, context);
+		} = useBaseControlEditComponent(props, context, {
+			vidOverride: props.vidOverride
+		});
 
 		const innerItems = ref([]);
 		const loading = ref(false);
 		const search = ref(null);
 
-		const update = LibraryCommonUtility.debounce(async function(self, newVal) {
+		// one debounce per instance
+		const executeQuery = LibraryCommonUtility.debounce(async (value) => {
 			loading.value = true;
-			if (props.querySelection)
-				innerItems.value = await props.querySelection(newVal);
-			else
-				innerItems.value = [];
-			loading.value = false;
+			try {
+				innerItems.value = props.querySelection ? (await props.querySelection(value) ?? []) : [];
+			}
+			finally {
+				loading.value = false;
+			}
 		}, 50);
-		const executeQuery = async (newVal) => {
-			update(null, newVal);
-		};
 
 		watch(() => search.value,
-			async (value) => {
-				value && (value !== innerValue.value) && await executeQuery(value);
+			(value) => {
+				if (value && (value !== innerValue.value))
+					executeQuery(value);
 			}
 		);
 
@@ -124,47 +122,8 @@ export default {
 			innerItems,
 			loading,
 			search
-		}
-	},
-	// data: () => ({
-	// 	innerItems: [],
-	// 	loading: false,
-	// 	search: null
-	// }),
-	// watch: {
-	// 	async search(newVal) {
-	// 		newVal && (newVal !== this.innerValue) && await this.executeQuery(newVal);
-	// 	},
-	// 	// Handles external model changes.
-	// 	value(newVal) {
-	// 		this.initValue(newVal);
-	// 	}
-	// },
-	// mounted() {
-	// 	this.initValue(this.value);
-	// },
-	// methods: {
-	// 	async executeQuery(newVal) {
-	// 		// this.loading = true
-	// 		// if (this.querySelection)
-	// 		//	 this.innerItems = await this.querySelection(newVal)
-	// 		// else
-	// 		//	 this.innerItems = []
-	// 		// this.loading = false
-	// 		this.update(this, newVal);
-	// 	},
-	// 	validation() {
-	// 		return this.$refs.prv;
-	// 	},
-	// 	update: LIbraryCommonUtility.debounce(async function(self, newVal) {
-	// 		self.loading = true;
-	// 		if (self.querySelection)
-	// 			self.innerItems = await this.querySelection(newVal);
-	// 		else
-	// 			self.innerItems = [];
-	// 		self.loading = false;
-	// 	}, 50)
-	// }
+		};
+	}
 };
 </script>
 

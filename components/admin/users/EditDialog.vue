@@ -1,58 +1,150 @@
 <template>
-	<VFormDialog
+	<VtFormDialog
 		:label="label"
 		:signal="signal"
 		:pre-complete-ok="preComplete"
+		:validation="validation"
 		max-width="750px"
-		@cancel="cancel"
+		@close="close"
 		@ok="ok"
 	>
-		<v-layout>
-			<v-flex xs6>
+		<v-row dense>
+			<v-col cols="6">
 				<VtTextFieldWithValidation
 					ref="idRef"
-					v-model="id"
+					:model-value="id"
 					vid="id"
 					:label="$t('forms.id')"
 					:readonly="true"
 				/>
-			</v-flex>
-			<v-flex xs6>
+			</v-col>
+			<v-col cols="6">
 				<VtTextFieldWithValidation
 					ref="externalIdRef"
-					v-model="externalId"
+					:model-value="externalId"
 					vid="externalId"
 					:label="$t('forms.externalId')"
 					:readonly="true"
 				/>
-			</v-flex>
-		</v-layout>
+			</v-col>
+		</v-row>
 
 		<VtTextFieldWithValidation
 			ref="nameRef"
-			v-model="name"
+			:model-value="name"
 			vid="name"
 			:label="$t('forms.name')"
 			:readonly="true"
 		/>
 
-		<VSelectWithValidation
+		<VtSelectWithValidation
 			ref="rolesRef"
-			v-model="innerValue.roles"
-			vid="roles"
-			:items="roles"
+			v-model="userRoles"
+			vid="userRoles"
+			:items="roleItems"
 			:multiple="true"
 			:label="$t('forms.roles')"
+			:validation="validation"
 		/>
-	</VFormDialog>
+	</VtFormDialog>
 </template>
 
 <script>
-import VtUsersAdminFormDialog from '@thzero/library_client_vue3_vuetify3/components/admin/users/VtUsersAdminFormDialog';
+import useVuelidate from '@vuelidate/core';
 
+import { useVtUsersAdminFormDialogComponent } from '@thzero/library_client_vue3_vuetify3/components/admin/users/VtUsersAdminFormDialog';
+
+import VtFormDialog from '@thzero/library_client_vue3_vuetify3/components/form/VtFormDialog';
+import VtSelectWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtSelectWithValidation';
+import VtTextFieldWithValidation from '@thzero/library_client_vue3_vuetify3/components/form/VtTextFieldWithValidation';
+
+// The admin user edit dialog. The listing calls reset(correlationId, user) through
+// its template ref before opening it; roles lists the roles the app knows. It was
+// built on VFormDialog, v-layout and v-flex, none of which exist in Vue 3 Vuetify.
 export default {
-	name: 'AdminUsersEditDialog',
-	extends: VtUsersAdminFormDialog
+	name: 'EditDialog',
+	components: {
+		VtFormDialog,
+		VtSelectWithValidation,
+		VtTextFieldWithValidation
+	},
+	props: {
+		label: {
+			type: String,
+			default: ''
+		},
+		roles: {
+			type: Array,
+			default: () => []
+		},
+		signal: {
+			type: Boolean,
+			default: false
+		}
+	},
+	emits: [ 'cancel', 'ok' ],
+	setup (props, context) {
+		const {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			successResponse,
+			innerValue,
+			externalId,
+			id,
+			name,
+			roles: roleItems,
+			userRoles,
+			cancel,
+			ok,
+			preComplete,
+			resetDialog
+		} = useVtUsersAdminFormDialogComponent(props, context, {
+			getRoles: () => props.roles
+		});
+
+		// VtFormDialog closes itself; the parent's signal is reset through cancel
+		const close = async () => {
+			await cancel();
+		};
+
+		return {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			successResponse,
+			innerValue,
+			externalId,
+			id,
+			name,
+			// not roles: that name is the prop
+			roleItems,
+			userRoles,
+			close,
+			ok,
+			preComplete,
+			// what the listing calls through its template ref
+			reset: resetDialog,
+			validation: useVuelidate({ $scope: 'AdminUsersEditDialog' })
+		};
+	},
+	validations () {
+		return {
+			userRoles: { $autoDirty: true }
+		};
+	}
 };
 </script>
 

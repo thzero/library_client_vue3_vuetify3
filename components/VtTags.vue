@@ -1,32 +1,84 @@
 <template>
 	<v-combobox
-		v-model="select"
+		v-model="innerValue"
 		:label="label"
-		multiple
-		append-icon
-		chips
-		deletable-chips
+		:delimiters="[',']"
 		class="tag-input"
-		:search-input.sync="value"
+		multiple
+		chips
+		closable-chips
+		@update:modelValue="innerValueUpdate"
 	/>
 </template>
 
 <script>
-import base from '@thzero/library_client_vue3/components/base';
+import { useBaseControlEditComponent } from '@thzero/library_client_vue3/components/baseControlEdit';
 
 export default {
 	name: 'VtTags',
-	extends: base,
 	props: {
 		label: {
 			type: [Object, String],
 			default: ''
 		},
 		// must be included in props
-		value: {
+		modelValue: {
 			type: null,
 			default: null
 		}
+	},
+	emits: [ 'update:modelValue' ],
+	setup (props, context) {
+		const {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			successResponse,
+			isSaving,
+			serverErrors,
+			setErrors,
+			convertValue,
+			errorI,
+			errorsI,
+			hideDetails,
+			innerValue,
+			initValue,
+			innerValueUpdate
+		} = useBaseControlEditComponent(props, context, {
+			// the combobox needs an array, never null
+			convertValueI: (value) => {
+				return value ?? [];
+			}
+		});
+
+		return {
+			correlationId,
+			error,
+			hasFailed,
+			hasSucceeded,
+			initialize,
+			logger,
+			noBreakingSpaces,
+			notImplementedError,
+			success,
+			successResponse,
+			isSaving,
+			serverErrors,
+			setErrors,
+			convertValue,
+			errorI,
+			errorsI,
+			hideDetails,
+			innerValue,
+			initValue,
+			innerValueUpdate
+		};
 	}
 };
 </script>

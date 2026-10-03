@@ -1,10 +1,10 @@
 export const useVuetifyInputProps = {
-    variantOverride: {
-        type: String,
-        default: null
-    },
-    vidOverride: {
-        type: String,
-        default: null
-    }
+	variantOverride: {
+		type: String,
+		default: null
+	},
+	vidOverride: {
+		type: String,
+		default: null
+	}
 };

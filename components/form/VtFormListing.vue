@@ -144,7 +144,8 @@ export default {
 	props: {
 		...baseFormListingControlProps
 	},
-	emits: ['close', 'error', 'ok', 'open'],
+	// everything the listing composable emits, not only what the template uses
+	emits: ['close', 'delete', 'error', 'ok', 'open', 'reset'],
 	setup (props, context) {
 		const {
 			correlationId,

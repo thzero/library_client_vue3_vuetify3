@@ -48,7 +48,7 @@ export default {
 			innerValueUpdate
 		} = useBaseControlEditComponent(props, context, {
 			convertValueI: (value) => {
-				return value ? value : Date();
+				return value ? value : new Date();
 			}}
 		);
 
