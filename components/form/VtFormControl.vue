@@ -140,6 +140,7 @@
 			<slot name="after"/>
 		</div> -->
 		<v-overlay
+			class="align-center justify-center"
 			contained
 			persistent
 			:model-value="overlayLoading"

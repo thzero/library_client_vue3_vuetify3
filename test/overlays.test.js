@@ -34,6 +34,30 @@ describe('VtLoadingOverlay', () => {
 
 		expect(overlay(wrapper).props('modelValue')).toBe(false);
 	});
+
+	it('centers its contents', () => {
+		const wrapper = mount(VtLoadingOverlay, { props: { signal: false } });
+
+		// VOverlay's location prop has no default, so without these the content
+		// sat in the overlay's top-left corner
+		expect(overlay(wrapper).props('class')).toBe('align-center justify-center');
+	});
+
+	it('resizes the spinner with the window', async () => {
+		const wrapper = mount(VtLoadingOverlay, { props: { signal: false } });
+		const progress = () => wrapper.findComponent({ name: 'VProgressCircular' }).props('size');
+		const before = progress();
+
+		window.innerWidth = 400;
+		window.innerHeight = 400;
+		window.dispatchEvent(new window.Event('resize'));
+		await flushPromises();
+
+		// sized off window.innerWidth, which is not reactive, so the computed was
+		// evaluated once and the spinner kept its first size for the session
+		expect(progress()).not.toBe(before);
+		expect(progress()).toBe(100);
+	});
 });
 
 describe('VtFormControl', () => {

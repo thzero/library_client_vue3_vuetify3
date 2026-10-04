@@ -1,5 +1,6 @@
 <template>
 	<v-overlay
+		class="align-center justify-center"
 		opacity="1.0"
 		z-index="5"
 		persistent
@@ -31,6 +32,8 @@
 <script>
 import { computed } from 'vue';
 
+import { useDisplay } from 'vuetify';
+
 import LibraryClientVueUtility from '@thzero/library_client_vue3/utility/index';
 
 export default {
@@ -42,11 +45,15 @@ export default {
 		}
 	},
 	setup(props) {
+		// read through useDisplay's refs, so the sizes follow a resize; reading
+		// window.innerWidth here would be evaluated once and never again
+		const { height, width } = useDisplay();
+
 		const imageWidth = computed(() => {
-			return LibraryClientVueUtility.overlayImageWidth();
+			return LibraryClientVueUtility.overlayImageWidth(width.value, height.value);
 		});
 		const progressSize = computed(() => {
-			return LibraryClientVueUtility.overlayProgressSize();
+			return LibraryClientVueUtility.overlayProgressSize(width.value, height.value);
 		});
 
 		return {

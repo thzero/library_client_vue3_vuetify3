@@ -7,6 +7,7 @@
 	>
 		<div class="text-subtitle-1" style="width:100%;">{{ label }}</div>
 		<v-overlay
+			class="align-center justify-center"
 			v-model="dialogSignal"
 			@keydown.esc="close"
         	scroll-strategy="reposition"
