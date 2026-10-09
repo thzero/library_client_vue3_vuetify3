@@ -32,6 +32,7 @@
     "@vuepic/vue-datepicker": "^14.0.0",
     "date-fns": "^4.4.0",
     "dayjs": "^1.11.23",
+    "github-markdown-css": "^5.9.0",
     "vue": "^3.5.43",
     "vue-cookie-comply": "^0.0.3"
   },

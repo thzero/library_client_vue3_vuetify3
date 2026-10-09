@@ -64,7 +64,9 @@ export default {
 </style>
 
 <style>
-	@import 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css';
+	/* bundled, not @imported from cdnjs: when that request failed (an ad
+	   blocker, a proxy, an outage), the whole route's chunk failed to load */
+	@import 'github-markdown-css/github-markdown.css';
 	.markdown ol, ul, li {
 		margin: revert;
 		padding: revert; /* Padding is what gives the indentation */
