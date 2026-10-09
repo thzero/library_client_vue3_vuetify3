@@ -1,7 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { defineComponent, h } from 'vue';
-
 import { flushPromises } from '@vue/test-utils';
 
 import LibraryClientUtility from '@thzero/library_client/utility/index';
@@ -17,20 +15,10 @@ import VtFormListingDialog from '../components/form/VtFormListingDialog';
 import { useVtNewsAdminFormDialogComponent } from '../components/admin/news/VtNewsAdminFormDialog';
 import { useVtUsersAdminFormDialogComponent } from '../components/admin/users/VtUsersAdminFormDialog';
 
-import { mount } from './mount';
+import { mount, mountComposable } from './mount';
 
-// mounts a renderless component around a composable
-const mountComposable = (composable, options) => {
-	let api;
-	mount(defineComponent({
-		emits: [ 'cancel', 'ok' ],
-		setup(props, context) {
-			api = composable(props, context, options);
-			return () => h('div');
-		}
-	}));
-	return api;
-};
+// mounts an admin form dialog's composable; returns what it returned
+const dialog = (composable, options) => mountComposable(composable, { emits: [ 'cancel', 'ok' ], options }).api;
 
 const toggles = (Component) => {
 	it('declares the events it sends', () => {
@@ -177,7 +165,7 @@ describe('admin form dialogs', () => {
 
 	it('creates news without an id', async () => {
 		const dispatcher = store();
-		const api = mountComposable(useVtNewsAdminFormDialogComponent);
+		const api = dialog(useVtNewsAdminFormDialogComponent);
 		await api.resetDialog('id', { title: 't' });
 
 		await api.preComplete('id');
@@ -188,7 +176,7 @@ describe('admin form dialogs', () => {
 
 	it('updates news with an id, keeping updatedTimestamp', async () => {
 		const dispatcher = store();
-		const api = mountComposable(useVtNewsAdminFormDialogComponent);
+		const api = dialog(useVtNewsAdminFormDialogComponent);
 		await api.resetDialog('id', { id: 'n', title: 't', updatedTimestamp: 5 });
 
 		await api.preComplete('id');
@@ -199,15 +187,15 @@ describe('admin form dialogs', () => {
 
 	it('lists the roles from an array or an object', () => {
 		store();
-		expect(mountComposable(useVtUsersAdminFormDialogComponent, { getRoles: () => [ 'a', 'b' ] }).roles.value).toEqual([ 'a', 'b' ]);
+		expect(dialog(useVtUsersAdminFormDialogComponent, { getRoles: () => [ 'a', 'b' ] }).roles.value).toEqual([ 'a', 'b' ]);
 		// for...of over an object threw
-		expect(mountComposable(useVtUsersAdminFormDialogComponent, { getRoles: () => ({ A: 'a' }) }).roles.value).toEqual([ 'a' ]);
-		expect(mountComposable(useVtUsersAdminFormDialogComponent).roles.value).toEqual([]);
+		expect(dialog(useVtUsersAdminFormDialogComponent, { getRoles: () => ({ A: 'a' }) }).roles.value).toEqual([ 'a' ]);
+		expect(dialog(useVtUsersAdminFormDialogComponent).roles.value).toEqual([]);
 	});
 
 	it('updates a user with the edited roles only', async () => {
 		const dispatcher = store();
-		const api = mountComposable(useVtUsersAdminFormDialogComponent, { getRoles: () => [ 'admin', 'user' ] });
+		const api = dialog(useVtUsersAdminFormDialogComponent, { getRoles: () => [ 'admin', 'user' ] });
 		await api.resetDialog('id', { id: 'u', roles: [ 'user' ], updatedTimestamp: 7, external: { id: 'x', name: 'N' } });
 		expect(api.userRoles.value).toEqual([ 'user' ]);
 		expect(api.name.value).toBe('N');

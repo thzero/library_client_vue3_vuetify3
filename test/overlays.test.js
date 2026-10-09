@@ -7,17 +7,9 @@ import VtDisplayDialog from '../components/VtDisplayDialog';
 import VtLoadingOverlay from '../components/VtLoadingOverlay';
 import VtFormControl from '../components/form/VtFormControl';
 
-import { mount } from './mount';
+import { mount, validation } from './mount';
 
 const overlay = (wrapper) => wrapper.findComponent({ name: 'VOverlay' });
-
-const validation = {
-	$validate: async () => true,
-	$reset: async () => {},
-	$invalid: false,
-	$silentErrors: [],
-	$anyDirty: true
-};
 
 describe('VtLoadingOverlay', () => {
 	it('shows while loading', () => {
@@ -47,16 +39,23 @@ describe('VtLoadingOverlay', () => {
 		const wrapper = mount(VtLoadingOverlay, { props: { signal: false } });
 		const progress = () => wrapper.findComponent({ name: 'VProgressCircular' }).props('size');
 		const before = progress();
+		const { innerWidth, innerHeight } = window;
 
-		window.innerWidth = 400;
-		window.innerHeight = 400;
-		window.dispatchEvent(new window.Event('resize'));
-		await flushPromises();
+		try {
+			window.innerWidth = 400;
+			window.innerHeight = 400;
+			window.dispatchEvent(new window.Event('resize'));
+			await flushPromises();
 
-		// sized off window.innerWidth, which is not reactive, so the computed was
-		// evaluated once and the spinner kept its first size for the session
-		expect(progress()).not.toBe(before);
-		expect(progress()).toBe(100);
+			// sized off window.innerWidth, which is not reactive, so the computed was
+			// evaluated once and the spinner kept its first size for the session
+			expect(progress()).not.toBe(before);
+			expect(progress()).toBe(100);
+		}
+		finally {
+			window.innerWidth = innerWidth;
+			window.innerHeight = innerHeight;
+		}
 	});
 });
 
@@ -64,7 +63,7 @@ describe('VtFormControl', () => {
 	it('shows the saving overlay while an auto save runs', async () => {
 		let finish;
 		const preCompleteOk = () => new Promise((resolve) => { finish = resolve; });
-		const wrapper = mount(VtFormControl, { props: { autoSave: true, preCompleteOk, validation } });
+		const wrapper = mount(VtFormControl, { props: { autoSave: true, preCompleteOk, validation: validation() } });
 		expect(overlay(wrapper).props('modelValue')).toBe(false);
 
 		const saving = wrapper.vm.submit();
