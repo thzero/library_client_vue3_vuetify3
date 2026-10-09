@@ -1,3 +1,5 @@
+import { defineComponent, h } from 'vue';
+
 import { mount as vueMount } from '@vue/test-utils';
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
@@ -5,29 +7,6 @@ import * as directives from 'vuetify/directives';
 
 import LibraryClientConstants from '@thzero/library_client/constants';
 import LibraryClientUtility from '@thzero/library_client/utility/index';
-
-// jsdom lacks these browser APIs, and Vuetify reaches for them on mount
-if (!globalThis.ResizeObserver) {
-	globalThis.ResizeObserver = class {
-		observe() {}
-		unobserve() {}
-		disconnect() {}
-	};
-}
-if (!window.matchMedia) {
-	window.matchMedia = (query) => ({
-		matches: false,
-		media: query,
-		addListener() {},
-		removeListener() {},
-		addEventListener() {},
-		removeEventListener() {},
-		dispatchEvent() { return false; }
-	});
-}
-// the overlays read it bare, behind ?.
-if (!('visualViewport' in globalThis))
-	globalThis.visualViewport = undefined;
 
 // the services the base composables resolve through the injector
 const services = {
@@ -37,11 +16,42 @@ const services = {
 LibraryClientUtility.$injector = { getService: (key) => services[key] ?? null };
 LibraryClientUtility.$trans = { t: (key, values) => (values ? `${key} ${JSON.stringify(values)}` : key) };
 
-export const mount = (component, options = {}) => vueMount(component, {
-	...options,
-	global: {
-		plugins: [ createVuetify({ components, directives }) ],
-		mocks: { $t: (key) => key },
-		...(options.global ?? {})
-	}
+// Mounts with a fresh Vuetify. A caller's global plugins and mocks are added to
+// Vuetify's rather than replacing them.
+export const mount = (component, options = {}) => {
+	const global = options.global ?? {};
+	return vueMount(component, {
+		...options,
+		global: {
+			...global,
+			plugins: [ createVuetify({ components, directives }), ...(global.plugins ?? []) ],
+			mocks: { $t: (key) => key, ...(global.mocks ?? {}) }
+		}
+	});
+};
+
+// Mounts a renderless component around a composable, so a test can drive it
+// through the component's props and emits; returns the wrapper and what the
+// composable returned. The same shape as library_client_vue3's test/mount.js.
+export const mountComposable = (composable, { props = {}, emits = [], options, attrs = {} } = {}) => {
+	let api;
+	const Component = defineComponent({
+		props,
+		emits,
+		setup(propsI, context) {
+			api = composable(propsI, context, options);
+			return () => h('div');
+		}
+	});
+	const wrapper = mount(Component, { props: attrs });
+	return { wrapper, api };
+};
+
+// the minimum of a vuelidate instance the form composables touch
+export const validation = (valid = true) => ({
+	$validate: async () => valid,
+	$reset: async () => {},
+	$invalid: !valid,
+	$silentErrors: [],
+	$anyDirty: true
 });
