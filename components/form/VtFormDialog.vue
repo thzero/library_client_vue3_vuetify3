@@ -31,6 +31,7 @@
 					</v-sheet>
 				</v-card-title>
 				<v-card-item
+					class="vt-form-dialog-body"
 					:style="scrollableHeightI"
 				>
 					<v-form>
@@ -261,4 +262,12 @@ export default {
 </script>
 
 <style scoped>
+/* scrollableHeightI fixes the body's height; without these the content
+   overflows it, centered, over the title and the action buttons */
+.vt-form-dialog-body {
+	overflow-y: auto;
+}
+.vt-form-dialog-body :deep(.v-card-item__content) {
+	align-self: start;
+}
 </style>
