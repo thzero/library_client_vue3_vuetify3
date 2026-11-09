@@ -6,7 +6,7 @@
 		hide-details="auto"
 		:disabled="disabled"
 		:hint="$attrs.hint"
-		:label="$attrs.label"
+		:label="labelI($attrs.label)"
 		density="compact"
 		:date-format="dateFormat"
 		:output-type="outputType"
@@ -15,6 +15,7 @@
 		:clear-text="$t('buttons.clear')"
 		:ok-text="$t('buttons.ok')"
 		@update:model-value="innerValueUpdate"
+		v-bind="attrsI($attrs)"
 	/>
 </template>
 
@@ -26,6 +27,7 @@ import VtDateTimePickerField from './VtDateTimePickerField';
 
 export default {
 	name: 'VtDateTimePickerFieldWithValidation',
+	inheritAttrs: false,
 	components: {
 		VtDateTimePickerField
 	},
@@ -64,6 +66,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,
@@ -87,6 +91,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,

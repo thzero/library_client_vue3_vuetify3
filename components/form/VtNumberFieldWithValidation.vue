@@ -14,12 +14,12 @@
 		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:disabled="disabled"
 		:hint="$attrs.hint"
-		:label="$attrs.label"
+		:label="labelI($attrs.label)"
 		:class="displayClass"
 		density="compact"
-		v-bind="$attrs"
 		@blur="blur"
 		@update:modelValue="innerValueUpdate"
+		v-bind="attrsI($attrs)"
 	>
 		<!-- <template v-slot:details>
 			<div
@@ -46,6 +46,7 @@ import { useVuetifyNumberInputProps } from '@thzero/library_client_vue3_vuetify3
 
 export default {
 	name: 'VtNumberFieldWithValidation',
+	inheritAttrs: false,
 	props: {
 		...useBaseControlEditProps,
 		...useVuetifyInputProps,
@@ -69,6 +70,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,
@@ -104,6 +107,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,

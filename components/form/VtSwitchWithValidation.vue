@@ -9,7 +9,7 @@
 			:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 			:disabled="disabled"
 			:hint="$attrs.hint"
-			:label="$attrs.label"
+			:label="labelI($attrs.label)"
 			:color="color"
 			density="compact"
 			@update:modelValue="innerValueUpdate"
@@ -59,6 +59,7 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,
@@ -82,6 +83,7 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,

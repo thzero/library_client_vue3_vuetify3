@@ -8,7 +8,7 @@
 		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:disabled="disabled"
 		:hint="hint"
-		:label="$attrs.label"
+		:label="labelI($attrs.label)"
 		:delimiters="[',']"
 		class="tag-input"
 		density="compact"
@@ -16,6 +16,7 @@
 		chips
 		closable-chips
 		@update:modelValue="update"
+		v-bind="attrsI($attrs)"
 	/>
 </template>
 
@@ -30,6 +31,7 @@ import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/compo
 
 export default {
 	name: 'VtTagsWithValidation',
+	inheritAttrs: false,
 	props: {
 		...useBaseControlEditProps,
 		...useVuetifyInputProps,
@@ -57,6 +59,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,
@@ -100,6 +104,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,

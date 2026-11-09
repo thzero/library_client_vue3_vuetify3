@@ -1,17 +1,17 @@
 <template>
 	<v-text-field
 		v-model="innerValue"
-		v-bind="$attrs"
 		hide-details="auto"
 		:readonly="readonly"
 		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:disabled="disabled"
 		:hint="$attrs.hint"
-		:label="$attrs.label"
+		:label="labelI($attrs.label)"
 		:clearable="(!readonly ? (clearable ? 'clearable' : false) : false)"
 		density="compact"
 		@blur="blur"
 		@update:modelValue="innerValueUpdate"
+		v-bind="attrsI($attrs)"
 	/>
 </template>
 
@@ -23,6 +23,7 @@ import { useVuetifyTextInputProps } from '@thzero/library_client_vue3_vuetify3/c
 
 export default {
 	name: 'VtTextField',
+	inheritAttrs: false,
 	props: {
 		...useBaseControlEditProps,
 		...useVuetifyInputProps,
@@ -46,6 +47,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,
@@ -69,6 +72,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,

@@ -11,9 +11,10 @@
 		:multiple="multiple"
 		:readonly="readonly"
 		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
-		:label="$attrs.label"
+		:label="labelI($attrs.label)"
 		density="compact"
 		@update:modelValue="innerValueUpdate"
+		v-bind="attrsI($attrs)"
 	/>
 </template>
 
@@ -29,6 +30,7 @@ import { useVuetifySelectInputProps } from '@thzero/library_client_vue3_vuetify3
 // baseControlEdit, so it never loaded, and it rendered a v-select.
 export default {
 	name: 'VtSelectAutoCompleteWithValidation',
+	inheritAttrs: false,
 	props: {
 		...useBaseControlEditProps,
 		...useVuetifyInputProps,
@@ -53,6 +55,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,
@@ -100,6 +104,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,

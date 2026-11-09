@@ -14,9 +14,10 @@
 		:disabled="disabled"
 		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
 		:hint="$attrs.hint"
-		:label="$attrs.label"
+		:label="labelI($attrs.label)"
 		density="compact"
 		@update:modelValue="innerValueUpdate"
+		v-bind="attrsI($attrs)"
 	/>
 </template>
 
@@ -33,6 +34,7 @@ import { useVuetifyInputProps } from '@thzero/library_client_vue3_vuetify3/compo
 // :search-input.sync, so the search never reached the watcher and no items ever loaded.
 export default {
 	name: 'VtAutoCompleteWithValidation',
+	inheritAttrs: false,
 	props: {
 		...useBaseControlEditProps,
 		...useVuetifyInputProps,
@@ -68,6 +70,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,
@@ -115,6 +119,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,
