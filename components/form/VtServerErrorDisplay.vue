@@ -3,7 +3,7 @@
 		<div
 			v-for="(item, index) in value"
 			:key="index"
-			class="red--text text--lighten-1 v-messages"
+			class="text-error v-messages"
 		>
 			{{ item }}
 		</div>

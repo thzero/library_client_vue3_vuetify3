@@ -12,9 +12,10 @@
 		:chips="multiple"
 		:readonly="readonly"
 		:variant="variantOverride ? variantOverride : readonly ? 'underlined' : 'filled'"
-		:label="$attrs.label"
+		:label="labelI($attrs.label)"
       	density="compact"
 		@update:modelValue="innerValueUpdate"
+		v-bind="attrsI($attrs)"
 	>
 	</v-select>
 </template>
@@ -29,6 +30,7 @@ import { useVuetifySelectInputProps } from '@thzero/library_client_vue3_vuetify3
 
 export default {
 	name: 'VtSelect',
+	inheritAttrs: false,
 	props: {
 		...useBaseControlEditProps,
 		...useVuetifyInputProps,
@@ -52,6 +54,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,
@@ -96,6 +100,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,

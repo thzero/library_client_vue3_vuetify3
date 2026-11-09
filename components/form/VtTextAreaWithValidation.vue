@@ -3,7 +3,6 @@
 		v-model="innerValue"
 		:error="errorI"
 		:messages="(errorsI ?? []).map(l => l.$message)"
-		v-bind="$attrs"
 		auto-grow
 		hide-details="auto"
 		:readonly="readonly"
@@ -11,11 +10,12 @@
 		:disabled="disabled"
 		:clearable="clearable"
 		:hint="$attrs.hint"
-		:label="$attrs.label"
+		:label="labelI($attrs.label)"
 		:counter="maxcount"
 		density="compact"
 		@blur="blur"
 		@update:modelValue="innerValueUpdate"
+		v-bind="attrsI($attrs)"
 	>
 		<!-- <template v-slot:append>
 			<span :class="countClass">{{ count }}</span>
@@ -41,6 +41,7 @@ import { useVuetifyTextInputProps } from '@thzero/library_client_vue3_vuetify3/c
 
 export default {
 	name: 'VtTextAreaWithValidation',
+	inheritAttrs: false,
 	props: {
 		...useBaseControlEditProps,
 		...useVuetifyInputProps,
@@ -64,6 +65,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,
@@ -94,6 +97,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,

@@ -20,8 +20,9 @@
 		:readonly="readonly"
 		:disabled="disabled"
 		:hint="$attrs.hint"
-		:label="$attrs.label"
+		:label="labelI($attrs.label)"
 		density="compact"
+		v-bind="attrsI($attrs)"
 	>
 		<VueDatePicker
 			v-model="innerValue"
@@ -62,6 +63,7 @@ import { useBaseControlEditProps } from '@thzero/library_client_vue3/components/
 
 export default {
 	name: 'VtDateTimePickerFieldWithValidationTemp',
+	inheritAttrs: false,
     components: {
 		VueDatePicker
 	},
@@ -98,6 +100,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,
@@ -131,6 +135,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,

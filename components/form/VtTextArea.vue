@@ -1,7 +1,6 @@
 <template>
 	<v-textarea
 		v-model="innerValue"
-		v-bind="$attrs"
 		auto-grow
 		hide-details="auto"
 		:readonly="readonly"
@@ -9,10 +8,11 @@
 		:disabled="disabled"
 		:clearable="false"
 		:hint="$attrs.hint"
-		:label="$attrs.label"
+		:label="labelI($attrs.label)"
 		density="compact"
 		@blur="blur"
 		@update:modelValue="innerValueUpdate"
+		v-bind="attrsI($attrs)"
 	/>
 </template>
 
@@ -24,6 +24,7 @@ import { useVuetifyTextInputProps } from '@thzero/library_client_vue3_vuetify3/c
 
 export default {
 	name: 'VtTextArea',
+	inheritAttrs: false,
 	props: {
 		...useBaseControlEditProps,
 		...useVuetifyInputProps,
@@ -47,6 +48,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,
@@ -70,6 +73,8 @@ export default {
 			convertValue,
 			errorI,
 			errorsI,
+			attrsI,
+			labelI,
 			hideDetails,
 			innerValue,
 			initValue,

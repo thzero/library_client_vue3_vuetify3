@@ -18,7 +18,7 @@
 				<div
 					v-for="(item, index) in serverErrors"
 					:key="index"
-					class="red--text text--lighten-1 v-messages"
+					class="text-error v-messages"
 				>
 					{{ item }}
 				</div>
